@@ -24,10 +24,10 @@ struct MainView: View {
                                 Text(category)
                                     .padding()
                                     .foregroundStyle(self.selectedCategory == category ? Color.red : Color.black)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 19))
                                 Capsule()
                                     .foregroundStyle(self.selectedCategory == category ? Color.red : Color.clear)
-                                    .frame(height: 5)
+                                    .frame(height: 4)
                                 
                             }.fixedSize()
                         }

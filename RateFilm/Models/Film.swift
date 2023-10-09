@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct Film: Identifiable {
+    var id: String
+    var name: String
+    var description: String
+    var duration: Int
+    var previewImage: ImageModel
+    var images: [ImageModel]
+    var avgRating: Float = 0.0
+    var ageRating: Int
+}

@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct ImageModel {
+    var url: URL
+}
