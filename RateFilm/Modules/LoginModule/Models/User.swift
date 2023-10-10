@@ -14,7 +14,6 @@ struct User: Identifiable {
     var email: String
     var phone: String?
     var age: Int?
-    var password: String
     var userType: UserTypes
 }
 
@@ -26,7 +25,6 @@ extension User {
         self.userName = ""
         self.email = ""
         self.age = 0
-        self.password = ""
         self.userType = .unauthUser
     }
 }

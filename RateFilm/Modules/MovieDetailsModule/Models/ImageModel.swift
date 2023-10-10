@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ImageModel {
+struct ImageModel: Codable {
     var url: URL
 }
