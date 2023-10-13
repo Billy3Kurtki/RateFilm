@@ -15,6 +15,21 @@ struct ContentView: View {
                     Text(TabBarSelections.main.rawValue)
                     Image(systemName: "house")
                 }
+            ReviewView()
+                .tabItem {
+                    Text(TabBarSelections.review.rawValue)
+                    Image(systemName: "safari")
+                }
+            FavoritesView()
+                .tabItem {
+                    Text(TabBarSelections.favorites.rawValue)
+                    Image(systemName: "bookmark")
+                }
+            ProfileView()
+                .tabItem {
+                    Text(TabBarSelections.profile.rawValue)
+                    Image(systemName: "person.crop.circle.fill")
+                }
         }
     }
 }
@@ -22,7 +37,7 @@ struct ContentView: View {
 enum TabBarSelections: String {
     case main = "Главная"
     case review = "Обзор"
-    case bookMarks = "Закладки"
+    case favorites = "Избранное"
     case profile = "Профиль"
 }
 

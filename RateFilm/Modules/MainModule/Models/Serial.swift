@@ -7,20 +7,32 @@
 
 import Foundation
 
-struct Serial: Identifiable {
+struct Serial: Identifiable, Codable {
     var id: String
     var name: String
+    var releaseDate: Date
     var description: String
     var duration: Int
     var previewImage: ImageModel
-    var images: [ImageModel]
-    var avgRating: Double = 0.0
+    var avgRating: Float = 0.0
     var seriesCount: Int
-    var series: [Series]
+    var seasons: [Season]
     var ageRating: Int
+    var moveTypes: [MovieType]
+    var author: String
 }
 
-struct Series {
+struct Season: Codable {
+    var id: String
+    var releaseDate: Date
+    var description: String
+    var episodes: [Episode]
+    var images: [ImageModel]
+    var avgRating: Float = 0.0
+    var actors: [ActorModel]?
+}
+
+struct Episode: Codable {
     var id: String
     var name: String
     var duration: String

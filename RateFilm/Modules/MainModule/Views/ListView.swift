@@ -8,8 +8,36 @@
 import SwiftUI
 
 struct ListView: View {
+    @State private var search = ""
+    @StateObject private var data = ListViewModel()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ScrollView {
+                ForEach(data.films) { film in
+                    NavigationLink(destination: MovieDetailsView()) {
+                        ListCell(film: film)
+                    }
+                }
+            }
+        }
+        .padding(.vertical, 20)
+        .onAppear {
+            data.fetchData()
+        }
+    }
+}
+
+struct ListCell: View {
+    var film: Film
+    var body: some View {
+        HStack {
+            VStack {
+                Text(film.name)
+                    .font(.system(size: 20))
+                Text(film.description)
+            }
+            Spacer()
+        }
     }
 }
 

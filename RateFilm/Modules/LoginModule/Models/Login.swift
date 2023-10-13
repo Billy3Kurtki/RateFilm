@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UserTypes {
+enum UserTypes: Codable {
     case admin
     case authUser
     case unauthUser
