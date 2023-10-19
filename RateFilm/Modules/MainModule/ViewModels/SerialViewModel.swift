@@ -14,6 +14,6 @@ struct SerialViewModel: Identifiable {
     var releaseDate: Date?
     var description: String
     var previewImage: UIImage?
-    var avgRating: String
+    var avgRating: String?
     var seriesCount: Int
 }

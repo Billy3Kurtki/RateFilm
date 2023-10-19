@@ -10,7 +10,7 @@ import Foundation
 struct Film: Identifiable, Codable {
     var id: String
     var name: String
-    var releaseDate: Date?
+    var releaseDate: Int? // UnixTimestamp
     var description: String
     var duration: Int
     var previewImage: String

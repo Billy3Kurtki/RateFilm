@@ -10,7 +10,7 @@ import Foundation
 struct Serial: Identifiable, Codable {
     var id: String
     var name: String
-    var releaseDate: Date?
+    var releaseDate: Int?
     var description: String
     var duration: Int
     var previewImage: String

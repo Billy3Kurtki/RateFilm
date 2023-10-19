@@ -12,9 +12,20 @@ class CustomFormatter {
         return String(format: "%.1f", float)
     }
     
-    static func formatDateToCustomString(date: Date) -> String? {
+    static func formatAvgRating(float: Float) -> Float {
+        if float < 0.0 {
+            return 0.0
+        } else if float > 5.0 {
+            return 5.0
+        } else {
+            return float
+        }
+    }
+    
+    static func formatDateToCustomString(date: Int) -> String? {
+        let date = date.date
         if date > Date.now {
-            if let month = Months(number: date.get(.month)) {
+            if let month = Months(number: date.get(.month))?.rawValue {
                 return "\(month) \(date.get(.year))"
             } else {
                 return "\(date.get(.year))"
