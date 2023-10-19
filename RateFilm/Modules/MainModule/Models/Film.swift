@@ -10,12 +10,12 @@ import Foundation
 struct Film: Identifiable, Codable {
     var id: String
     var name: String
-    var releaseDate: Date
+    var releaseDate: Date?
     var description: String
     var duration: Int
-    var previewImage: ImageModel?
+    var previewImage: String
     var images: [ImageModel]?
-    var avgRating: Float = 0.0
+    var avgRating: Float
     var ageRating: Int
     var moveTypes: [MovieType]
     var author: String

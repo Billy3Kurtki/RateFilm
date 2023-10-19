@@ -10,11 +10,11 @@ import Foundation
 struct Serial: Identifiable, Codable {
     var id: String
     var name: String
-    var releaseDate: Date
+    var releaseDate: Date?
     var description: String
     var duration: Int
-    var previewImage: ImageModel
-    var avgRating: Float = 0.0
+    var previewImage: String
+    var avgRating: Float
     var seriesCount: Int
     var seasons: [Season]
     var ageRating: Int
@@ -26,14 +26,8 @@ struct Season: Codable {
     var id: String
     var releaseDate: Date
     var description: String
-    var episodes: [Episode]
-    var images: [ImageModel]
+    var images: [ImageModel]?
     var avgRating: Float = 0.0
     var actors: [ActorModel]?
 }
 
-struct Episode: Codable {
-    var id: String
-    var name: String
-    var duration: String
-}

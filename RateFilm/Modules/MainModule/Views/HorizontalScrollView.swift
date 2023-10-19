@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HorizontalScrollView: View {
-    @State private var selectedCategory: String = Selections.lastReleased.rawValue
+    @Binding var selectedCategory: String
     var body: some View {
         ScrollViewReader { scrollProxy in
             ScrollView(.horizontal, showsIndicators: false) {
@@ -39,9 +39,9 @@ struct HorizontalScrollView: View {
     }
 }
 
-#Preview {
-    HorizontalScrollView()
-}
+//#Preview {
+//    HorizontalScrollView()
+//}
 
 enum Selections: String, CaseIterable {
     case mySelection = "Моя вкладка"

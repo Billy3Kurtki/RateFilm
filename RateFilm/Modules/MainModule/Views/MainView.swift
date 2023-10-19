@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct MainView: View {
+    @State private var selectedCategory: String = Selections.lastReleased.rawValue
     var body: some View {
         NavigationStack {
             VStack {
-                
                 ListView()
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem {
-                    HorizontalScrollView()
+                    HorizontalScrollView(selectedCategory: $selectedCategory)
                 }
             }
         }

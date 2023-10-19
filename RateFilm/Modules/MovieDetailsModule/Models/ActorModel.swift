@@ -11,5 +11,5 @@ struct ActorModel: Codable {
     var id: String
     var name: String
     var age: String?
-    var images: [ImageModel]?
+    var image: ImageModel
 }

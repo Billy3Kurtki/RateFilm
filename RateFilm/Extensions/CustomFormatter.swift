@@ -8,6 +8,10 @@
 import Foundation
 
 class CustomFormatter {
+    static func formatFloat(float: Float) -> String {
+        return String(format: "%.1f", float)
+    }
+    
     static func formatDateToCustomString(date: Date) -> String? {
         if date > Date.now {
             if let month = Months(number: date.get(.month)) {

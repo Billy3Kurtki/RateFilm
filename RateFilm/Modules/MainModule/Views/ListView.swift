@@ -13,33 +13,67 @@ struct ListView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                ForEach(data.films) { film in
+                ForEach(data.filmsVM) { film in
                     NavigationLink(destination: MovieDetailsView()) {
-                        ListCell(film: film)
+                        FilmCell(film: film)
                     }
                 }
             }
         }
         .padding(.vertical, 20)
-        .onAppear {
-            data.fetchData()
-        }
     }
 }
 
-struct ListCell: View {
-    var film: Film
+struct FilmCell: View {
+    var film: FilmViewModel
     var body: some View {
         HStack {
-            VStack {
-                Text(film.name)
-                    .font(.system(size: 20))
-                Text(film.description)
+            AsyncImage(url: URL(string: film.previewImage)) { data in
+                if let image = data.image {
+                    image
+                        .resizable()
+                        .frame(width: 100, height: 150) // вынести в consts
+                } else if data.error != nil {
+                    Image(uiImage: UIImage(named: "defaultImage")!)
+                        .resizable()
+                        .frame(width: 100, height: 150)
+                } else {
+                    ZStack {
+                        RoundedRectangle(cornerSize: CGSize(width: 1, height: 1))
+                            .opacity(0)
+                        ProgressView() // пока плохо
+                    }
+                    
+                }
+            }
+            VStack { // вынести в отдельные View
+                HStack {
+                    Text(film.name)
+                        .foregroundStyle(.black)
+                        .font(.system(size: 22))
+                        .bold()
+                    Spacer()
+                }
+                HStack {
+                    Text(film.avgRating)
+                    Image(systemName: "star.fill")
+                    Spacer()
+                }
+                .foregroundStyle(Color("lightGray"))
+                HStack {
+                    Text(film.description)
+                        .foregroundStyle(.gray)
+                        .font(.system(size: 20))
+                        .frame(maxHeight: 80)
+                    Spacer()
+                }
+                Spacer()
             }
             Spacer()
-        }
+        }.padding()
     }
 }
+
 
 #Preview {
     ListView()
