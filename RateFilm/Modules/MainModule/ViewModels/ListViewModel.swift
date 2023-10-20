@@ -24,7 +24,7 @@ class ListViewModel: ObservableObject {
                     avgRating = CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating))
                 }
             } else {
-                realeseDate = "скоро"
+                realeseDate = String(localized: "comingSoon")
             }
             
             let filmVM = FilmViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating)

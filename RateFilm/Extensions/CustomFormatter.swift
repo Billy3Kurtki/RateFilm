@@ -25,7 +25,7 @@ class CustomFormatter {
     static func formatDateToCustomString(date: Int) -> String? {
         let date = date.date
         if date > Date.now {
-            if let month = Months(number: date.get(.month))?.rawValue {
+            if let month = Months(number: date.get(.month))?.localizeString() {
                 return "\(month) \(date.get(.year))"
             } else {
                 return "\(date.get(.year))"
@@ -36,18 +36,18 @@ class CustomFormatter {
     }
     
     enum Months: String {
-        case january = "Январь"
-        case february = "Февраль"
-        case march = "Март"
-        case april = "Апрель"
-        case may = "Май"
-        case june = "Июнь"
-        case july = "Июль"
-        case august = "Август"
-        case september = "Сентябрь"
-        case october = "Октябрь"
-        case november = "Ноябрь"
-        case december = "Декабрь"
+        case january = "january"
+        case february = "february"
+        case march = "march"
+        case april = "april"
+        case may = "may"
+        case june = "june"
+        case july = "july"
+        case august = "august"
+        case september = "september"
+        case october = "october"
+        case november = "november"
+        case december = "december"
         
         init?(number: Int) {
             switch number {
@@ -65,6 +65,10 @@ class CustomFormatter {
             case 12: self = .december
             default: return nil
             }
+        }
+        
+        func localizeString() -> String {
+            return NSLocalizedString(self.rawValue, comment: "")
         }
     }
 }
