@@ -12,22 +12,22 @@ struct ContentView: View {
         TabView {
             MainView()
                 .tabItem {
-                    Text(TabBarSelections.main.rawValue)
+                    Text(TabBarSelections.main.localizeString())
                     Image(systemName: "house")
                 }
             ReviewView()
                 .tabItem {
-                    Text(TabBarSelections.review.rawValue)
+                    Text(TabBarSelections.review.localizeString())
                     Image(systemName: "safari")
                 }
             FavoritesView()
                 .tabItem {
-                    Text(TabBarSelections.favorites.rawValue)
+                    Text(TabBarSelections.favorites.localizeString())
                     Image(systemName: "bookmark")
                 }
             ProfileView()
                 .tabItem {
-                    Text(TabBarSelections.profile.rawValue)
+                    Text(TabBarSelections.profile.localizeString())
                     Image(systemName: "person.crop.circle.fill")
                 }
         }
@@ -35,10 +35,14 @@ struct ContentView: View {
 }
 
 enum TabBarSelections: String {
-    case main = "Главная"
-    case review = "Обзор"
-    case favorites = "Избранное"
-    case profile = "Профиль"
+    case main = "mainLabel"
+    case review = "reviewLabel"
+    case favorites = "favoritesLabel"
+    case profile = "profileLabel"
+    
+    func localizeString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 

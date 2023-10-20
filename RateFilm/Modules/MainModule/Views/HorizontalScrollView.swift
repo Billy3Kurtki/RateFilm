@@ -14,20 +14,20 @@ struct HorizontalScrollView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     Spacer(minLength: 20)
-                    ForEach(Selections.allCases, id: \.self) { selection in
+                    ForEach(MainViewSelections.allCases, id: \.self) { selection in
                         Button {
-                            self.selectedCategory = selection.rawValue
+                            self.selectedCategory = selection.localizeString()
                             withAnimation(.easeInOut(duration: 20)) {
                                 scrollProxy.scrollTo(selection, anchor: .center)
                             }
                         } label: {
                             VStack {
-                                Text(selection.rawValue)
+                                Text(selection.localizeString())
                                     .padding()
-                                    .foregroundStyle(self.selectedCategory == selection.rawValue ? Color.red : Color.black)
+                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.red : Color.black)
                                     .font(.system(size: 19))
                                 Capsule()
-                                    .foregroundStyle(self.selectedCategory == selection.rawValue ? Color.red : Color.clear)
+                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.red : Color.clear)
                                     .frame(height: 4)
                                 
                             }.fixedSize()
@@ -43,11 +43,15 @@ struct HorizontalScrollView: View {
 //    HorizontalScrollView()
 //}
 
-enum Selections: String, CaseIterable {
-    case mySelection = "Моя вкладка"
-    case lastReleased = "Последнее"
-    case ongoings = "Онгоинги"
-    case announcement = "Анонсы"
-    case films = "Фильмы"
-    case serials = "Сериалы"
+enum MainViewSelections: String, CaseIterable {
+    case mySelection = "mySelection"
+    case lastReleased = "lastReleased"
+    case ongoings = "ongoings"
+    case announcement = "announcement"
+    case films = "films"
+    case serials = "serials"
+    
+    func localizeString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }

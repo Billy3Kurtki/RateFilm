@@ -41,7 +41,7 @@ struct LoginView: View {
     private func LoginTextField() -> some View {
         TextField("Login",
                   text: $login,
-                  prompt: Text("Email или имя пользователя")
+                  prompt: Text(LoginViewEnum.loginPromptLabel.localizeString())
             .foregroundColor(.customLightGray))
         .padding(10)
         .overlay {
@@ -54,7 +54,7 @@ struct LoginView: View {
     private func PasswordField() -> some View {
         TextField("Password",
                   text: $password,
-                  prompt: Text("Пароль")
+                  prompt: Text(LoginViewEnum.passwordPromptLabel.localizeString())
             .foregroundColor(.customLightGray))
         .padding(10)
         .overlay {
@@ -67,7 +67,7 @@ struct LoginView: View {
     private func PasswordSecureField() -> some View {
         SecureField("Password",
                   text: $password,
-                  prompt: Text("Пароль")
+                  prompt: Text(LoginViewEnum.passwordPromptLabel.localizeString())
             .foregroundColor(.customLightGray))
         .padding(11)
         .overlay {
@@ -94,7 +94,7 @@ struct LoginView: View {
         Button {
             
         } label: {
-            Text("Зарегистрироваться")
+            Text(LoginViewEnum.signUpButtonLabel.localizeString())
                 .padding()
                 .frame(width: Consts.buttonWidth * 2, height: Consts.buttonHeight)
                 .foregroundStyle(Color.customLightGray)
@@ -110,7 +110,7 @@ struct LoginView: View {
             Capsule()
                 .frame(height: Consts.capsuleHeight)
             .padding(.horizontal)
-            Text("или")
+            Text(LoginViewEnum.orLabel.localizeString())
                 .foregroundStyle(Color.customLightGray)
             Capsule()
                 .frame(height: Consts.capsuleHeight)
@@ -124,7 +124,7 @@ struct LoginView: View {
             Button {
                 //
             } label: {
-                Text("Забыли пароль?")
+                Text(LoginViewEnum.forgotPasswordLabel.localizeString())
                     .foregroundStyle(Color.customLightGray)
             }
             Spacer()
@@ -132,7 +132,7 @@ struct LoginView: View {
             Button {
                 //
             } label: {
-                Text("Войти")
+                Text(LoginViewEnum.signInButtonLabel.localizeString())
                     .padding(20)
                     .frame(width: Consts.buttonWidth, height: Consts.buttonHeight)
                     .background(.black)
@@ -157,4 +157,19 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
+}
+
+enum LoginViewEnum: String {
+    case loginLabel = "loginLabel"
+    case passwordLabel = "passwordLabel"
+    case loginPromptLabel = "loginPromptLabel"
+    case passwordPromptLabel = "passwordPromptLabel"
+    case forgotPasswordLabel = "forgotPasswordLabel"
+    case signInButtonLabel = "signInButtonLabel"
+    case signUpButtonLabel = "signUpButtonLabel"
+    case orLabel = "orLabel"
+    
+    func localizeString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
