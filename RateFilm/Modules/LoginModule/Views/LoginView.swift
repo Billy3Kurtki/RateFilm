@@ -46,7 +46,7 @@ struct LoginView: View {
         .padding(10)
         .overlay {
             RoundedRectangle(cornerRadius: Consts.cornerRadius)
-                .stroke(.black, lineWidth: Consts.lineWidth)
+                .stroke(Color.customBlack, lineWidth: Consts.lineWidth)
         }
         .padding(.horizontal)
     }
@@ -59,7 +59,7 @@ struct LoginView: View {
         .padding(10)
         .overlay {
             RoundedRectangle(cornerRadius: Consts.cornerRadius)
-                .stroke(.black, lineWidth: Consts.lineWidth)
+                .stroke(Color.customBlack, lineWidth: Consts.lineWidth)
         }
         .padding(.horizontal)
     }
@@ -72,7 +72,7 @@ struct LoginView: View {
         .padding(11)
         .overlay {
             RoundedRectangle(cornerRadius: Consts.cornerRadius)
-                .stroke(.black, lineWidth: Consts.lineWidth)
+                .stroke(Color.customBlack, lineWidth: Consts.lineWidth)
         }
         .padding(.horizontal)
     }
@@ -84,7 +84,7 @@ struct LoginView: View {
                 showPassword.toggle()
             } label: {
                 Image(systemName: showPassword ? "eye.slash" : "eye")
-                    .foregroundStyle(.black)
+                    .foregroundStyle(Color.customBlack)
             }
             .padding(.trailing, 25)
         }
@@ -135,8 +135,8 @@ struct LoginView: View {
                 Text(LoginViewEnum.signInButtonLabel.localizeString())
                     .padding(20)
                     .frame(width: Consts.buttonWidth, height: Consts.buttonHeight)
-                    .background(.black)
-                    .foregroundStyle(.white)
+                    .background(Color.customBlack)
+                    .foregroundStyle(Color.customWhite)
                     .clipShape(Capsule())
                     
             }

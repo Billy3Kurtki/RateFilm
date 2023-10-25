@@ -24,7 +24,7 @@ struct HorizontalScrollView: View {
                             VStack {
                                 Text(selection.localizeString())
                                     .padding()
-                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.customTitleColor)
+                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.customBlack)
                                     .font(.system(size: 19))
                                 Capsule()
                                     .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.clear)

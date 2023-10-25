@@ -18,7 +18,7 @@ struct SettingsView: View {
                 }
             } label: {
                 Text ("Pick a theme")
-                    .foregroundStyle(Color.customTitleColor)
+                    .foregroundStyle(Color.customBlack)
             }
             .background(.green, in: RoundedRectangle(cornerRadius: 10))
     }

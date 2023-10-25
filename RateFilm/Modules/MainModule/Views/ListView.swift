@@ -74,7 +74,7 @@ struct DescriptionView: View {
         VStack(alignment: .leading) {
             Spacer(minLength: 5)
             Text(name)
-                .foregroundStyle(Color.customTitleColor)
+                .foregroundStyle(Color.customBlack)
                 .font(.system(size: Consts.textTitleSize))
                 .bold()
             if let avgRating = avgRating {
