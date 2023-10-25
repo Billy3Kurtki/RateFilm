@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedCategory: String = MainViewSelections.lastReleased.localizeString()
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -21,8 +22,7 @@ struct MainView: View {
                 }
             }
         }
-        
-        
+        //.preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
     }
     
     

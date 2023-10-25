@@ -24,10 +24,10 @@ struct HorizontalScrollView: View {
                             VStack {
                                 Text(selection.localizeString())
                                     .padding()
-                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.red : Color.black)
+                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.customTitleColor)
                                     .font(.system(size: 19))
                                 Capsule()
-                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.red : Color.clear)
+                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.clear)
                                     .frame(height: 4)
                                 
                             }.fixedSize()

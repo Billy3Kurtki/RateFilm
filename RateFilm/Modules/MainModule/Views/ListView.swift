@@ -69,11 +69,12 @@ struct AsyncIconRowView: View {
 struct DescriptionView: View {
     var name, description: String
     var episodesCount, realeseDate, avgRating: String?
+    
     var body: some View {
         VStack(alignment: .leading) {
             Spacer(minLength: 5)
             Text(name)
-                .foregroundStyle(.black)
+                .foregroundStyle(Color.customTitleColor)
                 .font(.system(size: Consts.textTitleSize))
                 .bold()
             if let avgRating = avgRating {
@@ -92,12 +93,12 @@ struct DescriptionView: View {
                     .padding(5)
                     .background {
                         RoundedRectangle(cornerRadius: 8)
-                            .foregroundStyle(Color("superLightGray"))
+                            .foregroundStyle(Color.customSuperLightGray)
                     }
             }
             
             Text(description)
-                .foregroundStyle(Color.customGray)
+                .foregroundStyle(Color.customLightGray)
                 .font(.system(size: Consts.textSize))
                 .frame(maxHeight: Consts.maxTextHeight)
                 .multilineTextAlignment(.leading)
@@ -109,7 +110,7 @@ struct DescriptionView: View {
     
     enum Consts {
         static var maxTextHeight: CGFloat = 80
-        static var textSize: CGFloat = 20
+        static var textSize: CGFloat = 18
         static var textTitleSize: CGFloat = 22
         static var iconStarWidth: CGFloat = 18
         static var iconStarHeight: CGFloat = 18

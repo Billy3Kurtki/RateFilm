@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("systemThemeVal") private var systemTheme: String = SchemeType.allCases.first!.rawValue
+    
     var body: some View {
         TabView {
             MainView()
@@ -30,7 +32,12 @@ struct ContentView: View {
                     Text(TabBarSelections.profile.localizeString())
                     Image(systemName: "person.crop.circle.fill")
                 }
-        }
+            SettingsView() // Для теста тёмной темы, потом уберу
+                .tabItem {
+                    Text("Settings")
+                    Image(systemName: "gearshape")
+                }
+        }.preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
     }
 }
 

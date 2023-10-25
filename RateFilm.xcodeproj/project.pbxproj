@@ -34,6 +34,7 @@
 		087573492ACD6A27009A466A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087573482ACD6A27009A466A /* User.swift */; };
 		0875734B2ACF582A009A466A /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875734A2ACF582A009A466A /* Film.swift */; };
 		0875734D2ACF5E1D009A466A /* Serial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875734C2ACF5E1D009A466A /* Serial.swift */; };
+		08F001C12AE86E58002C1B99 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001C02AE86E58002C1B99 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		087573482ACD6A27009A466A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0875734A2ACF582A009A466A /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		0875734C2ACF5E1D009A466A /* Serial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serial.swift; sourceTree = "<group>"; };
+		08F001C02AE86E58002C1B99 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 		085AE5A52AD48D3A0069EFF2 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				08F001BC2AE86E26002C1B99 /* SettingsModule */,
 				085AE5C32AD6CA340069EFF2 /* ProfileModule */,
 				085AE5BD2AD6C6650069EFF2 /* FavoritesModule */,
 				085AE5B62AD6C43A0069EFF2 /* ReviewModule */,
@@ -392,6 +395,38 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		08F001BC2AE86E26002C1B99 /* SettingsModule */ = {
+			isa = PBXGroup;
+			children = (
+				08F001BF2AE86E44002C1B99 /* Models */,
+				08F001BE2AE86E3B002C1B99 /* ViewModels */,
+				08F001BD2AE86E32002C1B99 /* Views */,
+			);
+			path = SettingsModule;
+			sourceTree = "<group>";
+		};
+		08F001BD2AE86E32002C1B99 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08F001C02AE86E58002C1B99 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		08F001BE2AE86E3B002C1B99 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		08F001BF2AE86E44002C1B99 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -478,6 +513,7 @@
 				085AE5B92AD6C47C0069EFF2 /* ReviewView.swift in Sources */,
 				085AE5B12AD5F4500069EFF2 /* MovieDetailsView.swift in Sources */,
 				085AE5C82AD6CA5B0069EFF2 /* ProfileView.swift in Sources */,
+				08F001C12AE86E58002C1B99 /* SettingsView.swift in Sources */,
 				0847FD502AD0B89F00DEC3C1 /* NetworkService.swift in Sources */,
 				0847FD492AD0169F00DEC3C1 /* RegisterView.swift in Sources */,
 				085AE5D42ADDC2F50069EFF2 /* CustomFormatter.swift in Sources */,

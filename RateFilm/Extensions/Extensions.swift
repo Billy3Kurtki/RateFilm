@@ -15,7 +15,10 @@ extension Date {
 
 extension Color {
     static let customLightGray = Color("lightGray")
+    static let customSuperLightGray = Color("superLightGray")
     static let customGray = Color("gray")
+    static let customTitleColor = Color("titleColor")
+    static let customLightRed = Color("lightRed")
 }
 
 extension Image {
@@ -44,3 +47,41 @@ extension UnixTimestamp {
         return Date(timeIntervalSince1970: TimeInterval((self + 10800000) / 1_000))
     }
 }
+
+enum SchemeType: String, Identifiable, CaseIterable {
+    var id: Self { self }
+    case system = "📱 System"
+    case light = "☀️ Light"
+    case dark = "🌑 Dark"
+}
+
+extension SchemeType {
+    var title: String {
+        switch self {
+        case .system:
+            return self.rawValue
+        case .light:
+            return self.rawValue
+        case .dark:
+            return self.rawValue
+        }
+    }
+}
+
+extension ColorScheme {
+    static func selectedScheme(scheme: String?) -> ColorScheme? {
+        guard let scheme = scheme,
+              let theme = SchemeType(rawValue: scheme)
+        else { return nil }
+        
+        switch theme {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        default:
+            return nil
+        }
+    }
+}
+
