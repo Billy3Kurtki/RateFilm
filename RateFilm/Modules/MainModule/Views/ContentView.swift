@@ -32,10 +32,10 @@ struct ContentView: View {
                     Text(TabBarSelections.profile.localizeString())
                     Image(systemName: "person.crop.circle.fill")
                 }
-            SettingsView() // Для теста тёмной темы, потом уберу
+            RegisterView() // Для теста тёмной темы, потом уберу
                 .tabItem {
-                    Text("Settings")
-                    Image(systemName: "gearshape")
+                    Text("Register")
+                    Image(systemName: "person")
                 }
         }.preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
     }

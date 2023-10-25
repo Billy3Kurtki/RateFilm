@@ -37,6 +37,7 @@
 		08F001C52AE9601C002C1B99 /* ColorSchemeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001C42AE9601C002C1B99 /* ColorSchemeExtension.swift */; };
 		08F001C72AE9604F002C1B99 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001C62AE9604F002C1B99 /* ImageExtension.swift */; };
 		08F001C92AE9606F002C1B99 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001C82AE9606F002C1B99 /* DateExtension.swift */; };
+		08F001CB2AE9BA3B002C1B99 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001CA2AE9BA3B002C1B99 /* RegisterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		08F001C42AE9601C002C1B99 /* ColorSchemeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeExtension.swift; sourceTree = "<group>"; };
 		08F001C62AE9604F002C1B99 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		08F001C82AE9606F002C1B99 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		08F001CA2AE9BA3B002C1B99 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		085AE5A02AD414140069EFF2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				08F001CA2AE9BA3B002C1B99 /* RegisterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				08F001C52AE9601C002C1B99 /* ColorSchemeExtension.swift in Sources */,
 				0847FD4D2AD0B70B00DEC3C1 /* LoginView.swift in Sources */,
 				087573492ACD6A27009A466A /* User.swift in Sources */,
+				08F001CB2AE9BA3B002C1B99 /* RegisterViewModel.swift in Sources */,
 				085AE5B52AD6AD870069EFF2 /* ListViewModel.swift in Sources */,
 				085AE5CC2ADB3AC00069EFF2 /* SerialViewModel.swift in Sources */,
 				085AE5C22AD6C9120069EFF2 /* FavoritesView.swift in Sources */,

@@ -69,6 +69,23 @@
         }
       }
     },
+    "ConfirmPasswordInvalidLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password fields do not match"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароли не совпадают"
+          }
+        }
+      }
+    },
     "CreateProfileLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -103,6 +120,23 @@
         }
       }
     },
+    "EmailInvalidLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a valid email address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите Email"
+          }
+        }
+      }
+    },
     "EmailLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -119,6 +153,9 @@
           }
         }
       }
+    },
+    "Entry" : {
+
     },
     "favoritesLabel" : {
       "extractionState" : "manual",
@@ -367,8 +404,22 @@
         }
       }
     },
-    "Nickname" : {
-
+    "NicknameInvalidLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The nickname must be between 5 and 20 characters long"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Никнейм должен иметь длину от 5 до 20 символов"
+          }
+        }
+      }
     },
     "NicknameLabel" : {
       "extractionState" : "manual",
@@ -458,6 +509,23 @@
     "Password" : {
 
     },
+    "PasswordInvalidLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Must be between 8 to 15 characters containing at least one number and one capital letter"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль должен иметь от 8 до 15 символов и содержать минимум одну цифру и одну заглавную букву"
+          }
+        }
+      }
+    },
     "passwordLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -511,6 +579,9 @@
           }
         }
       }
+    },
+    "Register" : {
+
     },
     "RepeatPasswordLabel" : {
       "extractionState" : "manual",
@@ -579,9 +650,6 @@
           }
         }
       }
-    },
-    "Settings" : {
-
     },
     "signInButtonLabel" : {
       "extractionState" : "manual",
