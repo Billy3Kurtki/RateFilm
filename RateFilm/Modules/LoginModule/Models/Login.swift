@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UserTypes {
+enum UserTypes: Codable {
     case admin
     case authUser
     case unauthUser
@@ -18,8 +18,3 @@ struct Login: Codable {
     var password: String
 }
 
-struct Register: Codable {
-    var nickName: String
-    var email: String
-    var password: String
-}
