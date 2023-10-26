@@ -138,11 +138,14 @@ struct CustomButton: View {
         }
     }
     
-    // MARK: Функция для адаптивной ширины кнопки в зависимости от ширины экрана. Мини-версия - это уменьшенная вдвое относительно большой-версии (+- 350px) до +- 175px.
+    // MARK: Функция для адаптивной ширины кнопки в зависимости от ширины окна приложения. Мини-версия - это уменьшенная вдвое относительно большой-версии (+- 350px) до +- 175px.
     func buttonWidth() -> CGFloat {
         let spacing: CGFloat = Consts.spacing
         let totalSpacing: CGFloat = 2 * spacing
-        let screenWidth = UIScreen.main.bounds.width
+        guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first
+        else { return 0 }
+        
+        let screenWidth = window.frame.width
         if isMini {
             return (screenWidth - totalSpacing) / 2
         }
