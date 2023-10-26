@@ -12,11 +12,11 @@ struct RegisterView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                EntryField(prompt: RegisterViewEnum.nicknameLabel.localizeString(), errorValidText: viewModel.nicknameError, field: $viewModel.nickname)
-                EntryField(prompt: RegisterViewEnum.emailLabel.localizeString(), errorValidText: viewModel.emailError, field: $viewModel.email)
-                EntryField(prompt: RegisterViewEnum.passwordPromptLabel.localizeString(), errorValidText: viewModel.passwordError, isSecure: true, field: $viewModel.password)
-                EntryField(prompt: RegisterViewEnum.repeatPasswordLabel.localizeString(), errorValidText: viewModel.confirmPasswordError, isSecure: true, field: $viewModel.confirmPassword)
-                CustomButton(label: RegisterViewEnum.createProfileLabel.localizeString(), isFill: true, action: {
+                EntryField(prompt: RegisterViewEnum.nicknameLabel.stringValue(), errorValidText: viewModel.nicknameError, field: $viewModel.nickname)
+                EntryField(prompt: RegisterViewEnum.emailLabel.stringValue(), errorValidText: viewModel.emailError, field: $viewModel.email)
+                EntryField(prompt: RegisterViewEnum.passwordPromptLabel.stringValue(), errorValidText: viewModel.passwordError, isSecure: true, field: $viewModel.password)
+                EntryField(prompt: RegisterViewEnum.repeatPasswordLabel.stringValue(), errorValidText: viewModel.confirmPasswordError, isSecure: true, field: $viewModel.confirmPassword)
+                CustomButton(label: RegisterViewEnum.createProfileLabel.stringValue(), isFill: true, action: {
                     viewModel.signUp()
                 })
                 .padding(.vertical, 10)
@@ -29,17 +29,13 @@ struct RegisterView: View {
     }
 }
 
-enum RegisterViewEnum: String {
-    case nicknameLabel = "NicknameLabel"
-    case emailLabel = "EmailLabel"
-    case passwordLabel = "passwordLabel"
-    case passwordPromptLabel = "passwordPromptLabel"
-    case repeatPasswordLabel = "RepeatPasswordLabel"
-    case createProfileLabel = "CreateProfileLabel"
-    
-    func localizeString() -> String {
-        return NSLocalizedString(self.rawValue, comment: "")
-    }
+enum RegisterViewEnum {
+    static var nicknameLabel: LocalizedStringKey = "NicknameLabel"
+    static var emailLabel: LocalizedStringKey = "EmailLabel"
+    static var passwordLabel: LocalizedStringKey = "passwordLabel"
+    static var passwordPromptLabel: LocalizedStringKey = "passwordPromptLabel"
+    static var repeatPasswordLabel: LocalizedStringKey = "RepeatPasswordLabel"
+    static var createProfileLabel: LocalizedStringKey = "CreateProfileLabel"
 }
 
 struct EntryField: View {

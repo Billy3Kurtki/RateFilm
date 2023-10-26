@@ -5,7 +5,7 @@
 //  Created by Кирилл Казаков on 26.10.2023.
 //
 
-import Foundation
+import SwiftUI
 
 class RegisterViewModel: ObservableObject {
     @Published var nickname: String = ""
@@ -46,28 +46,28 @@ class RegisterViewModel: ObservableObject {
         if nicknameValid() {
             return ""
         }
-        return InvalidLabels.nicknameInvalidLabel.localizeString()
+        return InvalidLabels.nicknameInvalidLabel.stringValue()
     }
     
     var confirmPasswordError: String {
         if passwordsMatch() {
             return ""
         }
-        return InvalidLabels.confirmPasswordInvalidLabel.localizeString()
+        return InvalidLabels.confirmPasswordInvalidLabel.stringValue()
     }
     
     var emailError: String {
         if isEmailValid() {
             return ""
         }
-        return InvalidLabels.emailInvalidLabel.localizeString()
+        return InvalidLabels.emailInvalidLabel.stringValue()
     }
     
     var passwordError: String {
         if isPasswordValid() {
             return ""
         }
-        return InvalidLabels.passwordInvalidLabel.localizeString()
+        return InvalidLabels.passwordInvalidLabel.stringValue()
     }
     
     func signUp() {
@@ -77,15 +77,11 @@ class RegisterViewModel: ObservableObject {
         confirmPassword = ""
     }
     
-    enum InvalidLabels: String {
-        case confirmPasswordInvalidLabel = "ConfirmPasswordInvalidLabel"
-        case emailInvalidLabel = "EmailInvalidLabel"
-        case passwordInvalidLabel = "PasswordInvalidLabel"
-        case nicknameInvalidLabel = "NicknameInvalidLabel"
-        
-        func localizeString() -> String {
-            return NSLocalizedString(self.rawValue, comment: "")
-        }
+    enum InvalidLabels {
+        static var  confirmPasswordInvalidLabel: LocalizedStringKey = "ConfirmPasswordInvalidLabel"
+        static var emailInvalidLabel: LocalizedStringKey = "EmailInvalidLabel"
+        static var passwordInvalidLabel: LocalizedStringKey = "PasswordInvalidLabel"
+        static var nicknameInvalidLabel: LocalizedStringKey = "NicknameInvalidLabel"
     }
 }
 

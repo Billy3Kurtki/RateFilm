@@ -43,7 +43,7 @@ struct HorizontalScrollView: View {
 //    HorizontalScrollView()
 //}
 
-enum MainViewSelections: String, CaseIterable {
+enum MainViewSelections: String, CaseIterable { // через static var ... : LocalizedStringKey не получится, тк нужно, чтобы осталось соответствие CaseIterable
     case mySelection = "mySelection"
     case lastReleased = "lastReleased"
     case ongoings = "ongoings"

@@ -17,7 +17,7 @@ struct SettingsView: View {
                         .tag(item.rawValue)
                 }
             } label: {
-                Text ("Pick a theme")
+                Text("Pick a theme")
                     .foregroundStyle(Color.customBlack)
             }
             .background(.green, in: RoundedRectangle(cornerRadius: 10))

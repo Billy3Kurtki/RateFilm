@@ -39,6 +39,7 @@
 		08F001C92AE9606F002C1B99 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001C82AE9606F002C1B99 /* DateExtension.swift */; };
 		08F001CB2AE9BA3B002C1B99 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001CA2AE9BA3B002C1B99 /* RegisterViewModel.swift */; };
 		08F001CD2AEA66F0002C1B99 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001CC2AEA66F0002C1B99 /* LoginViewModel.swift */; };
+		08F001CF2AEAABDD002C1B99 /* LocalizedStringKeyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001CE2AEAABDC002C1B99 /* LocalizedStringKeyExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		08F001C82AE9606F002C1B99 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		08F001CA2AE9BA3B002C1B99 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		08F001CC2AEA66F0002C1B99 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		08F001CE2AEAABDC002C1B99 /* LocalizedStringKeyExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringKeyExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +359,7 @@
 				08F001C42AE9601C002C1B99 /* ColorSchemeExtension.swift */,
 				08F001C62AE9604F002C1B99 /* ImageExtension.swift */,
 				08F001C82AE9606F002C1B99 /* DateExtension.swift */,
+				08F001CE2AEAABDC002C1B99 /* LocalizedStringKeyExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				085AE5CA2ADB3AB40069EFF2 /* FilmViewModel.swift in Sources */,
 				0875734D2ACF5E1D009A466A /* Serial.swift in Sources */,
 				085AE5AD2AD5EAC70069EFF2 /* HorizontalScrollView.swift in Sources */,
+				08F001CF2AEAABDD002C1B99 /* LocalizedStringKeyExtension.swift in Sources */,
 				0875733A2ACAF6A9009A466A /* MainView.swift in Sources */,
 				0875734B2ACF582A009A466A /* Film.swift in Sources */,
 				085AE5B92AD6C47C0069EFF2 /* ReviewView.swift in Sources */,

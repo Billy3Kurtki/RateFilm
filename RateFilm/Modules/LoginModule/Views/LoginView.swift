@@ -21,12 +21,12 @@ struct LoginView: View {
                     .frame(width: Consts.imageWidth, height: Consts.imageHeight)
                     .clipShape(Capsule())
                 Spacer()
-                EntryField(prompt: LoginViewEnum.loginPromptLabel.localizeString(), errorValidText: viewModel.loginError, field: $viewModel.login)
-                EntryField(prompt: LoginViewEnum.passwordPromptLabel.localizeString(), errorValidText: viewModel.passwordError, isSecure: true, field: $viewModel.password)
+                EntryField(prompt: LoginViewEnum.loginPromptLabel.stringValue(), errorValidText: viewModel.loginError, field: $viewModel.login)
+                EntryField(prompt: LoginViewEnum.passwordPromptLabel.stringValue(), errorValidText: viewModel.passwordError, isSecure: true, field: $viewModel.password)
                 
                 AuthorizationBlockButtons()
                 CustomDivider()
-                CustomButton(label: LoginViewEnum.signUpButtonLabel.localizeString()) {
+                CustomButton(label: LoginViewEnum.signUpButtonLabel.stringValue()) {
                     
                 }
                 SkipAuthorizationButton()
@@ -40,7 +40,7 @@ struct LoginView: View {
             Capsule()
                 .frame(height: Consts.capsuleHeight)
             .padding(.horizontal)
-            Text(LoginViewEnum.orLabel.localizeString())
+            Text(LoginViewEnum.orLabel.stringValue())
                 .foregroundStyle(Color.customLightGray)
             Capsule()
                 .frame(height: Consts.capsuleHeight)
@@ -54,11 +54,11 @@ struct LoginView: View {
             Button {
                 //
             } label: {
-                Text(LoginViewEnum.forgotPasswordLabel.localizeString())
+                Text(LoginViewEnum.forgotPasswordLabel.stringValue())
                     .foregroundStyle(Color.customLightGray)
             }
             Spacer()
-            CustomButton(label: LoginViewEnum.signInButtonLabel.localizeString(), isMini: true, isFill: true) {
+            CustomButton(label: LoginViewEnum.signInButtonLabel.stringValue(), isMini: true, isFill: true) {
                 viewModel.sighIn()
             }
             .opacity(viewModel.isSignInComplete ? 1 : 0.6)
@@ -72,7 +72,7 @@ struct LoginView: View {
             Button {
                 //
             } label: {
-                Text(LoginViewEnum.skipAuthLabel.localizeString())
+                Text(LoginViewEnum.skipAuthLabel.stringValue())
                     .foregroundStyle(Color.customLightGray)
             }
         }.padding()
@@ -94,18 +94,14 @@ struct LoginView: View {
     LoginView()
 }
 
-enum LoginViewEnum: String {
-    case loginLabel = "loginLabel"
-    case passwordLabel = "passwordLabel"
-    case loginPromptLabel = "loginPromptLabel"
-    case passwordPromptLabel = "passwordPromptLabel"
-    case forgotPasswordLabel = "forgotPasswordLabel"
-    case signInButtonLabel = "signInButtonLabel"
-    case signUpButtonLabel = "signUpButtonLabel"
-    case orLabel = "orLabel"
-    case skipAuthLabel = "SkipAuthLabel"
-    
-    func localizeString() -> String {
-        return NSLocalizedString(self.rawValue, comment: "")
-    }
+enum LoginViewEnum {
+    static var loginLabel: LocalizedStringKey = "loginLabel"
+    static var passwordLabel: LocalizedStringKey = "passwordLabel"
+    static var loginPromptLabel: LocalizedStringKey = "loginPromptLabel"
+    static var passwordPromptLabel: LocalizedStringKey = "passwordPromptLabel"
+    static var forgotPasswordLabel: LocalizedStringKey = "forgotPasswordLabel"
+    static var signInButtonLabel: LocalizedStringKey = "signInButtonLabel"
+    static var signUpButtonLabel: LocalizedStringKey = "signUpButtonLabel"
+    static var orLabel: LocalizedStringKey = "orLabel"
+    static var skipAuthLabel: LocalizedStringKey = "SkipAuthLabel"
 }

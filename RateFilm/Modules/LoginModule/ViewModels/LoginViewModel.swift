@@ -5,7 +5,7 @@
 //  Created by Кирилл Казаков on 26.10.2023.
 //
 
-import Foundation
+import SwiftUI
 
 class LoginViewModel: ObservableObject {
     @Published var login: String = ""
@@ -37,26 +37,22 @@ class LoginViewModel: ObservableObject {
         if loginValid() {
             return ""
         }
-        return InvalidLabels.loginValidError.localizeString()
+        return InvalidLabels.loginValidError.stringValue()
     }
     
     var passwordError: String {
         if passwordValid() {
             return ""
         }
-        return InvalidLabels.passwordValidError.localizeString()
+        return InvalidLabels.passwordValidError.stringValue()
     }
     func sighIn() {
         login = ""
         password = ""
     }
     
-    enum InvalidLabels: String {
-        case loginValidError = "LoginValidErrorLabel"
-        case passwordValidError = "PasswordValidErrorLabel"
-        
-        func localizeString() -> String {
-            return NSLocalizedString(self.rawValue, comment: "")
-        }
+    enum InvalidLabels {
+        static var loginValidError: LocalizedStringKey = "LoginValidErrorLabel"
+        static var passwordValidError: LocalizedStringKey = "PasswordValidErrorLabel"
     }
 }

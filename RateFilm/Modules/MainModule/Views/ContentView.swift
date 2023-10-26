@@ -14,22 +14,22 @@ struct ContentView: View {
         TabView {
             MainView()
                 .tabItem {
-                    Text(TabBarSelections.main.localizeString())
+                    Text(TabBarSelections.main.stringValue())
                     Image(systemName: "house")
                 }
             ReviewView()
                 .tabItem {
-                    Text(TabBarSelections.review.localizeString())
+                    Text(TabBarSelections.review.stringValue())
                     Image(systemName: "safari")
                 }
             FavoritesView()
                 .tabItem {
-                    Text(TabBarSelections.favorites.localizeString())
+                    Text(TabBarSelections.favorites.stringValue())
                     Image(systemName: "bookmark")
                 }
             ProfileView()
                 .tabItem {
-                    Text(TabBarSelections.profile.localizeString())
+                    Text(TabBarSelections.profile.stringValue())
                     Image(systemName: "person.crop.circle.fill")
                 }
             LoginView() // Для теста тёмной темы, потом уберу
@@ -41,15 +41,11 @@ struct ContentView: View {
     }
 }
 
-enum TabBarSelections: String {
-    case main = "mainLabel"
-    case review = "reviewLabel"
-    case favorites = "favoritesLabel"
-    case profile = "profileLabel"
-    
-    func localizeString() -> String {
-        return NSLocalizedString(self.rawValue, comment: "")
-    }
+enum TabBarSelections {
+    static var main: LocalizedStringKey = "mainLabel"
+    static var review: LocalizedStringKey = "reviewLabel"
+    static var favorites: LocalizedStringKey = "favoritesLabel"
+    static var profile: LocalizedStringKey = "profileLabel"
 }
 
 
