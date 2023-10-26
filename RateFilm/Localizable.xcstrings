@@ -679,9 +679,6 @@
         }
       }
     },
-    "SignIn" : {
-
-    },
     "signInButtonLabel" : {
       "extractionState" : "manual",
       "localizations" : {

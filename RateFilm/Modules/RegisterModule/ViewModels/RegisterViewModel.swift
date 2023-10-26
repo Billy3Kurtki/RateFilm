@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Observation
 
+@Observable
 class RegisterViewModel: ObservableObject {
-    @Published var nickname: String = ""
-    @Published var email: String = ""
-    @Published var password: String = ""
-    @Published var confirmPassword: String = ""
+    var nickname: String = ""
+    var email: String = ""
+    var password: String = ""
+    var confirmPassword: String = ""
     
     func nicknameValid() -> Bool {
         if Range(5...20).contains(nickname.count) {

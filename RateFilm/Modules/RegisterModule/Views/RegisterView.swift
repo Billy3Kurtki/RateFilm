@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @ObservedObject var viewModel = RegisterViewModel()
+    @Bindable var viewModel = RegisterViewModel()
+    
     var body: some View {
         NavigationStack {
             VStack {

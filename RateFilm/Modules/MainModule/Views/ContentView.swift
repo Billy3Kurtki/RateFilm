@@ -32,11 +32,6 @@ struct ContentView: View {
                     Text(TabBarSelections.profile.stringValue())
                     Image(systemName: "person.crop.circle.fill")
                 }
-            LoginView() // Для теста тёмной темы, потом уберу
-                .tabItem {
-                    Text("SignIn")
-                    Image(systemName: "person")
-                }
         }.preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
     }
 }

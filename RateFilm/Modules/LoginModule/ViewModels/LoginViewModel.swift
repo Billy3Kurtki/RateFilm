@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Observation
 
+@Observable
 class LoginViewModel: ObservableObject {
-    @Published var login: String = ""
-    @Published var password: String = ""
+    var login: String = ""
+    var password: String = ""
     
     func loginValid() -> Bool {
         if login.count > 0 {

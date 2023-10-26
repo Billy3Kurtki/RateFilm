@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ListView: View {
     @State private var search = ""
-    @StateObject private var data = ListViewModel()
+    @State private var data = ListViewModel()
+    
     var body: some View {
         NavigationStack {
             ScrollView {

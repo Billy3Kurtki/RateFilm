@@ -5,12 +5,13 @@
 //  Created by Кирилл Казаков on 11.10.2023.
 //
 
-import Foundation
-import UIKit
+import SwiftUI
+import Observation
 
-class ListViewModel: ObservableObject {
-    @Published var filmsVM: [FilmViewModel] = []
-    @Published var serialsVM: [SerialViewModel] = []
+@Observable
+class ListViewModel {
+    var filmsVM: [FilmViewModel] = []
+    var serialsVM: [SerialViewModel] = []
     
     init() {
         for i in ListViewModel.films {
