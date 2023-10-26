@@ -279,6 +279,9 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "lastReleased" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -295,9 +298,6 @@
           }
         }
       }
-    },
-    "Login" : {
-
     },
     "loginLabel" : {
       "comment" : "enum LoginViewEnum",
@@ -330,6 +330,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Email или имя пользователя"
+          }
+        }
+      }
+    },
+    "LoginValidErrorLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a field Login"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заполните поле Логин"
           }
         }
       }
@@ -506,9 +523,6 @@
         }
       }
     },
-    "Password" : {
-
-    },
     "PasswordInvalidLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -560,6 +574,23 @@
         }
       }
     },
+    "PasswordValidErrorLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a field Password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заполните поле Пароль"
+          }
+        }
+      }
+    },
     "Pick a theme" : {
 
     },
@@ -579,9 +610,6 @@
           }
         }
       }
-    },
-    "Register" : {
-
     },
     "RepeatPasswordLabel" : {
       "extractionState" : "manual",
@@ -651,6 +679,9 @@
         }
       }
     },
+    "SignIn" : {
+
+    },
     "signInButtonLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -684,6 +715,26 @@
           }
         }
       }
+    },
+    "SkipAuthLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пропустить"
+          }
+        }
+      }
+    },
+    "Создание профиля" : {
+
     }
   },
   "version" : "1.0"

@@ -10,19 +10,22 @@ import SwiftUI
 struct RegisterView: View {
     @ObservedObject var viewModel = RegisterViewModel()
     var body: some View {
-        VStack {
-            EntryField(prompt: RegisterViewEnum.nicknameLabel.localizeString(), errorValidText: viewModel.nicknameError, field: $viewModel.nickname)
-            EntryField(prompt: RegisterViewEnum.emailLabel.localizeString(), errorValidText: viewModel.emailError, field: $viewModel.email)
-            EntryField(prompt: RegisterViewEnum.passwordPromptLabel.localizeString(), errorValidText: viewModel.passwordError, isSecure: true, field: $viewModel.password)
-            EntryField(prompt: RegisterViewEnum.repeatPasswordLabel.localizeString(), errorValidText: viewModel.confirmPasswordError, isSecure: true, field: $viewModel.confirmPassword)
-            CustomButton(label: RegisterViewEnum.createProfileLabel.localizeString(), isFill: true, action: {
-                viewModel.signUp()
-            })
-            .padding(.vertical, 10)
-            .opacity(viewModel.isSignUpComplete ? 1 : 0.65)
-            .disabled(!viewModel.isSignUpComplete)
+        NavigationStack {
+            VStack {
+                EntryField(prompt: RegisterViewEnum.nicknameLabel.localizeString(), errorValidText: viewModel.nicknameError, field: $viewModel.nickname)
+                EntryField(prompt: RegisterViewEnum.emailLabel.localizeString(), errorValidText: viewModel.emailError, field: $viewModel.email)
+                EntryField(prompt: RegisterViewEnum.passwordPromptLabel.localizeString(), errorValidText: viewModel.passwordError, isSecure: true, field: $viewModel.password)
+                EntryField(prompt: RegisterViewEnum.repeatPasswordLabel.localizeString(), errorValidText: viewModel.confirmPasswordError, isSecure: true, field: $viewModel.confirmPassword)
+                CustomButton(label: RegisterViewEnum.createProfileLabel.localizeString(), isFill: true, action: {
+                    viewModel.signUp()
+                })
+                .padding(.vertical, 10)
+                .opacity(viewModel.isSignUpComplete ? 1 : 0.65)
+                .disabled(!viewModel.isSignUpComplete)
+            }
+            .padding(.vertical)
+            .navigationTitle("Создание профиля")
         }
-        .padding(.vertical)
     }
 }
 

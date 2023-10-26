@@ -8,100 +8,30 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var login: String = ""
-    @State var password: String = ""
+    @ObservedObject var viewModel = LoginViewModel()
+    
     @State var showPassword = false
     
     var body: some View {
-        VStack(spacing: 10) {
-            Image("icon")
-                .resizable()
-                .frame(width: Consts.imageWidth, height: Consts.imageHeight)
-                .clipShape(Capsule())
-            
-            LoginTextField()
-            
-            ZStack {
-                if showPassword {
-                    PasswordField()
-                } else {
-                    PasswordSecureField()
+        NavigationStack {
+            VStack(spacing: 10) {
+                Spacer(minLength: Consts.spacerPadding)
+                Image("icon")
+                    .resizable()
+                    .frame(width: Consts.imageWidth, height: Consts.imageHeight)
+                    .clipShape(Capsule())
+                Spacer()
+                EntryField(prompt: LoginViewEnum.loginPromptLabel.localizeString(), errorValidText: viewModel.loginError, field: $viewModel.login)
+                EntryField(prompt: LoginViewEnum.passwordPromptLabel.localizeString(), errorValidText: viewModel.passwordError, isSecure: true, field: $viewModel.password)
+                
+                AuthorizationBlockButtons()
+                CustomDivider()
+                CustomButton(label: LoginViewEnum.signUpButtonLabel.localizeString()) {
+                    
                 }
+                SkipAuthorizationButton()
+                Spacer(minLength: Consts.spacerPadding)
             }
-            .overlay {
-                ShowPasswordEyeButton()
-            }
-            
-            AuthorizationBlockButtons()
-            CustomDivider()
-            RegisterButton()
-        }
-    }
-    
-    private func LoginTextField() -> some View {
-        TextField("Login",
-                  text: $login,
-                  prompt: Text(LoginViewEnum.loginPromptLabel.localizeString())
-            .foregroundColor(.customLightGray))
-        .padding(10)
-        .overlay {
-            RoundedRectangle(cornerRadius: Consts.cornerRadius)
-                .stroke(Color.customBlack, lineWidth: Consts.lineWidth)
-        }
-        .padding(.horizontal)
-    }
-    
-    private func PasswordField() -> some View {
-        TextField("Password",
-                  text: $password,
-                  prompt: Text(LoginViewEnum.passwordPromptLabel.localizeString())
-            .foregroundColor(.customLightGray))
-        .padding(10)
-        .overlay {
-            RoundedRectangle(cornerRadius: Consts.cornerRadius)
-                .stroke(Color.customBlack, lineWidth: Consts.lineWidth)
-        }
-        .padding(.horizontal)
-    }
-    
-    private func PasswordSecureField() -> some View {
-        SecureField("Password",
-                  text: $password,
-                  prompt: Text(LoginViewEnum.passwordPromptLabel.localizeString())
-            .foregroundColor(.customLightGray))
-        .padding(11)
-        .overlay {
-            RoundedRectangle(cornerRadius: Consts.cornerRadius)
-                .stroke(Color.customBlack, lineWidth: Consts.lineWidth)
-        }
-        .padding(.horizontal)
-    }
-    
-    private func ShowPasswordEyeButton() -> some View {
-        HStack {
-            Spacer()
-            Button {
-                showPassword.toggle()
-            } label: {
-                Image(systemName: showPassword ? "eye.slash" : "eye")
-                    .foregroundStyle(Color.customBlack)
-            }
-            .padding(.trailing, 25)
-        }
-    }
-    
-    private func RegisterButton() -> some View {
-        Button {
-            
-        } label: {
-            Text(LoginViewEnum.signUpButtonLabel.localizeString())
-                .padding()
-                .frame(width: Consts.buttonWidth * 2, height: Consts.buttonHeight)
-                .foregroundStyle(Color.customLightGray)
-                .overlay {
-                    Capsule()
-                        .stroke(Color.customLightGray, lineWidth: 2)
-                }
         }
     }
     
@@ -128,20 +58,24 @@ struct LoginView: View {
                     .foregroundStyle(Color.customLightGray)
             }
             Spacer()
-            
+            CustomButton(label: LoginViewEnum.signInButtonLabel.localizeString(), isMini: true, isFill: true) {
+                viewModel.sighIn()
+            }
+            .opacity(viewModel.isSignInComplete ? 1 : 0.6)
+            .disabled(!viewModel.isSignInComplete)
+        }
+        .padding(.horizontal)
+    }
+    
+    private func SkipAuthorizationButton() -> some View {
+        VStack(alignment: .center) {
             Button {
                 //
             } label: {
-                Text(LoginViewEnum.signInButtonLabel.localizeString())
-                    .padding(20)
-                    .frame(width: Consts.buttonWidth, height: Consts.buttonHeight)
-                    .background(Color.customBlack)
-                    .foregroundStyle(Color.customWhite)
-                    .clipShape(Capsule())
-                    
+                Text(LoginViewEnum.skipAuthLabel.localizeString())
+                    .foregroundStyle(Color.customLightGray)
             }
-        }
-        .padding(.horizontal)
+        }.padding()
     }
     
     enum Consts {
@@ -152,6 +86,7 @@ struct LoginView: View {
         static var imageHeight: CGFloat = 200
         static var buttonHeight: CGFloat = 50
         static var buttonWidth: CGFloat = 175
+        static var spacerPadding: CGFloat = 100
     }
 }
 
@@ -168,6 +103,7 @@ enum LoginViewEnum: String {
     case signInButtonLabel = "signInButtonLabel"
     case signUpButtonLabel = "signUpButtonLabel"
     case orLabel = "orLabel"
+    case skipAuthLabel = "SkipAuthLabel"
     
     func localizeString() -> String {
         return NSLocalizedString(self.rawValue, comment: "")

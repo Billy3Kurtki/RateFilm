@@ -23,13 +23,12 @@ class RegisterViewModel: ObservableObject {
     func passwordsMatch() -> Bool { password == confirmPassword }
     
     func isPasswordValid() -> Bool {
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", 
-                                       "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$")
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", Regex.password.rawValue)
         return passwordTest.evaluate(with: password)
     }
     
     func isEmailValid() -> Bool {
-        let emailTest = NSPredicate(format: "SELF MATCHES %@", "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$")
+        let emailTest = NSPredicate(format: "SELF MATCHES %@", Regex.email.rawValue)
         return emailTest.evaluate(with: email)
     }
     
@@ -88,4 +87,9 @@ class RegisterViewModel: ObservableObject {
             return NSLocalizedString(self.rawValue, comment: "")
         }
     }
+}
+
+enum Regex: String {
+    case email = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$"
+    case password = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
 }
