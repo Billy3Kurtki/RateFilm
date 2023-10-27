@@ -39,22 +39,26 @@ class LoginViewModel: ObservableObject {
         if loginValid() {
             return ""
         }
-        return InvalidLabels.loginValidError.stringValue()
+        return InvalidLabels.loginValidError.localizeString()
     }
     
     var passwordError: String {
         if passwordValid() {
             return ""
         }
-        return InvalidLabels.passwordValidError.stringValue()
+        return InvalidLabels.passwordValidError.localizeString()
     }
     func sighIn() {
         login = ""
         password = ""
     }
     
-    enum InvalidLabels {
-        static var loginValidError: LocalizedStringKey = "LoginValidErrorLabel"
-        static var passwordValidError: LocalizedStringKey = "PasswordValidErrorLabel"
+    enum InvalidLabels: LocalizedStringKey {
+        case loginValidError = "LoginValidErrorLabel"
+        case passwordValidError = "PasswordValidErrorLabel"
+        
+        func localizeString() -> String {
+            NSLocalizedString(self.rawValue.stringKey ?? "", comment: "")
+        }
     }
 }

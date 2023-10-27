@@ -48,28 +48,28 @@ class RegisterViewModel: ObservableObject {
         if nicknameValid() {
             return ""
         }
-        return InvalidLabels.nicknameInvalidLabel.stringValue()
+        return InvalidLabels.nicknameInvalidLabel.localizeString()
     }
     
     var confirmPasswordError: String {
         if passwordsMatch() {
             return ""
         }
-        return InvalidLabels.confirmPasswordInvalidLabel.stringValue()
+        return InvalidLabels.confirmPasswordInvalidLabel.localizeString()
     }
     
     var emailError: String {
         if isEmailValid() {
             return ""
         }
-        return InvalidLabels.emailInvalidLabel.stringValue()
+        return InvalidLabels.emailInvalidLabel.localizeString()
     }
     
     var passwordError: String {
         if isPasswordValid() {
             return ""
         }
-        return InvalidLabels.passwordInvalidLabel.stringValue()
+        return InvalidLabels.passwordInvalidLabel.localizeString()
     }
     
     func signUp() {
@@ -79,11 +79,15 @@ class RegisterViewModel: ObservableObject {
         confirmPassword = ""
     }
     
-    enum InvalidLabels {
-        static var  confirmPasswordInvalidLabel: LocalizedStringKey = "ConfirmPasswordInvalidLabel"
-        static var emailInvalidLabel: LocalizedStringKey = "EmailInvalidLabel"
-        static var passwordInvalidLabel: LocalizedStringKey = "PasswordInvalidLabel"
-        static var nicknameInvalidLabel: LocalizedStringKey = "NicknameInvalidLabel"
+    enum InvalidLabels: LocalizedStringKey {
+        case confirmPasswordInvalidLabel = "ConfirmPasswordInvalidLabel"
+        case emailInvalidLabel = "EmailInvalidLabel"
+        case passwordInvalidLabel = "PasswordInvalidLabel"
+        case nicknameInvalidLabel = "NicknameInvalidLabel"
+        
+        func localizeString() -> String {
+            NSLocalizedString(self.rawValue.stringKey ?? "", comment: "")
+        }
     }
 }
 

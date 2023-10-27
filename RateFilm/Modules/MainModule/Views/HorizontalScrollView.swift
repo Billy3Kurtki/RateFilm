@@ -21,16 +21,16 @@ struct HorizontalScrollView: View {
                                 scrollProxy.scrollTo(selection, anchor: .center)
                             }
                         } label: {
-                            VStack {
-                                Text(selection.localizeString())
-                                    .padding()
-                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.customBlack)
-                                    .font(.system(size: 19))
-                                Capsule()
-                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.clear)
-                                    .frame(height: 4)
-                                
-                            }.fixedSize()
+                            Text(selection.localizeString())
+                                .padding()
+                                .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.customBlack)
+                                .font(.system(size: 19))
+                                .background(
+                                    Capsule()
+                                        .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.clear)
+                                        .frame(height: 3)
+                                        .offset(y: 22)
+                                )
                         }
                     }
                 }.padding()
@@ -43,15 +43,3 @@ struct HorizontalScrollView: View {
 //    HorizontalScrollView()
 //}
 
-enum MainViewSelections: String, CaseIterable { // через static var ... : LocalizedStringKey не получится, тк нужно, чтобы осталось соответствие CaseIterable
-    case mySelection = "mySelection"
-    case lastReleased = "lastReleased"
-    case ongoings = "ongoings"
-    case announcement = "announcement"
-    case films = "films"
-    case serials = "serials"
-    
-    func localizeString() -> String {
-        return NSLocalizedString(self.rawValue, comment: "")
-    }
-}

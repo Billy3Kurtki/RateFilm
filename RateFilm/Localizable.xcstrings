@@ -1,6 +1,22 @@
 {
   "sourceLanguage" : "ru",
   "strings" : {
+    "Abandoned" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abandoned"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Брошено"
+          }
+        }
+      }
+    },
     "announcement" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -48,6 +64,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Август"
+          }
+        }
+      }
+    },
+    "Collection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collection"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Коллеция"
           }
         }
       }
@@ -157,6 +189,22 @@
     "Entry" : {
 
     },
+    "Favorite" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorite"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Избранное"
+          }
+        }
+      }
+    },
     "favoritesLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -227,6 +275,38 @@
     },
     "Hello, World!" : {
 
+    },
+    "History" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "История"
+          }
+        }
+      }
+    },
+    "InThePlans" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In the plans"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В планах"
+          }
+        }
+      }
     },
     "january" : {
       "extractionState" : "manual",
@@ -347,6 +427,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Заполните поле Логин"
+          }
+        }
+      }
+    },
+    "Looking" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looking"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Смотрю"
           }
         }
       }
@@ -594,6 +690,22 @@
     "Pick a theme" : {
 
     },
+    "Postponed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postponed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отложено"
+          }
+        }
+      }
+    },
     "profileLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -726,6 +838,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пропустить"
+          }
+        }
+      }
+    },
+    "Viewed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viewed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Просмотрено"
           }
         }
       }
