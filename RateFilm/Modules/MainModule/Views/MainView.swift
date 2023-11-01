@@ -8,23 +8,46 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var selectedCategory: String = MainViewSelections.lastReleased.localizeString()
+    @State private var selectedCategory: MainViewSelections = MainViewSelections.lastReleased
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                ListView()
+        TabView(selection: $selectedCategory) {
+            //пока так, через ForEach пока не получилось.
+            NavigationStack {
+                ListView(filterBy: $selectedCategory)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem {
+                            HorizontalScrollView(selectedCategory: $selectedCategory)
+                        }
+                    }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem {
-                    HorizontalScrollView(selectedCategory: $selectedCategory)
-                }
+            .tag(selectedCategory)
+            NavigationStack {
+                ListView(filterBy: $selectedCategory)
             }
+            .tag(selectedCategory)
+            NavigationStack {
+                ListView(filterBy: $selectedCategory)
+            }
+            .tag(selectedCategory)
+            NavigationStack {
+                ListView(filterBy: $selectedCategory)
+            }
+            .tag(selectedCategory)
+            NavigationStack {
+                ListView(filterBy: $selectedCategory)
+            }
+            .tag(selectedCategory)
+            NavigationStack {
+                ListView(filterBy: $selectedCategory)
+            }
+            .tag(selectedCategory)
         }
-        //.preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .indexViewStyle(.page(backgroundDisplayMode: .never))
+        .navigationBarTitleDisplayMode(.inline)
     }
-    
     
 }
 

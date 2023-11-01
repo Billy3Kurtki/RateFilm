@@ -10,26 +10,50 @@ import Observation
 
 @Observable
 class ListViewModel {
-    var filmsVM: [FilmViewModel] = []
-    var serialsVM: [SerialViewModel] = []
+//    var filmsVM: [FilmViewModel] = []
+//    var serialsVM: [SerialViewModel] = []
+    var snippetsVM: [SnippetViewModel] = []
     
     init() {
         for i in ListViewModel.films {
-            
             // MARK: Доп проверка: Оценки быть не должно, если Дата выхода не пришла или если Дата выхода > .now (скоро выйдет).
-            var realeseDate: String?
+            
             var avgRating: String?
+            var realeseDate: String?
+            var selections: [MainViewSelections] = [.films]
+            
             if let date = i.releaseDate {
-                realeseDate = CustomFormatter.formatDateToCustomString(date: date)
+                realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
                 if realeseDate == nil {
                     avgRating = CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating))
+                } else {
+                    selections.append(.announcement)
                 }
             } else {
                 realeseDate = String(localized: "comingSoon")
+                selections.append(.announcement)
             }
-            
-            let filmVM = FilmViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating)
-            filmsVM.append(filmVM)
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating, mainViewSelection: selections)
+            snippetsVM.append(snippetVM)
+//            let filmVM = FilmViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating)
+//            filmsVM.append(filmVM)
+        }
+    }
+    
+    func getFiltedList(filterBy: MainViewSelections) -> [SnippetViewModel] {
+        switch filterBy {
+        case .mySelection:
+            return snippetsVM.filter { $0.mainViewSelection.contains(.mySelection) }
+        case .lastReleased:
+            return snippetsVM.filter { $0.mainViewSelection.contains(.lastReleased) }
+        case .ongoings:
+            return snippetsVM.filter { $0.mainViewSelection.contains(.ongoings) }
+        case .announcement:
+            return snippetsVM.filter { $0.mainViewSelection.contains(.announcement) }
+        case .completed:
+            return snippetsVM.filter { $0.mainViewSelection.contains(.completed) }
+        case .films:
+            return snippetsVM.filter { $0.mainViewSelection.contains([.films]) }
         }
     }
 }
@@ -43,12 +67,13 @@ extension ListViewModel {
         Film(id: "5", name: "biba5", releaseDate: 1820241212121, description: "boba", duration: 200, previewImage: "https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg", avgRating: 2.5, ageRating: 15, moveTypes: [MovieType.action], author: "Alyosha"),
         Film(id: "6", name: "biba6", description: "boba2", duration: 200, previewImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvd0sBonCGb8bGoHNjUMOspgI3AoI_UR89oQ&usqp=CAU", avgRating: 3.3, ageRating: 15, moveTypes: [MovieType.action], author: "Alyosha2"),
         Film(id: "7", name: "biba7", releaseDate: 1750241212121, description: "boba3", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 2.6, ageRating: 15, moveTypes: [MovieType.action], author: "Alyosha3"),
-        Film(id: "8", name: "biba8", releaseDate: 1823241212121, description: "boba4", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 5.0, ageRating: 15, moveTypes: [MovieType.action], author: "Alyosha4")
+        Film(id: "8", name: "biba8", releaseDate: 1823241212121, description: "boba4", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 5.0, ageRating: 15, moveTypes: [MovieType.action], author: "Alyosha4"),
+        Film(id: "9", name: "biba9", releaseDate: 1823212121, description: "boba5", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 5.0, ageRating: 15, moveTypes: [MovieType.action], author: "Alyosha4")
     ]
     
     static let serials: [Serial] = [
-        Serial(id: "1", name: "boba1", releaseDate: 1810241212121, description: "boba123123123", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 3.0, seriesCount: 15, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka"),
-        Serial(id: "2", name: "boba2", releaseDate: 1710241212121, description: "boba123123123", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 4.0, seriesCount: 15, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka"),
-        Serial(id: "3", name: "boba3", description: "boba123123123", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 5.0, seriesCount: 15, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka")
+        Serial(id: "1", name: "boba1", releaseDate: 1810241212121, description: "boba123123123", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 3.0, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka"),
+        Serial(id: "2", name: "boba2", releaseDate: 1710241212121, description: "boba123123123", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 4.0, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka"),
+        Serial(id: "3", name: "boba3", description: "boba123123123", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 5.0, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka")
     ]
 }

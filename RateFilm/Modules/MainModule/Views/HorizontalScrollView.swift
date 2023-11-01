@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HorizontalScrollView: View {
-    @Binding var selectedCategory: String
+    @Binding var selectedCategory: MainViewSelections
     var body: some View {
         ScrollViewReader { scrollProxy in
             ScrollView(.horizontal, showsIndicators: false) {
@@ -16,18 +16,18 @@ struct HorizontalScrollView: View {
                     Spacer(minLength: 20)
                     ForEach(MainViewSelections.allCases, id: \.self) { selection in
                         Button {
-                            self.selectedCategory = selection.localizeString()
+                            self.selectedCategory = selection
                             withAnimation(.easeInOut(duration: 20)) {
                                 scrollProxy.scrollTo(selection, anchor: .center)
                             }
                         } label: {
                             Text(selection.localizeString())
                                 .padding()
-                                .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.customBlack)
+                                .foregroundStyle(self.selectedCategory == selection ? Color.customLightRed : Color.customBlack)
                                 .font(.system(size: 19))
                                 .background(
                                     Capsule()
-                                        .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.clear)
+                                        .foregroundStyle(self.selectedCategory == selection ? Color.customLightRed : Color.clear)
                                         .frame(height: 3)
                                         .offset(y: 22)
                                 )

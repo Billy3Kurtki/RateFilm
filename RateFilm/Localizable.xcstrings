@@ -34,6 +34,22 @@
         }
       }
     },
+    "Announcement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Announcement"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Анонс"
+          }
+        }
+      }
+    },
     "april" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -97,6 +113,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "cкоро"
+          }
+        }
+      }
+    },
+    "completed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завершённые"
           }
         }
       }
@@ -189,6 +221,22 @@
     "Entry" : {
 
     },
+    "ep" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ep"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "эп"
+          }
+        }
+      }
+    },
     "Favorite" : {
       "localizations" : {
         "en" : {
@@ -238,6 +286,9 @@
           }
         }
       }
+    },
+    "february" : {
+
     },
     "films" : {
       "extractionState" : "manual",
@@ -482,6 +533,9 @@
         }
       }
     },
+    "may" : {
+
+    },
     "May" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -581,6 +635,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Октябрь"
+          }
+        }
+      }
+    },
+    "of" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "of"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "из"
           }
         }
       }

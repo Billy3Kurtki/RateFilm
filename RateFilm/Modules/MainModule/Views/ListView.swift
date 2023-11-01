@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct ListView: View {
+    @Binding var filterBy: MainViewSelections
     @State private var search = ""
     @State private var data = ListViewModel()
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                ForEach(data.filmsVM) { film in
+                ForEach(data.getFiltedList(filterBy: filterBy)) { snippet in
                     NavigationLink(destination: MovieDetailsView()) {
-                        FilmCell(film: film)
+                        SnippetCell(snippet: snippet)
                     }
                 }
             }
@@ -25,14 +26,14 @@ struct ListView: View {
     }
 }
 
-struct FilmCell: View {
-    var film: FilmViewModel
+struct SnippetCell: View {
+    var snippet: SnippetViewModel
     
     var body: some View {
         HStack {
-            AsyncIconRowView(urlString: film.previewImage)
+            AsyncIconRowView(urlString: snippet.previewImage)
             
-            DescriptionView(name: film.name, description: film.description, realeseDate: film.releaseDate, avgRating: film.avgRating)
+            DescriptionView(name: snippet.name, description: snippet.description, realeseDate: snippet.releaseDate, avgRating: snippet.avgRating)
             Spacer()
         }
         .padding(.horizontal)
@@ -118,6 +119,6 @@ struct DescriptionView: View {
     }
 }
 
-#Preview {
-    ListView()
-}
+//#Preview {
+//    ListView(filterBy: .mySelection)
+//}

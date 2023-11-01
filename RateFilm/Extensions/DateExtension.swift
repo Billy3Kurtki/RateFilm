@@ -5,7 +5,7 @@
 //  Created by Кирилл Казаков on 25.10.2023.
 //
 
-import Foundation
+import SwiftUI
 
 extension Date {
     func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
@@ -42,20 +42,84 @@ class CustomFormatter {
         }
     }
     
-    static func formatDateToCustomString(date: Int) -> String? {
-        let date = date.date
-        if date > Date.now {
-            if let month = Months(number: date.get(.month))?.localizeString() {
-                return "\(month) \(date.get(.year))"
-            } else {
+    static func formatDateToCustomString(unix: Int) -> String? {
+        let date = unix.date
+        let now = Date.now
+        if date > now {
+            if date.unixTimestamp > now.unixTimestamp + Consts.unixYear {
                 return "\(date.get(.year))"
+            } else {
+                if let month = Months(number: date.get(.month))?.localizeString() {
+                    return "\(month) \(date.get(.year))"
+                }
             }
         }
         
         return nil
     }
     
-    enum Months: String {
+    // MARK: Функция для определения категорий для сериала
+    static func formatSeriesCountToString(seasons: [Season]) -> (String, MainViewSelections) {
+        let now = Date.now.unixTimestamp
+        let stringOf = LocalizedStrings.of.localizeString()
+        let stringEp = LocalizedStrings.ep.localizeString()
+        let stringAnnouncement = LocalizedStrings.announcement.localizeString()
+        let unknownCount = "?"
+        var selection = MainViewSelections.announcement
+        
+        if seasons.count > 0 {
+            if let beforeExists = seasons.first(where: { $0.releaseDate < now }) {
+                if let afterExits = seasons.first(where: { $0.releaseDate > now }) {
+                    selection = .ongoings
+                    var realesedSeries = 0
+                    var unRealesedSeries = 0
+                    for i in seasons {
+                        if i.releaseDate <= now {
+                            realesedSeries += i.seriesCount
+                        } else {
+                            unRealesedSeries += i.seriesCount
+                        }
+                    }
+                    let stringMaxCount = unRealesedSeries > 0 ? "\(realesedSeries + unRealesedSeries)" : unknownCount
+                    return ("\(realesedSeries) \(stringOf) \(stringMaxCount) \(stringEp)", selection)
+                }
+                
+                selection = .completed
+                var maxCount = 0
+                for i in seasons {
+                    maxCount += i.seriesCount
+                }
+                return ("\(maxCount) \(stringEp)", selection)
+                
+            } else if let afterExits = seasons.first(where: { $0.releaseDate > now }) {
+                selection = .announcement
+                var maxCount = 0
+                for i in seasons {
+                    maxCount += i.seriesCount
+                }
+                let stringMaxCount = maxCount > 0 ? "\(maxCount)" : unknownCount
+                return ("\(stringMaxCount) \(stringEp)", selection)
+            }
+        }
+        
+        return ("\(stringAnnouncement) \(unknownCount) \(stringEp)", selection)
+    }
+    
+    enum LocalizedStrings: LocalizedStringKey {
+        case of = "of"
+        case ep = "ep"
+        case announcement = "Announcement"
+        
+        func localizeString() -> String {
+            return NSLocalizedString(self.rawValue.stringKey ?? "", comment: "")
+        }
+    }
+    
+    enum Consts {
+        static var unixYear = 31556926
+    }
+    
+    enum Months: LocalizedStringKey {
         case january = "january"
         case february = "february"
         case march = "march"
@@ -88,7 +152,7 @@ class CustomFormatter {
         }
         
         func localizeString() -> String {
-            return NSLocalizedString(self.rawValue, comment: "")
+            return NSLocalizedString(self.rawValue.stringKey ?? "", comment: "")
         }
     }
 }
