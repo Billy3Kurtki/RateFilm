@@ -15,9 +15,8 @@ class ListViewModel {
     var snippetsVM: [SnippetViewModel] = []
     
     init() {
+        // MARK: Перегон фильмов
         for i in ListViewModel.films {
-            // MARK: Доп проверка: Оценки быть не должно, если Дата выхода не пришла или если Дата выхода > .now (скоро выйдет).
-            
             var avgRating: String?
             var realeseDate: String?
             var selections: [MainViewSelections] = [.films]
@@ -35,12 +34,37 @@ class ListViewModel {
             }
             let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating, mainViewSelection: selections)
             snippetsVM.append(snippetVM)
-//            let filmVM = FilmViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating)
-//            filmsVM.append(filmVM)
+        }
+        
+        // MARK: Перегон сериалов
+        for i in ListViewModel.serials {
+            var avgRating: String?
+            var realeseDate: String?
+            var seriesCount: String
+            var selections: [MainViewSelections] = []
+            
+            (seriesCount, selections) = CustomFormatter.formatSeriesCountToString(seasons: i.seasons)
+            if let date = i.releaseDate {
+                realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
+                if realeseDate == nil {
+                    avgRating = CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating))
+                } else {
+                    selections.append(.announcement)
+                    if selections.contains(.completed) {
+                        selections.remove(at: 1) // [.serial, .completed, .announcement]  -> удаляю .completed, т.к. по realeseDate сериал ещё не вышел (хотя по датам выхода сезонов, сериал уже завершился) -> На случай если придут неправильные данные.
+                    }
+                }
+            } else {
+                realeseDate = String(localized: "comingSoon")
+                selections.append(.announcement)
+            }
+            
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating, seriesCount: seriesCount, mainViewSelection: selections)
+            snippetsVM.append(snippetVM)
         }
     }
     
-    func getFiltedList(filterBy: MainViewSelections) -> [SnippetViewModel] {
+    func getFilteredList(filterBy: MainViewSelections) -> [SnippetViewModel] {
         switch filterBy {
         case .mySelection:
             return snippetsVM.filter { $0.mainViewSelection.contains(.mySelection) }
@@ -52,8 +76,10 @@ class ListViewModel {
             return snippetsVM.filter { $0.mainViewSelection.contains(.announcement) }
         case .completed:
             return snippetsVM.filter { $0.mainViewSelection.contains(.completed) }
+        case .serials:
+            return snippetsVM.filter { $0.mainViewSelection.contains(.serials) }
         case .films:
-            return snippetsVM.filter { $0.mainViewSelection.contains([.films]) }
+            return snippetsVM.filter { $0.mainViewSelection.contains(.films) }
         }
     }
 }
@@ -72,8 +98,23 @@ extension ListViewModel {
     ]
     
     static let serials: [Serial] = [
-        Serial(id: "1", name: "boba1", releaseDate: 1810241212121, description: "boba123123123", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 3.0, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka"),
-        Serial(id: "2", name: "boba2", releaseDate: 1710241212121, description: "boba123123123", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 4.0, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka"),
-        Serial(id: "3", name: "boba3", description: "boba123123123", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 5.0, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka")
+        Serial(id: "1", name: "Крокодил Гена выходит на охоту", releaseDate: 1810241212121, description: "Гена шёл-шёл, шёл-шёл, так и не пришёл.", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 3.0, seasons: seasons1, ageRating: 12, moveTypes: [.action], author: "Alyshka"),
+        Serial(id: "2", name: "Мышь подкралась незаметно", releaseDate: 1710241212121, description: "Бежит, бежит, оп, упала", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 4.0, seasons: seasons2, ageRating: 12, moveTypes: [.action], author: "Alyshka"),
+        Serial(id: "3", name: "Шарик взорвался", description: "Жалко конечно даааааа", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 5.0, seasons: seasons3, ageRating: 12, moveTypes: [.action], author: "Alyshka"),
+        Serial(id: "4", name: "Винни полетел", description: "Бывает конечно даааааа", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 5.0, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka"),
+        Serial(id: "5", name: "Фунтик толкает машину дядюшки Мокуса", releaseDate: 1823212121, description: "Тянет-потянет, вытащить так и не смог", duration: 200, previewImage: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg", avgRating: 5.0, seasons: seasons2, ageRating: 12, moveTypes: [.action], author: "Alyshka")
+    ]
+    
+    static let seasons1: [Season] = [
+        Season(id: "1", releaseDate: 1823212121, description: "", seriesCount: 10),
+        Season(id: "2", releaseDate: 1750241212121, description: "", seriesCount: 10)
+    ]
+    
+    static let seasons2: [Season] = [
+        Season(id: "1", releaseDate: 1823212121, description: "", seriesCount: 10)
+    ]
+    
+    static let seasons3: [Season] = [
+        Season(id: "2", releaseDate: 1750241212121, description: "", seriesCount: 10)
     ]
 }

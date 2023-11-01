@@ -59,18 +59,18 @@ class CustomFormatter {
     }
     
     // MARK: Функция для определения категорий для сериала
-    static func formatSeriesCountToString(seasons: [Season]) -> (String, MainViewSelections) {
+    static func formatSeriesCountToString(seasons: [Season]) -> (String, [MainViewSelections]) {
         let now = Date.now.unixTimestamp
         let stringOf = LocalizedStrings.of.localizeString()
         let stringEp = LocalizedStrings.ep.localizeString()
         let stringAnnouncement = LocalizedStrings.announcement.localizeString()
         let unknownCount = "?"
-        var selection = MainViewSelections.announcement
+        var selection: [MainViewSelections] = [.serials]
         
         if seasons.count > 0 {
             if let beforeExists = seasons.first(where: { $0.releaseDate < now }) {
                 if let afterExits = seasons.first(where: { $0.releaseDate > now }) {
-                    selection = .ongoings
+                    selection.append(.ongoings)
                     var realesedSeries = 0
                     var unRealesedSeries = 0
                     for i in seasons {
@@ -84,7 +84,7 @@ class CustomFormatter {
                     return ("\(realesedSeries) \(stringOf) \(stringMaxCount) \(stringEp)", selection)
                 }
                 
-                selection = .completed
+                selection.append(.completed)
                 var maxCount = 0
                 for i in seasons {
                     maxCount += i.seriesCount
@@ -92,7 +92,7 @@ class CustomFormatter {
                 return ("\(maxCount) \(stringEp)", selection)
                 
             } else if let afterExits = seasons.first(where: { $0.releaseDate > now }) {
-                selection = .announcement
+                selection.append(.announcement)
                 var maxCount = 0
                 for i in seasons {
                     maxCount += i.seriesCount
@@ -101,7 +101,7 @@ class CustomFormatter {
                 return ("\(stringMaxCount) \(stringEp)", selection)
             }
         }
-        
+        selection.append(.announcement)
         return ("\(stringAnnouncement) \(unknownCount) \(stringEp)", selection)
     }
     

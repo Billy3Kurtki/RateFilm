@@ -17,9 +17,6 @@ struct HorizontalScrollView: View {
                     ForEach(MainViewSelections.allCases, id: \.self) { selection in
                         Button {
                             self.selectedCategory = selection
-                            withAnimation(.easeInOut(duration: 20)) {
-                                scrollProxy.scrollTo(selection, anchor: .center)
-                            }
                         } label: {
                             Text(selection.localizeString())
                                 .padding()
@@ -34,6 +31,11 @@ struct HorizontalScrollView: View {
                         }
                     }
                 }.padding()
+            }
+            .onChange(of: selectedCategory) { _, newValue in
+                withAnimation(.easeInOut(duration: 20)) {
+                    scrollProxy.scrollTo(newValue, anchor: .center)
+                }
             }
         }
     }

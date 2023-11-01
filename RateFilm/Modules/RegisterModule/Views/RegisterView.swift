@@ -24,7 +24,7 @@ struct RegisterView: View {
                 .disabled(!viewModel.isSignUpComplete)
             }
             .padding(.vertical)
-            .navigationTitle("Создание профиля")
+            .navigationTitle(String(localized: "Creating profile"))
         }
     }
 }
@@ -128,13 +128,42 @@ struct CustomButton: View {
     var action: () -> Void
     
     var body: some View {
-        Button {
-            action()
-        } label: {
-            Text(label)
-                .padding()
-                .frame(width: buttonWidth(), height: Consts.buttonHeight)
-                .modifier(ButtonModifier(isFill: isFill))
+        ViewThatFits(in: .horizontal) {
+            Button {
+                action()
+            } label: {
+                Text(label)
+                    .padding()
+                    .frame(width: buttonWidth(), height: Consts.buttonHeight)
+                    .modifier(ButtonModifier(isFill: isFill))
+            }
+            
+            Button {
+                action()
+            } label: {
+                Text(label)
+                    .padding()
+                    .frame(width: 350, height: Consts.buttonHeight)
+                    .modifier(ButtonModifier(isFill: isFill))
+            }
+            
+            Button {
+                action()
+            } label: {
+                Text(label)
+                    .padding()
+                    .frame(width: 300, height: Consts.buttonHeight)
+                    .modifier(ButtonModifier(isFill: isFill))
+            }
+            
+            Button {
+                action()
+            } label: {
+                Text(label)
+                    .padding()
+                    .frame(width: 200, height: Consts.buttonHeight)
+                    .modifier(ButtonModifier(isFill: isFill))
+            }
         }
     }
     

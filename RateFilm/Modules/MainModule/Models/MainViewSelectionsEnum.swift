@@ -13,6 +13,7 @@ enum MainViewSelections: LocalizedStringKey, CaseIterable {
     case ongoings = "ongoings"
     case announcement = "announcement"
     case completed = "completed"
+    case serials = "serials"
     case films = "films"
     
     func localizeString() -> String {

@@ -15,7 +15,7 @@ struct ListView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                ForEach(data.getFiltedList(filterBy: filterBy)) { snippet in
+                ForEach(data.getFilteredList(filterBy: filterBy)) { snippet in
                     NavigationLink(destination: MovieDetailsView()) {
                         SnippetCell(snippet: snippet)
                     }
@@ -33,7 +33,7 @@ struct SnippetCell: View {
         HStack {
             AsyncIconRowView(urlString: snippet.previewImage)
             
-            DescriptionView(name: snippet.name, description: snippet.description, realeseDate: snippet.releaseDate, avgRating: snippet.avgRating)
+            DescriptionView(name: snippet.name, description: snippet.description, seriesCount: snippet.seriesCount, realeseDate: snippet.releaseDate, avgRating: snippet.avgRating)
             Spacer()
         }
         .padding(.horizontal)
@@ -70,7 +70,7 @@ struct AsyncIconRowView: View {
 
 struct DescriptionView: View {
     var name, description: String
-    var episodesCount, realeseDate, avgRating: String?
+    var seriesCount, realeseDate, avgRating: String?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -79,6 +79,11 @@ struct DescriptionView: View {
                 .foregroundStyle(Color.customBlack)
                 .font(.system(size: Consts.textTitleSize))
                 .bold()
+            if let seriesCount = seriesCount {
+                Text(seriesCount)
+                    .foregroundStyle(Color.customLightGray)
+                    .padding(.vertical, 5)
+            }
             if let avgRating = avgRating {
                 HStack {
                     Text(avgRating)

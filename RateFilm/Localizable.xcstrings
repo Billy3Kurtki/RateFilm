@@ -167,6 +167,22 @@
         }
       }
     },
+    "Creating profile" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creating profile"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Создание профиля"
+          }
+        }
+      }
+    },
     "december" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -927,9 +943,6 @@
           }
         }
       }
-    },
-    "Создание профиля" : {
-
     }
   },
   "version" : "1.0"

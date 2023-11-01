@@ -32,6 +32,11 @@ struct ContentView: View {
                     Text(TabBarSelections.profile.stringValue())
                     Image(systemName: "person.crop.circle.fill")
                 }
+            LoginView()
+                .tabItem {
+                    Text(TabBarSelections.profile.stringValue())
+                    Image(systemName: "person.crop.circle.fill")
+                }
         }.preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
     }
 }
