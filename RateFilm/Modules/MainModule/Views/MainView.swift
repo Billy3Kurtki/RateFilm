@@ -9,12 +9,15 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedCategory: MainViewSelections = MainViewSelections.lastReleased
+    @State private var data = ListViewModel()
+    @State private var searchTerm = ""
+    @State private var isSearching = false
     
     var body: some View {
         NavigationStack {
             TabView(selection: $selectedCategory) {
                 ForEach(MainViewSelections.allCases, id: \.self) { selection in
-                    ListView(filterBy: $selectedCategory)
+                    ListView(snippets: data.getFilteredList(filterBy: selection))
                     .tag(selection)
                 }
             }
@@ -22,11 +25,10 @@ struct MainView: View {
             .indexViewStyle(.page(backgroundDisplayMode: .never))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem {
+                ToolbarItem(placement: .navigation) {
                     HorizontalScrollView(selectedCategory: $selectedCategory)
                 }
             }
-            
         }
     }
     

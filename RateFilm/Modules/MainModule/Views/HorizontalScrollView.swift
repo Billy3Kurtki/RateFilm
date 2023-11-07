@@ -32,6 +32,11 @@ struct HorizontalScrollView: View {
                     }
                 }.padding()
             }
+            .onAppear {
+                withAnimation(.easeInOut(duration: 20)) {
+                    scrollProxy.scrollTo(selectedCategory, anchor: .center)
+                }
+            }
             .onChange(of: selectedCategory) { _, newValue in
                 withAnimation(.easeInOut(duration: 20)) {
                     scrollProxy.scrollTo(newValue, anchor: .center)

@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct ListView: View {
-    @Binding var filterBy: MainViewSelections
-    @State private var search = ""
-    @State private var data = ListViewModel()
+    var snippets: [SnippetViewModel]
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                ForEach(data.getFilteredList(filterBy: filterBy)) { snippet in
+                ForEach(snippets) { snippet in
                     NavigationLink(destination: MovieDetailsView()) {
                         SnippetCell(snippet: snippet)
                     }

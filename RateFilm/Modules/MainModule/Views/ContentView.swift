@@ -32,7 +32,7 @@ struct ContentView: View {
                     Text(TabBarSelections.profile.stringValue())
                     Image(systemName: "person.crop.circle.fill")
                 }
-            LoginView()
+            SettingsView()
                 .tabItem {
                     Text(TabBarSelections.profile.stringValue())
                     Image(systemName: "person.crop.circle.fill")
