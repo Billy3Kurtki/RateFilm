@@ -129,42 +129,213 @@ struct CustomButton: View {
     
     var body: some View {
         ViewThatFits(in: .horizontal) {
-            Button {
-                action()
-            } label: {
-                Text(label)
-                    .padding()
-                    .frame(width: buttonWidth(), height: Consts.buttonHeight)
-                    .modifier(ButtonModifier(isFill: isFill))
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                // MARK: Большая версия (на всю ширину экрана) iPad (horizontal)
+                if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight { // не заходит в это условие, надо как-то переделать
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 1150, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 1100, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 1050, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    // MARK: Мини-версия (на половину экрана) iPad (horizontal)
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 585, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 575, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 565, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                } else {
+                    // MARK: Большая версия (на всю ширину экрана) iPad (vertical)
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 795, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 775, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 750, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    // MARK: Мини-версия (на половину экрана) iPad (vertical)
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 400, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 385, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                    Button {
+                        action()
+                    } label: {
+                        Text(label)
+                            .padding()
+                            .frame(width: 370, height: Consts.buttonHeight)
+                            .modifier(ButtonModifier(isFill: isFill))
+                    }
+                }
             }
             
-            Button {
-                action()
-            } label: {
-                Text(label)
-                    .padding()
-                    .frame(width: 350, height: Consts.buttonHeight)
-                    .modifier(ButtonModifier(isFill: isFill))
-            }
-            
-            Button {
-                action()
-            } label: {
-                Text(label)
-                    .padding()
-                    .frame(width: 300, height: Consts.buttonHeight)
-                    .modifier(ButtonModifier(isFill: isFill))
-            }
-            
-            Button {
-                action()
-            } label: {
-                Text(label)
-                    .padding()
-                    .frame(width: 200, height: Consts.buttonHeight)
-                    .modifier(ButtonModifier(isFill: isFill))
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                // MARK: Большая версия (на всю ширину экрана) iPhone (horizontal)
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 700, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
+                
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 690, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
+                
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 680, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
+                // MARK: Мини-версия (на половину экрана) iPhone (horizontal)
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 360, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
+                
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 350, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
+                // MARK: Большая версия (на всю ширину экрана) iPhone (vertical)
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 370, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
+                
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 365, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
+                
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 345, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
+                
+                // MARK: Мини-версия (на половину экрана) iPhone (vertical)
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 185, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
+                
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: 175, height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
+                }
             }
         }
+        .padding(.horizontal, 10)
     }
     
     // MARK: Функция для адаптивной ширины кнопки в зависимости от ширины окна приложения. Мини-версия - это уменьшенная вдвое относительно большой-версии (+- 350px) до +- 175px.
@@ -172,7 +343,9 @@ struct CustomButton: View {
         let spacing: CGFloat = Consts.spacing
         let totalSpacing: CGFloat = 2 * spacing
         guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first
-        else { return 0 }
+        else {
+            return 0
+        }
         
         let screenWidth = window.frame.width
         if isMini {

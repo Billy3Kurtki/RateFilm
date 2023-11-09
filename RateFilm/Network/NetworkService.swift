@@ -34,7 +34,7 @@ struct NetworkService: NetworkLayer {
             }
             
             guard Self.httpStatusCodeSuccess.contains(response.statusCode) else {
-                onCompletion(.failure(NetworkError.failedResponse))
+                onCompletion(.failure(NetworkError.failedResponse(response)))
                 return
             }
             
@@ -81,7 +81,7 @@ struct NetworkService: NetworkLayer {
             }
             
             guard Self.httpStatusCodeSuccess.contains(response.statusCode) else {
-                onCompletion(.failure(NetworkError.failedResponse))
+                onCompletion(.failure(NetworkError.failedResponse(response)))
                 return
             }
             
@@ -98,5 +98,5 @@ enum NetworkError: Error {
     case dataError
     case parseError
     case unexpectedResponse
-    case failedResponse
+    case failedResponse(HTTPURLResponse)
 }

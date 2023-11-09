@@ -23,14 +23,14 @@ class CustomFormatter {
     }
     
     static func formatDateToCustomString(unix: Int) -> String? {
-        let date = unix.date
-        let now = Date.now
+        let date = unix
+        let now = Date.now.unixTimestamp
         if date > now {
-            if date.unixTimestamp > now.unixTimestamp + UnixConsts.unixYear {
-                return "\(date.get(.year))"
+            if date > now + UnixConsts.unixYear {
+                return "\(date.date.get(.year))"
             } else {
-                if let month = Months(number: date.get(.month))?.localizeString() {
-                    return "\(month) \(date.get(.year))"
+                if let month = Months(number: date.date.get(.month))?.localizeString() {
+                    return "\(month) \(date.date.get(.year))"
                 }
             }
         }
@@ -39,7 +39,7 @@ class CustomFormatter {
     }
     
     //допилить
-    // MARK: Функция для определения категорий для сериала
+    // MARK: Функция для определения категорий сериала
     static func formatSeriesCountToString(seasons: [Season]) -> (String, [MainViewSelections]) {
         let now = Date.now.unixTimestamp
         let stringOf = LocalizedStrings.of.localizeString()
@@ -147,6 +147,6 @@ class CustomFormatter {
 }
 
 enum UnixConsts {
-    static var unixYear = 31556926
-    static var unixMonth = 2629743
+    static var unixYear = 31556926000
+    static var unixMonth = 2629743000
 }

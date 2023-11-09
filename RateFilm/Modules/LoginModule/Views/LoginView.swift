@@ -64,7 +64,7 @@ struct LoginView: View {
             .opacity(viewModel.isSignInComplete ? 1 : 0.6)
             .disabled(!viewModel.isSignInComplete)
         }
-        .padding(.horizontal)
+        .padding(.leading, 20)
     }
     
     private func SkipAuthorizationButton() -> some View {
