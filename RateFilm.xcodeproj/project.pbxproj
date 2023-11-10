@@ -25,6 +25,7 @@
 		085AE5CA2ADB3AB40069EFF2 /* FilmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AE5C92ADB3AB40069EFF2 /* FilmViewModel.swift */; };
 		085AE5CC2ADB3AC00069EFF2 /* SerialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AE5CB2ADB3AC00069EFF2 /* SerialViewModel.swift */; };
 		085BAFDD2AF6BB7F00EBF98D /* CustomFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085BAFDC2AF6BB7F00EBF98D /* CustomFormatter.swift */; };
+		085BAFDF2AFE5AA400EBF98D /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085BAFDE2AFE5AA400EBF98D /* CustomSearchView.swift */; };
 		08612BBE2AE2C883003F9568 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 08612BBD2AE2C883003F9568 /* Localizable.xcstrings */; };
 		087573382ACAF6A9009A466A /* RateFilmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087573372ACAF6A9009A466A /* RateFilmApp.swift */; };
 		0875733A2ACAF6A9009A466A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087573392ACAF6A9009A466A /* MainView.swift */; };
@@ -65,6 +66,7 @@
 		085AE5C92ADB3AB40069EFF2 /* FilmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmViewModel.swift; sourceTree = "<group>"; };
 		085AE5CB2ADB3AC00069EFF2 /* SerialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialViewModel.swift; sourceTree = "<group>"; };
 		085BAFDC2AF6BB7F00EBF98D /* CustomFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFormatter.swift; sourceTree = "<group>"; };
+		085BAFDE2AFE5AA400EBF98D /* CustomSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchView.swift; sourceTree = "<group>"; };
 		08612BBD2AE2C883003F9568 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		087573342ACAF6A9009A466A /* RateFilm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RateFilm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		087573372ACAF6A9009A466A /* RateFilmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateFilmApp.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		085AE59C2AD4138A0069EFF2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				085BAFDE2AFE5AA400EBF98D /* CustomSearchView.swift */,
 				085AE5AC2AD5EAC70069EFF2 /* HorizontalScrollView.swift */,
 				085AE5B22AD5F4760069EFF2 /* ListView.swift */,
 				087573392ACAF6A9009A466A /* MainView.swift */,
@@ -535,6 +538,7 @@
 				085BAFDD2AF6BB7F00EBF98D /* CustomFormatter.swift in Sources */,
 				085AE5A72AD5E7AB0069EFF2 /* ActorModel.swift in Sources */,
 				08F001D52AEFF736002C1B99 /* SnippetViewModel.swift in Sources */,
+				085BAFDF2AFE5AA400EBF98D /* CustomSearchView.swift in Sources */,
 				085AE5CA2ADB3AB40069EFF2 /* FilmViewModel.swift in Sources */,
 				0875734D2ACF5E1D009A466A /* Serial.swift in Sources */,
 				085AE5AD2AD5EAC70069EFF2 /* HorizontalScrollView.swift in Sources */,

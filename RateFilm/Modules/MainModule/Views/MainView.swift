@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     @State private var selectedCategory: MainViewSelections = MainViewSelections.lastReleased
     @State private var data = ListViewModel()
-    @State private var searchTerm = ""
+    @State private var searchText = ""
     @State private var isSearching = false
     
     var body: some View {
