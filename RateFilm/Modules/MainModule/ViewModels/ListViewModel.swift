@@ -13,6 +13,7 @@ class ListViewModel {
 //    var filmsVM: [FilmViewModel] = []
 //    var serialsVM: [SerialViewModel] = []
     var snippetsVM: [SnippetViewModel] = []
+    var searchResults: [SnippetViewModel] = []
     
     init() {
         let now = Date.now.unixTimestamp

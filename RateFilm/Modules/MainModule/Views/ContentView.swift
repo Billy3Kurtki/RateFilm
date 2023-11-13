@@ -17,10 +17,10 @@ struct ContentView: View {
                     Text(TabBarSelections.main.stringValue())
                     Image(systemName: "house")
                 }
-            ReviewView()
+            SearchView()
                 .tabItem {
-                    Text(TabBarSelections.review.stringValue())
-                    Image(systemName: "safari")
+                    Text(TabBarSelections.search.stringValue())
+                    Image(systemName: "magnifyingglass")
                 }
             FavoritesView()
                 .tabItem {
@@ -44,6 +44,7 @@ struct ContentView: View {
 enum TabBarSelections {
     static var main: LocalizedStringKey = "mainLabel"
     static var review: LocalizedStringKey = "reviewLabel"
+    static var search: LocalizedStringKey = "searchLabel"
     static var favorites: LocalizedStringKey = "favoritesLabel"
     static var profile: LocalizedStringKey = "profileLabel"
 }

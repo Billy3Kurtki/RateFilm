@@ -55,6 +55,7 @@ struct CustomSearchIcon: View {
     @Binding var iconOffset: Bool
     @Binding var state: Bool
     @Binding var showTextFi: Bool
+    
     var body: some View {
         Button {
             if showTextFi {
@@ -91,29 +92,33 @@ struct CustomSearchIcon: View {
                 }
             }
         } label: {
-            VStack(spacing: 0) {
-                Circle()
-                    .trim(from: Consts.trimFrom, to: progress)
-                    .stroke(lineWidth: Consts.lineWidth)
-                    .rotationEffect(.degrees(Consts.rotationDegrees88))
-                    .frame(width: Consts.circleWidth, height: Consts.circleHeight)
-                    .padding()
-                RoundedRectangle(cornerRadius: Consts.cornerRadius)
-                    .frame(width: Consts.lineWidth, height: iconOffset ? 20 : 15)
-                    .offset(y: Consts.offset)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: Consts.cornerRadius)
-                            .frame(width: Consts.lineWidth, height: iconOffset ? 20 : 15)
-                            .rotationEffect(.degrees(iconOffset ? Consts.rotationDegrees80 : Consts.rotationDegrees0), anchor: .center)
-                            .offset(y: Consts.offset)
-                    }
-                
-            }
+            searchIcon()
         }
         .rotationEffect(.degrees(Consts.rotationDegreesMinus40))
         .offset(x: iconOffset ? -5 : -3, y: iconOffset ? -5 : 2)
         .foregroundStyle(Color.customBlack)
         .frame(width: Consts.buttonWidth, height: Consts.buttonHeight)
+    }
+    
+    private func searchIcon() -> some View {
+        VStack(spacing: 0) {
+            Circle()
+                .trim(from: Consts.trimFrom, to: progress)
+                .stroke(lineWidth: Consts.lineWidth)
+                .rotationEffect(.degrees(Consts.rotationDegrees88))
+                .frame(width: Consts.circleWidth, height: Consts.circleHeight)
+                .padding()
+            RoundedRectangle(cornerRadius: Consts.cornerRadius)
+                .frame(width: Consts.lineWidth, height: iconOffset ? 20 : 15)
+                .offset(y: Consts.offset)
+                .overlay {
+                    RoundedRectangle(cornerRadius: Consts.cornerRadius)
+                        .frame(width: Consts.lineWidth, height: iconOffset ? 20 : 15)
+                        .rotationEffect(.degrees(iconOffset ? Consts.rotationDegrees80 : Consts.rotationDegrees0), anchor: .center)
+                        .offset(y: Consts.offset)
+                }
+            
+        }
     }
     
     enum Consts {

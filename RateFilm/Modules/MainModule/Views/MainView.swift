@@ -25,9 +25,13 @@ struct MainView: View {
             .indexViewStyle(.page(backgroundDisplayMode: .never))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigation) {
+                ToolbarItem(placement: .topBarLeading) {
                     HorizontalScrollView(selectedCategory: $selectedCategory)
                 }
+                
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    CustomSearchView(searchText: $searchText)
+//                }
             }
         }
     }
