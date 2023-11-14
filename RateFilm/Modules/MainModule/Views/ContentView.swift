@@ -9,35 +9,39 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("systemThemeVal") private var systemTheme: String = SchemeType.allCases.first!.rawValue
+    @State var animateIsActive = false
     
     var body: some View {
         TabView {
             MainView()
                 .tabItem {
                     Text(TabBarSelections.main.stringValue())
-                    Image(systemName: "house")
+                    Image(systemName: Images.house.rawValue)
                 }
             SearchView()
                 .tabItem {
                     Text(TabBarSelections.search.stringValue())
-                    Image(systemName: "magnifyingglass")
+                    Image(systemName: Images.lupo.rawValue)
                 }
             FavoritesView()
                 .tabItem {
                     Text(TabBarSelections.favorites.stringValue())
-                    Image(systemName: "bookmark")
+                    Image(systemName: Images.bookmark.rawValue)
                 }
             ProfileView()
                 .tabItem {
                     Text(TabBarSelections.profile.stringValue())
-                    Image(systemName: "person.crop.circle.fill")
+                    Image(systemName: Images.personFill.rawValue)
                 }
-            LoginView()
-                .tabItem {
-                    Text(TabBarSelections.profile.stringValue())
-                    Image(systemName: "person.crop.circle.fill")
-                }
-        }.preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
+        }
+        .preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
+    }
+    
+    enum Images: String {
+        case house = "house"
+        case lupo = "magnifyingglass"
+        case bookmark = "bookmark"
+        case personFill = "person.crop.circle.fill"
     }
 }
 

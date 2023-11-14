@@ -16,7 +16,7 @@ struct LoginView: View {
         NavigationStack {
             VStack(spacing: 10) {
                 Spacer(minLength: Consts.spacerPadding)
-                Image("icon")
+                Image(AppConsts.appIcon)
                     .resizable()
                     .frame(width: Consts.imageWidth, height: Consts.imageHeight)
                     .clipShape(Capsule())
