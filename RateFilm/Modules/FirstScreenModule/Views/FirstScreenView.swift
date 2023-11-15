@@ -9,14 +9,14 @@ import SwiftUI
 
 struct FirstScreenView: View {
     @State var animateIsActive = false
-    @AppStorage("authUser") private var userAuthorized = false
+    @Environment(AuthViewModel.self) private var authVM
     
     var body: some View {
         ZStack {
             SplashScreenView(isActive: $animateIsActive)
             
             Group {
-                if !userAuthorized {
+                if authVM.currentUser == nil {
                     LoginView()
                 } else {
                     ContentView()

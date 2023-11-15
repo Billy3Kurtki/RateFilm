@@ -48,10 +48,6 @@ class LoginViewModel: ObservableObject {
         }
         return InvalidLabels.passwordValidError.localizeString()
     }
-    func sighIn() {
-        login = ""
-        password = ""
-    }
     
     enum InvalidLabels: LocalizedStringKey {
         case loginValidError = "LoginValidErrorLabel"

@@ -9,8 +9,9 @@ import SwiftUI
 
 struct LoginView: View {
     @Bindable var viewModel = LoginViewModel()
-    
+    @Environment(AuthViewModel.self) private var authVM
     @State var showPassword = false
+    @State var linkToRegisterViewIsActive = false
     
     var body: some View {
         NavigationStack {
@@ -26,9 +27,12 @@ struct LoginView: View {
                 
                 AuthorizationBlockButtons()
                 CustomDivider()
-                CustomButton(label: LoginViewEnum.signUpButtonLabel.localizeString()) {
-                    
+                NavigationLink(destination: RegisterView(), isActive: $linkToRegisterViewIsActive) { // хоть isActive и deprecated, но по-другому не хочет работать
+                    CustomButton(label: LoginViewEnum.signUpButtonLabel.localizeString()) {
+                        linkToRegisterViewIsActive.toggle()
+                    }
                 }
+                
                 SkipAuthorizationButton()
                 Spacer(minLength: Consts.spacerPadding)
             }
@@ -59,7 +63,9 @@ struct LoginView: View {
             }
             Spacer()
             CustomButton(label: LoginViewEnum.signInButtonLabel.localizeString(), isMini: true, isFill: true) {
-                viewModel.sighIn()
+                Task {
+                    await authVM.signIn(login: viewModel.login, password: viewModel.password)
+                }
             }
             .opacity(viewModel.isSignInComplete ? 1 : 0.6)
             .disabled(!viewModel.isSignInComplete)
@@ -70,7 +76,7 @@ struct LoginView: View {
     private func SkipAuthorizationButton() -> some View {
         VStack(alignment: .center) {
             Button {
-                //
+                authVM.skipAuth()
             } label: {
                 Text(LoginViewEnum.skipAuthLabel.localizeString())
                     .foregroundStyle(Color.customLightGray)

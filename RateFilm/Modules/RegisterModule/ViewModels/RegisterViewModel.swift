@@ -72,13 +72,6 @@ class RegisterViewModel: ObservableObject {
         return InvalidLabels.passwordInvalidLabel.localizeString()
     }
     
-    func signUp() {
-        nickname = ""
-        email = ""
-        password = ""
-        confirmPassword = ""
-    }
-    
     enum InvalidLabels: LocalizedStringKey {
         case confirmPasswordInvalidLabel = "ConfirmPasswordInvalidLabel"
         case emailInvalidLabel = "EmailInvalidLabel"
