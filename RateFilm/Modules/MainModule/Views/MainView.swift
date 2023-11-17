@@ -15,6 +15,8 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack {
+            CustomSearchView(searchText: $searchText)
+            HorizontalScrollView(selectedCategory: $selectedCategory)
             TabView(selection: $selectedCategory) {
                 ForEach(MainViewSelections.allCases, id: \.self) { selection in
                     ListView(snippets: data.getFilteredList(filterBy: selection))
@@ -23,16 +25,6 @@ struct MainView: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .indexViewStyle(.page(backgroundDisplayMode: .never))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    HorizontalScrollView(selectedCategory: $selectedCategory)
-                }
-                
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    CustomSearchView(searchText: $searchText)
-//                }
-            }
         }
     }
     

@@ -29,9 +29,10 @@ class CustomFormatter {
             if date > now + UnixConsts.unixYear {
                 return "\(date.date.get(.year))"
             } else {
-                if let month = Months(number: date.date.get(.month))?.localizeString() {
-                    return "\(month) \(date.date.get(.year))"
-                }
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale.current
+                dateFormatter.setLocalizedDateFormatFromTemplate("MMMM")
+                return "\(dateFormatter.string(from: date.date)) \(date.date.get(.year))"
             }
         }
         
@@ -100,45 +101,6 @@ class CustomFormatter {
         case of = "of"
         case ep = "ep"
         case announcement = "Announcement"
-        
-        func localizeString() -> String {
-            return NSLocalizedString(self.rawValue.stringKey ?? "", comment: "")
-        }
-    }
-    
-    
-    
-    enum Months: LocalizedStringKey {
-        case january = "january"
-        case february = "february"
-        case march = "march"
-        case april = "april"
-        case may = "may"
-        case june = "june"
-        case july = "july"
-        case august = "august"
-        case september = "september"
-        case october = "october"
-        case november = "november"
-        case december = "december"
-        
-        init?(number: Int) {
-            switch number {
-            case 1: self = .january
-            case 2: self = .february
-            case 3: self = .march
-            case 4: self = .april
-            case 5: self = .may
-            case 6: self = .june
-            case 7: self = .july
-            case 8: self = .august
-            case 9: self = .september
-            case 10: self = .october
-            case 11: self = .november
-            case 12: self = .december
-            default: return nil
-            }
-        }
         
         func localizeString() -> String {
             return NSLocalizedString(self.rawValue.stringKey ?? "", comment: "")

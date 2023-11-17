@@ -20,17 +20,18 @@ struct HorizontalScrollView: View {
                         } label: {
                             Text(selection.localizeString())
                                 .padding()
-                                .foregroundStyle(self.selectedCategory == selection ? Color.customLightRed : Color.customBlack)
+                                .foregroundStyle(self.selectedCategory == selection ? Color.accentColor : Color.customBlack)
                                 .font(.system(size: 19))
                                 .background(
                                     Capsule()
-                                        .foregroundStyle(self.selectedCategory == selection ? Color.customLightRed : Color.clear)
+                                        .foregroundStyle(self.selectedCategory == selection ? Color.accentColor : Color.clear)
                                         .frame(height: 3)
                                         .offset(y: 22)
                                 )
                         }
                     }
-                }.padding()
+                }
+                .padding(.horizontal)
             }
             .onAppear {
                 withAnimation(.easeInOut(duration: 20)) {

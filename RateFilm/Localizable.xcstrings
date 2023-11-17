@@ -319,9 +319,6 @@
         }
       }
     },
-    "february" : {
-
-    },
     "films" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -564,9 +561,6 @@
           }
         }
       }
-    },
-    "may" : {
-
     },
     "May" : {
       "extractionState" : "manual",

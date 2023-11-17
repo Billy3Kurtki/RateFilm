@@ -9,7 +9,7 @@ import SwiftUI
 import Observation
 
 @Observable
-class LoginViewModel: ObservableObject {
+final class LoginViewModel: ObservableObject {
     var login: String = ""
     var password: String = ""
     

@@ -19,7 +19,7 @@ struct CustomSearchView: View {
                 RoundedRectangle(cornerRadius: Consts.cornerRadius, style: .continuous)
                 RoundedRectangle(cornerRadius: Consts.cornerRadius, style: .continuous)
                     .stroke(lineWidth: Consts.lineWidth)
-                    .foregroundStyle(state ? Color.customLightRed : .clear)
+                    .foregroundStyle(state ? Color.accentColor : .clear)
                 if showTextFi {
                     TextField("Search", text: $searchText)
                         .padding(.horizontal)
