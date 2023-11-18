@@ -9,67 +9,71 @@ import SwiftUI
 import Observation
 
 @Observable
-class RegisterViewModel: ObservableObject {
+final class RegisterViewModel: ObservableObject {
     var nickname: String = ""
     var email: String = ""
     var password: String = ""
     var confirmPassword: String = ""
     
+    
+    var nicknameError: String = ""
+
+    var confirmPasswordError: String = ""
+
+    var emailError: String = ""
+
+    var passwordError: String = ""
+    
     func nicknameValid() -> Bool {
         if Range(5...20).contains(nickname.count) {
+            nicknameError = ""
             return true
         }
+        nicknameError = InvalidLabels.nicknameInvalidLabel.localizeString()
         return false
     }
     
-    func passwordsMatch() -> Bool { password == confirmPassword }
+    func passwordsMatch() -> Bool {
+        if password == confirmPassword {
+            confirmPasswordError = ""
+            return true
+        }
+        confirmPasswordError = InvalidLabels.confirmPasswordInvalidLabel.localizeString()
+        return false
+    }
     
     func isPasswordValid() -> Bool {
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", Regex.password.rawValue)
-        return passwordTest.evaluate(with: password)
+        if passwordTest.evaluate(with: password) {
+            passwordError = ""
+            return true
+        }
+        passwordError = InvalidLabels.passwordInvalidLabel.localizeString()
+        return false
     }
     
     func isEmailValid() -> Bool {
         let emailTest = NSPredicate(format: "SELF MATCHES %@", Regex.email.rawValue)
-        return emailTest.evaluate(with: email)
+        if emailTest.evaluate(with: email) {
+            emailError = ""
+            return true
+        }
+        emailError = InvalidLabels.emailInvalidLabel.localizeString()
+        return false
     }
     
     var isSignUpComplete: Bool {
-        if !nicknameValid() ||
-           !passwordsMatch() ||
-           !isPasswordValid() ||
-           !isEmailValid() {
+        var nicknameValidation = nicknameValid() // реализовано так, потому что, если оставить, как было, то если, например, неверно указан никнейм, то условие сразу обрубало валидацию других полей. А здесь, валидация сразу по всем полям, и только потом проверка.
+        var isEmailValidation = isEmailValid()
+        var isPasswordValidation = isPasswordValid()
+        var passwordsMatchValidation = passwordsMatch()
+        if !nicknameValidation ||
+           !isEmailValidation ||
+           !isPasswordValidation ||
+           !passwordsMatchValidation {
             return false
         }
         return true
-    }
-    
-    var nicknameError: String {
-        if nicknameValid() {
-            return ""
-        }
-        return InvalidLabels.nicknameInvalidLabel.localizeString()
-    }
-    
-    var confirmPasswordError: String {
-        if passwordsMatch() {
-            return ""
-        }
-        return InvalidLabels.confirmPasswordInvalidLabel.localizeString()
-    }
-    
-    var emailError: String {
-        if isEmailValid() {
-            return ""
-        }
-        return InvalidLabels.emailInvalidLabel.localizeString()
-    }
-    
-    var passwordError: String {
-        if isPasswordValid() {
-            return ""
-        }
-        return InvalidLabels.passwordInvalidLabel.localizeString()
     }
     
     enum InvalidLabels: LocalizedStringKey {

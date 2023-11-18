@@ -63,12 +63,12 @@ struct LoginView: View {
             }
             Spacer()
             CustomButton(label: LoginViewEnum.signInButtonLabel.localizeString(), isMini: true, isFill: true) {
-                Task {
-                    await authVM.signIn(login: viewModel.login, password: viewModel.password)
+                if viewModel.isSignInComplete {
+                    Task {
+                        await authVM.signIn(login: viewModel.login, password: viewModel.password)
+                    }
                 }
             }
-            .opacity(viewModel.isSignInComplete ? 1 : 0.6)
-            .disabled(!viewModel.isSignInComplete)
         }
         .padding(.leading, 20)
     }

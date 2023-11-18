@@ -19,13 +19,13 @@ struct RegisterView: View {
                 EntryField(prompt: RegisterViewEnum.passwordPromptLabel.localizeString(), errorValidText: viewModel.passwordError, isSecure: true, field: $viewModel.password)
                 EntryField(prompt: RegisterViewEnum.repeatPasswordLabel.localizeString(), errorValidText: viewModel.confirmPasswordError, isSecure: true, field: $viewModel.confirmPassword)
                 CustomButton(label: RegisterViewEnum.createProfileLabel.localizeString(), isFill: true, action: {
-                    Task {
-                        await authVM.sighUp(nickName: viewModel.nickname, email: viewModel.email, password: viewModel.password)
+                    if viewModel.isSignUpComplete {
+                        Task {
+                            await authVM.sighUp(nickName: viewModel.nickname, email: viewModel.email, password: viewModel.password)
+                        }
                     }
                 })
                 .padding(.vertical, 10)
-                .opacity(viewModel.isSignUpComplete ? 1 : 0.65)
-                .disabled(!viewModel.isSignUpComplete)
             }
             .padding(.vertical)
             .navigationTitle(String(localized: "Creating profile"))
