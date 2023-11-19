@@ -17,11 +17,8 @@ final class RegisterViewModel: ObservableObject {
     
     
     var nicknameError: String = ""
-
     var confirmPasswordError: String = ""
-
     var emailError: String = ""
-
     var passwordError: String = ""
     
     func nicknameValid() -> Bool {

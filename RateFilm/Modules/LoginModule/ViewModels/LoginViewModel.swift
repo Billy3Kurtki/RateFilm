@@ -15,7 +15,6 @@ final class LoginViewModel: ObservableObject {
     
     
     var loginError: String = ""
-    
     var passwordError: String = ""
     
     func loginValid() -> Bool {

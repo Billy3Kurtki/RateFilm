@@ -8,55 +8,43 @@
 import Foundation
 
 protocol NetworkLayer {
-    func fetch<T: Decodable>(urlString: String, onCompletion: @escaping (Result<T, NetworkError>) -> Void)
-    func post<T: Encodable>(urlString: String, body: T, method: HTTPMethod, onCompletion: @escaping (Result<Data?, NetworkError>) -> Void)
+    func fetch<T: Decodable>(urlString: String, onCompletion: @escaping (Result<T, NetworkError>) -> Void) async
+    func post<T: Encodable>(urlString: String, body: T, method: HTTPMethod, onCompletion: @escaping (Result<Data?, NetworkError>) -> Void) async
 }
 
-struct NetworkService: NetworkLayer {
+final class NetworkService: NetworkLayer {
+    private lazy var session = URLSession.shared
     
-    func fetch<T: Decodable>(urlString: String, onCompletion: @escaping (Result<T, NetworkError>) -> Void) {
+    func fetch<T: Decodable>(urlString: String, onCompletion: @escaping (Result<T, NetworkError>) -> Void) async {
         guard let url = URL(string: urlString) else {
             onCompletion(.failure(NetworkError.invalidUrl))
             return
         }
         
         let urlRequest = URLRequest(url: url)
-        
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            DispatchQueue.main.async {
-                if error != nil {
-                    onCompletion(.failure(NetworkError.networkError))
-                    return
-                }
-                
-                guard let response = response as? HTTPURLResponse else {
-                    onCompletion(.failure(NetworkError.unexpectedResponse))
-                    return
-                }
-                
-                guard Self.httpStatusCodeSuccess.contains(response.statusCode) else {
-                    onCompletion(.failure(NetworkError.failedResponse(response)))
-                    return
-                }
-                
-                guard let data else {
-                    onCompletion(.failure(NetworkError.dataError))
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let responseData = try decoder.decode(T.self, from: data)
-                    onCompletion(.success(responseData))
-                } catch {
-                    onCompletion(.failure(NetworkError.parseError))
-                }
+        do {
+            let (data, response) = try await session.data(for: urlRequest, delegate: nil)
+            guard let response = response as? HTTPURLResponse else {
+                onCompletion(.failure(NetworkError.unexpectedResponse))
+                return
             }
-        }.resume()
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let responseData = try decoder.decode(T.self, from: data)
+                onCompletion(.success(responseData))
+            } catch {
+                onCompletion(.failure(NetworkError.parseError))
+                return
+            }
+        } catch {
+            onCompletion(.failure(NetworkError.requestError))
+            return
+        }
     }
     
-    func post<T: Encodable>(urlString: String, body: T, method: HTTPMethod, onCompletion: @escaping (Result<Data?, NetworkError>) -> Void) {
+    func post<T: Encodable>(urlString: String, body: T, method: HTTPMethod, onCompletion: @escaping (Result<Data?, NetworkError>) -> Void) async {
         guard let url = URL(string: urlString) else {
             onCompletion(.failure(NetworkError.invalidUrl))
             return
@@ -65,19 +53,10 @@ struct NetworkService: NetworkLayer {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
         do {
-            urlRequest.httpBody = try JSONEncoder().encode(body)
-        } catch {
-            onCompletion(.failure(NetworkError.parseError))
-        }
-        
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            DispatchQueue.main.async {
-                if error != nil {
-                    onCompletion(.failure(NetworkError.networkError))
-                }
-                
+            let requestData = try JSONEncoder().encode(body)
+            do {
+                let (data, response) = try await session.upload(for: urlRequest, from: requestData)
                 guard let response = response as? HTTPURLResponse else {
                     onCompletion(.failure(NetworkError.unexpectedResponse))
                     return
@@ -89,8 +68,13 @@ struct NetworkService: NetworkLayer {
                 }
             
                 onCompletion(.success(data))
+            } catch {
+                onCompletion(.failure(NetworkError.requestError))
             }
-        }.resume()
+        } catch {
+            onCompletion(.failure(NetworkError.parseError))
+            return
+        }
     }
     
     private static let httpStatusCodeSuccess = 200..<300
@@ -103,6 +87,7 @@ enum NetworkError: Error {
     case parseError
     case unexpectedResponse
     case failedResponse(HTTPURLResponse)
+    case requestError
 }
 
 enum HTTPMethod: String {
