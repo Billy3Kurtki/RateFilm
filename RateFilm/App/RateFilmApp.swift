@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct RateFilmApp: App {
+    @State var authVM = AuthViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FirstScreenView()
+                .environment(authVM)
         }
     }
 }

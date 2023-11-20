@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HorizontalScrollView: View {
-    @Binding var selectedCategory: String
+    @Binding var selectedCategory: MainViewSelections
     var body: some View {
         ScrollViewReader { scrollProxy in
             ScrollView(.horizontal, showsIndicators: false) {
@@ -16,24 +16,32 @@ struct HorizontalScrollView: View {
                     Spacer(minLength: 20)
                     ForEach(MainViewSelections.allCases, id: \.self) { selection in
                         Button {
-                            self.selectedCategory = selection.localizeString()
-                            withAnimation(.easeInOut(duration: 20)) {
-                                scrollProxy.scrollTo(selection, anchor: .center)
-                            }
+                            self.selectedCategory = selection
                         } label: {
-                            VStack {
-                                Text(selection.localizeString())
-                                    .padding()
-                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.customBlack)
-                                    .font(.system(size: 19))
-                                Capsule()
-                                    .foregroundStyle(self.selectedCategory == selection.localizeString() ? Color.customLightRed : Color.clear)
-                                    .frame(height: 4)
-                                
-                            }.fixedSize()
+                            Text(selection.localizeString())
+                                .padding()
+                                .foregroundStyle(self.selectedCategory == selection ? Color.accentColor : Color.customBlack)
+                                .font(.system(size: 19))
+                                .background(
+                                    Capsule()
+                                        .foregroundStyle(self.selectedCategory == selection ? Color.accentColor : Color.clear)
+                                        .frame(height: 3)
+                                        .offset(y: 22)
+                                )
                         }
                     }
-                }.padding()
+                }
+                .padding(.horizontal)
+            }
+            .onAppear {
+                withAnimation(.easeInOut(duration: 20)) {
+                    scrollProxy.scrollTo(selectedCategory, anchor: .center)
+                }
+            }
+            .onChange(of: selectedCategory) { _, newValue in
+                withAnimation(.easeInOut(duration: 20)) {
+                    scrollProxy.scrollTo(newValue, anchor: .center)
+                }
             }
         }
     }
@@ -43,15 +51,3 @@ struct HorizontalScrollView: View {
 //    HorizontalScrollView()
 //}
 
-enum MainViewSelections: String, CaseIterable {
-    case mySelection = "mySelection"
-    case lastReleased = "lastReleased"
-    case ongoings = "ongoings"
-    case announcement = "announcement"
-    case films = "films"
-    case serials = "serials"
-    
-    func localizeString() -> String {
-        return NSLocalizedString(self.rawValue, comment: "")
-    }
-}

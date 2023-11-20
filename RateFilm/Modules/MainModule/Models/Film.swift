@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Film: Identifiable, Codable {
+struct Film: Codable {
     var id: String
     var name: String
     var releaseDate: Int? // UnixTimestamp

@@ -14,4 +14,6 @@ extension Color {
     static let customBlack = Color(.customBlack)
     static let customLightRed = Color(.lightRed)
     static let customWhite = Color(.customWhite)
+    static let backgroundSnippet = Color(.backgroundSnippet)
+    static let strokeSnippet = Color(.strokeSnippet)
 }

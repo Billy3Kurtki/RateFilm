@@ -9,47 +9,48 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("systemThemeVal") private var systemTheme: String = SchemeType.allCases.first!.rawValue
+    @State var animateIsActive = false
     
     var body: some View {
         TabView {
             MainView()
                 .tabItem {
-                    Text(TabBarSelections.main.localizeString())
-                    Image(systemName: "house")
+                    Text(TabBarSelections.main.stringValue())
+                    Image(systemName: Images.house.rawValue)
                 }
-            ReviewView()
+            SearchView()
                 .tabItem {
-                    Text(TabBarSelections.review.localizeString())
-                    Image(systemName: "safari")
+                    Text(TabBarSelections.search.stringValue())
+                    Image(systemName: Images.lupo.rawValue)
                 }
             FavoritesView()
                 .tabItem {
-                    Text(TabBarSelections.favorites.localizeString())
-                    Image(systemName: "bookmark")
+                    Text(TabBarSelections.favorites.stringValue())
+                    Image(systemName: Images.bookmark.rawValue)
                 }
             ProfileView()
                 .tabItem {
-                    Text(TabBarSelections.profile.localizeString())
-                    Image(systemName: "person.crop.circle.fill")
+                    Text(TabBarSelections.profile.stringValue())
+                    Image(systemName: Images.personFill.rawValue)
                 }
-            SettingsView() // Для теста тёмной темы, потом уберу
-                .tabItem {
-                    Text("Settings")
-                    Image(systemName: "gearshape")
-                }
-        }.preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
+        }
+        .preferredColorScheme(ColorScheme.selectedScheme(scheme: systemTheme))
+    }
+    
+    enum Images: String {
+        case house = "house"
+        case lupo = "magnifyingglass"
+        case bookmark = "bookmark"
+        case personFill = "person.crop.circle.fill"
     }
 }
 
-enum TabBarSelections: String {
-    case main = "mainLabel"
-    case review = "reviewLabel"
-    case favorites = "favoritesLabel"
-    case profile = "profileLabel"
-    
-    func localizeString() -> String {
-        return NSLocalizedString(self.rawValue, comment: "")
-    }
+enum TabBarSelections {
+    static var main: LocalizedStringKey = "mainLabel"
+    static var review: LocalizedStringKey = "reviewLabel"
+    static var search: LocalizedStringKey = "searchLabel"
+    static var favorites: LocalizedStringKey = "favoritesLabel"
+    static var profile: LocalizedStringKey = "profileLabel"
 }
 
 

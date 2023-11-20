@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ListView: View {
-    @State private var search = ""
-    @StateObject private var data = ListViewModel()
+    var snippets: [SnippetViewModel]
+    
     var body: some View {
         NavigationStack {
             ScrollView {
-                ForEach(data.filmsVM) { film in
+                ForEach(snippets) { snippet in
                     NavigationLink(destination: MovieDetailsView()) {
-                        FilmCell(film: film)
+                        SnippetCell(snippet: snippet)
                     }
                 }
             }
@@ -24,14 +24,14 @@ struct ListView: View {
     }
 }
 
-struct FilmCell: View {
-    var film: FilmViewModel
+struct SnippetCell: View {
+    var snippet: SnippetViewModel
     
     var body: some View {
         HStack {
-            AsyncIconRowView(urlString: film.previewImage)
+            AsyncIconRowView(urlString: snippet.previewImage)
             
-            DescriptionView(name: film.name, description: film.description, realeseDate: film.releaseDate, avgRating: film.avgRating)
+            DescriptionView(name: snippet.name, description: snippet.description, seriesCount: snippet.seriesCount, realeseDate: snippet.releaseDate, avgRating: snippet.avgRating)
             Spacer()
         }
         .padding(.horizontal)
@@ -68,7 +68,7 @@ struct AsyncIconRowView: View {
 
 struct DescriptionView: View {
     var name, description: String
-    var episodesCount, realeseDate, avgRating: String?
+    var seriesCount, realeseDate, avgRating: String?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -77,6 +77,11 @@ struct DescriptionView: View {
                 .foregroundStyle(Color.customBlack)
                 .font(.system(size: Consts.textTitleSize))
                 .bold()
+            if let seriesCount = seriesCount {
+                Text(seriesCount)
+                    .foregroundStyle(Color.customLightGray)
+                    .padding(.vertical, 5)
+            }
             if let avgRating = avgRating {
                 HStack {
                     Text(avgRating)
@@ -117,6 +122,6 @@ struct DescriptionView: View {
     }
 }
 
-#Preview {
-    ListView()
-}
+//#Preview {
+//    ListView(filterBy: .mySelection)
+//}
