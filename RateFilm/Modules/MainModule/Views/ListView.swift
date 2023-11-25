@@ -45,16 +45,15 @@ struct AsyncIconRowView: View {
             if let image = data.image {
                 image
                     .imageIconModifier(width: Consts.iconWidth, height: Consts.iconHeight)
-                    
             } else if data.error != nil {
-                Image(uiImage: UIImage(named: "defaultImage")!)
+                Consts.defaultImage
                     .imageIconModifier(width: Consts.iconWidth, height: Consts.iconHeight)
             } else {
-                ZStack { // пока плохо. Надо заменить.
-                    RoundedRectangle(cornerSize: CGSize(width: 1, height: 1))
-                        .opacity(0)
+                ZStack {
+                    RoundedRectangle(cornerRadius: Consts.cornerRadius)
+                        .foregroundStyle(Color.customLightGray)
                     ProgressView()
-                }
+                }.frame(width: Consts.iconWidth, height: Consts.iconHeight)
             }
         }
     }
@@ -62,6 +61,8 @@ struct AsyncIconRowView: View {
     enum Consts {
         static var iconWidth: CGFloat = 100
         static var iconHeight: CGFloat = 150
+        static var defaultImage: Image = Image(uiImage: UIImage(named: "defaultImage")!)
+        static var cornerRadius: CGFloat = 6
     }
 }
 

@@ -15,6 +15,7 @@ struct User: Identifiable, Codable {
     var phone: String?
     var age: Int?
     var userType: UserTypes
+    var token: String?
 }
 
 // MARK: Inittializer for unauthorized user
@@ -26,5 +27,6 @@ extension User {
         self.email = ""
         self.age = 0
         self.userType = .unauthUser
+        self.token = nil
     }
 }

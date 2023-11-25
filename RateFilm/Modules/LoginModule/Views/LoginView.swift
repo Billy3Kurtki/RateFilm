@@ -27,7 +27,7 @@ struct LoginView: View {
                 
                 AuthorizationBlockButtons()
                 CustomDivider()
-                NavigationLink(destination: RegisterView(), isActive: $linkToRegisterViewIsActive) { // хоть isActive и deprecated, но по-другому не хочет работать
+                NavigationLink(destination: RegisterView(), isActive: $linkToRegisterViewIsActive) {
                     CustomButton(label: LoginViewEnum.signUpButtonLabel.localizeString()) {
                         linkToRegisterViewIsActive.toggle()
                     }
@@ -36,6 +36,9 @@ struct LoginView: View {
                 SkipAuthorizationButton()
                 Spacer(minLength: Consts.spacerPadding)
             }
+        }
+        .onAppear {
+            authVM.currentUser = nil
         }
     }
     
@@ -55,9 +58,7 @@ struct LoginView: View {
     
     private func AuthorizationBlockButtons() -> some View {
         HStack {
-            Button {
-                //
-            } label: {
+            NavigationLink(destination: ForgotPasswordView()) {
                 Text(LoginViewEnum.forgotPasswordLabel.localizeString())
                     .foregroundStyle(Color.customLightGray)
             }

@@ -25,11 +25,16 @@ struct RegisterView: View {
                         }
                     }
                 })
-                .padding(.vertical, 10)
+                .padding(.vertical, Consts.verticalPadding)
             }
             .padding(.vertical)
-            .navigationTitle(String(localized: "Creating profile"))
+            .navigationTitle(Consts.navTitle)
         }
+    }
+    
+    enum Consts {
+        static var verticalPadding: CGFloat = 10
+        static var navTitle: String = String(localized: "Creating profile")
     }
 }
 
@@ -134,114 +139,14 @@ struct CustomButton: View {
     var body: some View {
         ViewThatFits(in: .horizontal) {
             if UIDevice.current.userInterfaceIdiom == .pad {
-                // MARK: Большая версия (на всю ширину экрана) iPad (horizontal)
-                if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight { // не заходит в это условие, надо как-то переделать
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 1150, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 1100, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 1050, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    // MARK: Мини-версия (на половину экрана) iPad (horizontal)
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 585, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 575, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 565, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                } else {
-                    // MARK: Большая версия (на всю ширину экрана) iPad (vertical)
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 795, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 775, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 750, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    // MARK: Мини-версия (на половину экрана) iPad (vertical)
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 400, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 385, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
-                    Button {
-                        action()
-                    } label: {
-                        Text(label)
-                            .padding()
-                            .frame(width: 370, height: Consts.buttonHeight)
-                            .modifier(ButtonModifier(isFill: isFill))
-                    }
+                // MARK: У iPad автоопределение ширины кнопки, тк вручную отладить не получилось
+                Button {
+                    action()
+                } label: {
+                    Text(label)
+                        .padding()
+                        .frame(width: buttonWidth(), height: Consts.buttonHeight)
+                        .modifier(ButtonModifier(isFill: isFill))
                 }
             }
             

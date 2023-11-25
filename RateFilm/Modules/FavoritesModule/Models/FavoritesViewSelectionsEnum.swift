@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum FavoritesViewSelections: LocalizedStringKey, CaseIterable {
+enum FavoritesViewSelections: LocalizedStringKey, CaseIterable, Codable {
     case collection = "Collection"
     case history = "History"
     case favourite = "Favorite"
