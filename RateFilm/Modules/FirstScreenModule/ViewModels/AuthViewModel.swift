@@ -46,9 +46,10 @@ final class AuthViewModel {
         // сервер ещё в разработке
 //        let loginModel = Login(userLogin: login, password: password)
 //        
-//        await networkService.post(urlString: ServerString.login.rawValue, 
-//                                  body: loginModel,
-//                                  method: .post) { (result: Result<Data?, NetworkError>) in
+//        do {
+//            let result = try await networkService.postAsync(urlString: ServerString.login.rawValue,
+//                                                       body: loginModel,
+//                                                       method: .post)
 //            switch result {
 //            case .success(let data):
 //                guard let data = data else {
@@ -59,12 +60,15 @@ final class AuthViewModel {
 //                    self.currentUser = try JSONDecoder().decode(User.self, from: data)
 //                    self.error = nil
 //                } catch {
-//                    self.error = NetworkError.serverError
+//                    self.error = NetworkError.parseError
 //                }
 //            case .failure(let error):
 //                self.error = error
 //            }
+//        } catch {
+//            self.error = NetworkError.serverError
 //        }
+        
 
         currentUser = User(id: "1", userName: "user", email: "test@email.com", userType: .authUser)
     }
@@ -72,27 +76,31 @@ final class AuthViewModel {
     @MainActor
     func sighUp(nickName: String, email: String, password: String) async {
         // сервер ещё в разработке
-        let registerModel = Register(nickName: nickName, email: email, password: password)
+//        let registerModel = Register(nickName: nickName, email: email, password: password)
+//        
+//        do {
+//            let result = try await networkService.postAsync(urlString: ServerString.login.rawValue,
+//                                                       body: registerModel,
+//                                                       method: .post)
+//            switch result {
+//            case .success(let data):
+//                guard let data = data else {
+//                    self.error = NetworkError.dataError
+//                    return
+//                }
+//                do {
+//                    self.currentUser = try JSONDecoder().decode(User.self, from: data)
+//                    self.error = nil
+//                } catch {
+//                    self.error = NetworkError.parseError
+//                }
+//            case .failure(let error):
+//                self.error = error
+//            }
+//        } catch {
+//            self.error = NetworkError.serverError
+//        }
         
-        await networkService.post(urlString: ServerString.login.rawValue, 
-                                  body: registerModel,
-                                  method: .post) { (result: Result<Data?, NetworkError>) in
-            switch result {
-            case .success(let data):
-                guard let data = data else {
-                    self.error = NetworkError.dataError
-                    return
-                }
-                do {
-                    self.currentUser = try JSONDecoder().decode(User.self, from: data)
-                    self.error = nil
-                } catch {
-                    self.error = NetworkError.serverError
-                }
-            case .failure(let error):
-                self.error = error
-            }
-        }
         
         currentUser = User(id: "2", userName: nickName, email: email, userType: .authUser)
     }

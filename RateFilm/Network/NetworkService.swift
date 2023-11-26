@@ -8,17 +8,16 @@
 import Foundation
 
 protocol NetworkLayer {
-    func fetch<T: Decodable>(urlString: String, token: String?, onCompletion: @escaping (Result<T, NetworkError>) -> Void) async
-    func post<T: Encodable>(urlString: String, body: T, method: HTTPMethod, token: String?, onCompletion: @escaping (Result<Data?, NetworkError>) -> Void) async
+    func fetchAsync<T: Decodable>(urlString: String, token: String?) async throws -> Result<T, NetworkError>
+    func postAsync<T: Encodable>(urlString: String, body: T, method: HTTPMethod, token: String?) async throws -> Result<Data?, NetworkError>
 }
 
 final class NetworkService: NetworkLayer {
     private lazy var session = URLSession.shared
     
-    func fetch<T: Decodable>(urlString: String, token: String? = nil, onCompletion: @escaping (Result<T, NetworkError>) -> Void) async {
+    func fetchAsync<T: Decodable>(urlString: String, token: String? = nil) async throws -> Result<T, NetworkError> {
         guard let url = URL(string: urlString) else {
-            onCompletion(.failure(NetworkError.invalidUrl))
-            return
+            return .failure(NetworkError.invalidUrl)
         }
         
         var urlRequest = URLRequest(url: url)
@@ -28,29 +27,25 @@ final class NetworkService: NetworkLayer {
         do {
             let (data, response) = try await session.data(for: urlRequest, delegate: nil)
             guard let response = response as? HTTPURLResponse else {
-                onCompletion(.failure(NetworkError.unexpectedResponse))
-                return
+                return .failure(NetworkError.unexpectedResponse)
             }
             
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let responseData = try decoder.decode(T.self, from: data)
-                onCompletion(.success(responseData))
+                return .success(responseData)
             } catch {
-                onCompletion(.failure(NetworkError.parseError))
-                return
+                return .failure(NetworkError.parseError)
             }
         } catch {
-            onCompletion(.failure(NetworkError.requestError))
-            return
+            return .failure(NetworkError.requestError)
         }
     }
     
-    func post<T: Encodable>(urlString: String, body: T, method: HTTPMethod, token: String? = nil, onCompletion: @escaping (Result<Data?, NetworkError>) -> Void) async {
+    func postAsync<T: Encodable>(urlString: String, body: T, method: HTTPMethod, token: String? = nil) async throws -> Result<Data?, NetworkError> {
         guard let url = URL(string: urlString) else {
-            onCompletion(.failure(NetworkError.invalidUrl))
-            return
+            return .failure(NetworkError.invalidUrl)
         }
         
         var urlRequest = URLRequest(url: url)
@@ -64,22 +59,19 @@ final class NetworkService: NetworkLayer {
             do {
                 let (data, response) = try await session.upload(for: urlRequest, from: requestData)
                 guard let response = response as? HTTPURLResponse else {
-                    onCompletion(.failure(NetworkError.unexpectedResponse))
-                    return
+                    return .failure(NetworkError.unexpectedResponse)
                 }
                 
                 guard Self.httpStatusCodeSuccess.contains(response.statusCode) else {
-                    onCompletion(.failure(NetworkError.failedResponse(response)))
-                    return
+                    return .failure(NetworkError.failedResponse(response))
                 }
             
-                onCompletion(.success(data))
+                return .success(data)
             } catch {
-                onCompletion(.failure(NetworkError.requestError))
+                return .failure(NetworkError.requestError)
             }
         } catch {
-            onCompletion(.failure(NetworkError.parseError))
-            return
+            return .failure(NetworkError.parseError)
         }
     }
     
