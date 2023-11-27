@@ -17,12 +17,12 @@ struct Film: Codable {
     var images: [ImageModel]?
     var avgRating: Float
     var ageRating: Int
-    var moveTypes: [MovieType]
+    var moveTypes: [Genre]
     var author: String
     var actors: [ActorModel]?
 }
 
-enum MovieType: String, Codable {
+enum Genre: String, Codable {
     case action = "Экшен"
     case fantasy = "Фэнтези"
 }

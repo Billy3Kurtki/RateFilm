@@ -84,6 +84,38 @@
         }
       }
     },
+    "authDecriptionLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log in or create a profile to discover all the functionality of the application!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Войдите или создайте профиль, чтобы открыть для себя весь функционал приложения!"
+          }
+        }
+      }
+    },
+    "authorizationLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authorization"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Авторизация"
+          }
+        }
+      }
+    },
     "Collection" : {
       "localizations" : {
         "en" : {
@@ -146,6 +178,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пароли не совпадают"
+          }
+        }
+      }
+    },
+    "continueLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжить"
           }
         }
       }
@@ -647,6 +695,22 @@
         }
       }
     },
+    "notWithUsYetLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not with us yet?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ещё не с нами?!"
+          }
+        }
+      }
+    },
     "november" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -782,6 +846,22 @@
         }
       }
     },
+    "passwordRecoveryLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password recovery"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Восстановление пароля"
+          }
+        }
+      }
+    },
     "PasswordValidErrorLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -881,6 +961,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поиск"
+          }
+        }
+      }
+    },
+    "SearchIn" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search in"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск в"
           }
         }
       }

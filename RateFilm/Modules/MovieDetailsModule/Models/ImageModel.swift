@@ -8,5 +8,6 @@
 import Foundation
 
 struct ImageModel: Codable {
+    var id: String
     var url: URL
 }

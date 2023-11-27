@@ -47,7 +47,7 @@ struct HorizontalScrollView: View {
     }
 }
 
-//#Preview {
-//    HorizontalScrollView()
-//}
+#Preview {
+    HorizontalScrollView(selectedCategory: .constant(MainViewSelections.lastReleased))
+}
 

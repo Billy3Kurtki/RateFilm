@@ -60,10 +60,10 @@ final class RegisterViewModel: ObservableObject {
     }
     
     var isSignUpComplete: Bool {
-        var nicknameValidation = nicknameValid() // реализовано так, потому что, если оставить, как было, то если, например, неверно указан никнейм, то условие сразу обрубало валидацию других полей. А здесь, валидация сразу по всем полям, и только потом проверка.
-        var isEmailValidation = isEmailValid()
-        var isPasswordValidation = isPasswordValid()
-        var passwordsMatchValidation = passwordsMatch()
+        let nicknameValidation = nicknameValid() // реализовано так, потому что, если оставить, как было, то если, например, неверно указан никнейм, то условие сразу обрубало валидацию других полей. А здесь, валидация сразу по всем полям, и только потом проверка.
+        let isEmailValidation = isEmailValid()
+        let isPasswordValidation = isPasswordValid()
+        let passwordsMatchValidation = passwordsMatch()
         if !nicknameValidation ||
            !isEmailValidation ||
            !isPasswordValidation ||

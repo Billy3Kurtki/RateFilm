@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(AuthViewModel.self) private var authVM
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if authVM.currentUser?.userType != .unauthUser {
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        } else {
+            BlockingView()
+        }
+        
     }
 }
 

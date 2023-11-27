@@ -17,7 +17,7 @@ struct Serial: Codable {
     var avgRating: Float
     var seasons: [Season]
     var ageRating: Int
-    var moveTypes: [MovieType]
+    var moveTypes: [Genre]
     var author: String
 }
 
