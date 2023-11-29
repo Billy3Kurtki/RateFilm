@@ -8,14 +8,14 @@
 import Foundation
 
 protocol NetworkLayer {
-    func fetchAsync<T: Decodable>(urlString: String, token: String?) async -> Result<T, NetworkError>
+    func fetchAsync<T: Decodable>(urlString: String, token: String?, _ type: T.Type) async -> Result<T, NetworkError>
     func postAsync<T: Encodable>(urlString: String, body: T, method: HTTPMethod, token: String?) async -> Result<Data?, NetworkError>
 }
 
 final class NetworkService: NetworkLayer {
     private lazy var session = URLSession.shared
     
-    func fetchAsync<T: Decodable>(urlString: String, token: String? = nil) async -> Result<T, NetworkError> {
+    func fetchAsync<T: Decodable>(urlString: String, token: String? = nil, _ type: T.Type = T.self) async -> Result<T, NetworkError> {
         guard let url = URL(string: urlString) else {
             return .failure(NetworkError.invalidUrl)
         }
@@ -26,7 +26,7 @@ final class NetworkService: NetworkLayer {
         }
         do {
             let (data, response) = try await session.data(for: urlRequest, delegate: nil)
-            guard let response = response as? HTTPURLResponse else {
+            guard let _ = response as? HTTPURLResponse else {
                 return .failure(NetworkError.unexpectedResponse)
             }
             

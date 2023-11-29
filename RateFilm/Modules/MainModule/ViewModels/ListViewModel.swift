@@ -10,16 +10,44 @@ import Observation
 
 @Observable
 final class ListViewModel {
-    var snippetsVM: [SnippetViewModel] = []
+    var snippets: [SnippetViewModel] = []
     var searchResults: [SnippetViewModel] = []
     
+    let networkService = NetworkService()
+    var error: NetworkError?
+    
     init() {
+        
+    }
+    
+    func getFilteredList(filterBy: MainViewSelections) -> [SnippetViewModel] {
+        switch filterBy {
+        case .mySelection:
+            return snippets.filter { $0.mainViewSelection.contains(.mySelection) }
+        case .lastReleased:
+            return snippets.filter { $0.mainViewSelection.contains(.lastReleased) }
+        case .ongoings:
+            return snippets.filter { $0.mainViewSelection.contains(.ongoings) }
+        case .announcement:
+            return snippets.filter { $0.mainViewSelection.contains(.announcement) }
+        case .completed:
+            return snippets.filter { $0.mainViewSelection.contains(.completed) }
+        case .serials:
+            return snippets.filter { $0.mainViewSelection.contains(.serials) }
+        case .films:
+            return snippets.filter { $0.mainViewSelection.contains(.films) }
+        }
+    }
+    
+    func convertFilmsToSnippetVMs(_ films: [Film]) -> [SnippetViewModel] {
+        // MARK: Перегон фильмов
+        var resultSnippets: [SnippetViewModel] = []
+        
         let now = Date.now.unixTimestamp
         let startDate: Int = now - 2 * UnixConsts.unixMonth
         let endDate: Int = now
         let range = startDate...endDate
-        // MARK: Перегон фильмов
-        for i in ListViewModel.films {
+        for i in films {
             var avgRating: String?
             var realeseDate: String?
             var selections: [MainViewSelections] = [.films]
@@ -40,11 +68,16 @@ final class ListViewModel {
             }
             
             let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating, mainViewSelection: selections, isFavorite: i.isFavorite, favoriteSelection: i.favoritesSelection)
-            snippetsVM.append(snippetVM)
+            resultSnippets.append(snippetVM)
         }
-        
+        return resultSnippets
+    }
+    
+    func convertSerialsToSnippetVMs(_ serials: [Serial]) -> [SnippetViewModel] {
         // MARK: Перегон сериалов
-        for i in ListViewModel.serials {
+        var resultSnippets: [SnippetViewModel] = []
+        
+        for i in serials {
             var avgRating: String?
             var realeseDate: String?
             var seriesCount: String
@@ -69,26 +102,29 @@ final class ListViewModel {
             }
             
             let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating, seriesCount: seriesCount, mainViewSelection: selections, isFavorite: i.isFavorite, favoriteSelection: i.favoritesSelection)
-            snippetsVM.append(snippetVM)
+            snippets.append(snippetVM)
         }
+        return resultSnippets
     }
     
-    func getFilteredList(filterBy: MainViewSelections) -> [SnippetViewModel] {
-        switch filterBy {
-        case .mySelection:
-            return snippetsVM.filter { $0.mainViewSelection.contains(.mySelection) }
-        case .lastReleased:
-            return snippetsVM.filter { $0.mainViewSelection.contains(.lastReleased) }
-        case .ongoings:
-            return snippetsVM.filter { $0.mainViewSelection.contains(.ongoings) }
-        case .announcement:
-            return snippetsVM.filter { $0.mainViewSelection.contains(.announcement) }
-        case .completed:
-            return snippetsVM.filter { $0.mainViewSelection.contains(.completed) }
-        case .serials:
-            return snippetsVM.filter { $0.mainViewSelection.contains(.serials) }
-        case .films:
-            return snippetsVM.filter { $0.mainViewSelection.contains(.films) }
+    func fetchMockData() {
+        let convertedFilms = convertFilmsToSnippetVMs(ListViewModel.films)
+        let convertedSerials = convertSerialsToSnippetVMs(ListViewModel.serials)
+        let movies = convertedFilms + convertedSerials
+        snippets = movies
+    }
+    
+    @MainActor
+    func fetchDataAsync(user: User) async {
+        let result = await networkService.fetchAsync(urlString: ServerString.movies.rawValue, token: user.token, NetworkMovies.self)
+        switch result {
+        case .success(let success):
+            let convertedFilms = convertFilmsToSnippetVMs(success.films)
+            let convertedSerials = convertSerialsToSnippetVMs(success.serials)
+            let movies = convertedFilms + convertedSerials
+            snippets = movies
+        case .failure(let failure):
+            error = failure
         }
     }
 }

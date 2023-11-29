@@ -9,15 +9,16 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedCategory: MainViewSelections = MainViewSelections.lastReleased
-    @State private var data = ListViewModel()
+    @State private var vm = ListViewModel()
     @State private var searchText = ""
     @FocusState var focus: FocusElement?
+    @Environment(AuthViewModel.self) private var authVM
     
     var body: some View {
         NavigationStack {
             NavBarMainView(searchText: $searchText, focus: $focus, prompt: LocalizedStrings.search.localizeString())
             if _focus.wrappedValue == .movie {
-                if !data.searchResults.isEmpty {
+                if !vm.searchResults.isEmpty {
                     searchedResults()
                 } else if !searchText.isEmpty {
                     Text(LocalizedStrings.nothingFound.localizeString())
@@ -29,7 +30,7 @@ struct MainView: View {
                 HorizontalScrollView(selectedCategory: $selectedCategory)
                 TabView(selection: $selectedCategory) {
                     ForEach(MainViewSelections.allCases, id: \.self) { selection in
-                        ListView(snippets: data.getFilteredList(filterBy: selection))
+                        ListView(snippets: vm.getFilteredList(filterBy: selection))
                             .tag(selection)
                     }
                 }
@@ -40,9 +41,17 @@ struct MainView: View {
             Spacer()
         }
         .onChange(of: searchText) { oldSearchTerm, newSearchTerm in
-            data.searchResults = data.snippetsVM.filter { snippet in
+            vm.searchResults = vm.snippets.filter { snippet in
                 snippet.name.lowercased().contains(newSearchTerm.lowercased())
             }
+        }
+        .onAppear {
+//            if let user = authVM.currentUser { // по идее здесь можно было сделать и ...(user: authVM.currentUser!), тк на этот экран можно перейти только если currentUser != nil
+//                Task {
+//                    await vm.fetchDataAsync(user: user)
+//                }
+//            }
+            vm.fetchMockData()
         }
     }
     
@@ -53,7 +62,7 @@ struct MainView: View {
                 .foregroundStyle(Color.customBlack)
                 .padding(.top, Consts.vertPadding)
                 .padding(.horizontal, Consts.horPadding)
-            ListView(snippets: data.searchResults)
+            ListView(snippets: vm.searchResults)
         }
     }
     

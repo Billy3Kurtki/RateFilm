@@ -15,6 +15,7 @@
 		080A8BAE2B057F3F008626AE /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A8BAD2B057F3F008626AE /* ForgotPasswordViewModel.swift */; };
 		080A8BB02B116158008626AE /* BlockingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A8BAF2B116158008626AE /* BlockingView.swift */; };
 		081B318E2B16499100CAB851 /* MovieStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B318D2B16499100CAB851 /* MovieStatus.swift */; };
+		081B31902B177A8000CAB851 /* NetworkMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B318F2B177A8000CAB851 /* NetworkMovies.swift */; };
 		0847FD492AD0169F00DEC3C1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847FD482AD0169F00DEC3C1 /* RegisterView.swift */; };
 		0847FD4B2AD0B28C00DEC3C1 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847FD4A2AD0B28C00DEC3C1 /* Login.swift */; };
 		0847FD4D2AD0B70B00DEC3C1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847FD4C2AD0B70B00DEC3C1 /* LoginView.swift */; };
@@ -64,6 +65,7 @@
 		080A8BAD2B057F3F008626AE /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		080A8BAF2B116158008626AE /* BlockingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingView.swift; sourceTree = "<group>"; };
 		081B318D2B16499100CAB851 /* MovieStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStatus.swift; sourceTree = "<group>"; };
+		081B318F2B177A8000CAB851 /* NetworkMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMovies.swift; sourceTree = "<group>"; };
 		0847FD482AD0169F00DEC3C1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		0847FD4A2AD0B28C00DEC3C1 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0847FD4C2AD0B70B00DEC3C1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				0875734C2ACF5E1D009A466A /* Serial.swift */,
 				08F001D22AEC7C79002C1B99 /* MainViewSelectionsEnum.swift */,
 				081B318D2B16499100CAB851 /* MovieStatus.swift */,
+				081B318F2B177A8000CAB851 /* NetworkMovies.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				085AE5B32AD5F4760069EFF2 /* ListView.swift in Sources */,
 				0847FD4B2AD0B28C00DEC3C1 /* Login.swift in Sources */,
 				08F001C72AE9604F002C1B99 /* ImageExtension.swift in Sources */,
+				081B31902B177A8000CAB851 /* NetworkMovies.swift in Sources */,
 				085AE5A32AD4146E0069EFF2 /* Register.swift in Sources */,
 				085AE5AF2AD5EE810069EFF2 /* ContentView.swift in Sources */,
 				081B318E2B16499100CAB851 /* MovieStatus.swift in Sources */,

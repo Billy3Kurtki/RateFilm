@@ -120,7 +120,7 @@ struct DescriptionView: View {
             Spacer(minLength: 5)
             titleView()
             HStack {
-                if let seriesCount = seriesCount {
+                if let _ = seriesCount {
                     seriesCountView()
                 }
                 if let _ = avgRating {
@@ -130,7 +130,7 @@ struct DescriptionView: View {
                     favoriteImageView()
                 }
             }
-            if let realeseDate = realeseDate {
+            if let _ = realeseDate {
                 realeseDateView()
             }
             
