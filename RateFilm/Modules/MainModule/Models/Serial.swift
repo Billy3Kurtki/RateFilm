@@ -19,6 +19,8 @@ struct Serial: Codable {
     var ageRating: Int
     var moveTypes: [Genre]
     var author: String
+    var isFavorite: Bool
+    var favoritesSelection: MovieStatus
 }
 
 struct Season: Codable {

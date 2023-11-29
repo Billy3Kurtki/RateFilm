@@ -16,5 +16,7 @@ struct SnippetViewModel: Identifiable {
     var avgRating: String?
     var seriesCount: String?
     var mainViewSelection: [MainViewSelections]
+    var isFavorite: Bool
+    var favoriteSelection: MovieStatus
 }
 

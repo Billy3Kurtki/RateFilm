@@ -46,29 +46,24 @@ final class AuthViewModel {
         // сервер ещё в разработке
 //        let loginModel = Login(userLogin: login, password: password)
 //        
-//        do {
-//            let result = try await networkService.postAsync(urlString: ServerString.login.rawValue,
-//                                                       body: loginModel,
-//                                                       method: .post)
-//            switch result {
-//            case .success(let data):
-//                guard let data = data else {
-//                    self.error = NetworkError.dataError
-//                    return
-//                }
-//                do {
-//                    self.currentUser = try JSONDecoder().decode(User.self, from: data)
-//                    self.error = nil
-//                } catch {
-//                    self.error = NetworkError.parseError
-//                }
-//            case .failure(let error):
-//                self.error = error
+//        let result = await networkService.postAsync(urlString: ServerString.login.rawValue,
+//                                                        body: loginModel,
+//                                                        method: .post)
+//        switch result {
+//        case .success(let data):
+//            guard let data = data else {
+//                self.error = NetworkError.dataError
+//                return
 //            }
-//        } catch {
-//            self.error = NetworkError.serverError
+//            do {
+//                self.currentUser = try JSONDecoder().decode(User.self, from: data)
+//                self.error = nil
+//            } catch {
+//                self.error = NetworkError.parseError
+//            }
+//        case .failure(let error):
+//            self.error = error
 //        }
-        
 
         currentUser = User(id: "1", userName: "user", email: "test@email.com", userType: .authUser)
     }
@@ -78,30 +73,25 @@ final class AuthViewModel {
         // сервер ещё в разработке
 //        let registerModel = Register(nickName: nickName, email: email, password: password)
 //        
-//        do {
-//            let result = try await networkService.postAsync(urlString: ServerString.login.rawValue,
-//                                                       body: registerModel,
-//                                                       method: .post)
-//            switch result {
-//            case .success(let data):
-//                guard let data = data else {
-//                    self.error = NetworkError.dataError
-//                    return
-//                }
-//                do {
-//                    self.currentUser = try JSONDecoder().decode(User.self, from: data)
-//                    self.error = nil
-//                } catch {
-//                    self.error = NetworkError.parseError
-//                }
-//            case .failure(let error):
-//                self.error = error
+//        let result = await networkService.postAsync(urlString: ServerString.login.rawValue,
+//                                                    body: registerModel,
+//                                                    method: .post)
+//        switch result {
+//        case .success(let data):
+//            guard let data = data else {
+//                self.error = NetworkError.dataError
+//                return
 //            }
-//        } catch {
-//            self.error = NetworkError.serverError
+//            do {
+//                self.currentUser = try JSONDecoder().decode(User.self, from: data)
+//                self.error = nil
+//            } catch {
+//                self.error = NetworkError.parseError
+//            }
+//        case .failure(let error):
+//            self.error = error
 //        }
-        
-        
+
         currentUser = User(id: "2", userName: nickName, email: email, userType: .authUser)
     }
     

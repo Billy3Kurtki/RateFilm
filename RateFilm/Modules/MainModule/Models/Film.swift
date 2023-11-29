@@ -10,7 +10,7 @@ import Foundation
 struct Film: Codable {
     var id: String
     var name: String
-    var releaseDate: Int? // UnixTimestamp
+    var releaseDate: Int?
     var description: String
     var duration: Int
     var previewImage: String
@@ -20,6 +20,8 @@ struct Film: Codable {
     var moveTypes: [Genre]
     var author: String
     var actors: [ActorModel]?
+    var isFavorite: Bool
+    var favoritesSelection: MovieStatus
 }
 
 enum Genre: String, Codable {
