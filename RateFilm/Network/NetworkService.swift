@@ -97,8 +97,8 @@ enum HTTPMethod: String {
 
 enum ServerString: String {
     case baseUrlString = "https://покаНепонятноКуда"
-    case account = "https://покаНепонятноКуда/account"
-    case login = "https://покаНепонятноКуда/login"
-    case register = "https://покаНепонятноКуда/register"
+    case login = "https://покаНепонятноКуда/account/login"
+    case register = "https://покаНепонятноКуда/account/register"
+    case changePassword = "https://покаНепонятноКуда/account/changePassword"
     case movies = "https://покаНепонятноКуда/movies"
 }

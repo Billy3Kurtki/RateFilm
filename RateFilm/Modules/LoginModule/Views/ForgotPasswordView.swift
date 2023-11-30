@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     @Bindable var viewModel = ForgotPasswordViewModel()
+    @Environment(AuthViewModel.self) private var authVM
     
     var body: some View {
         NavigationStack {
@@ -18,7 +19,9 @@ struct ForgotPasswordView: View {
                 EntryField(prompt: ForgotPasswordEnum.repeatPassword.localizeString(), errorValidText: viewModel.confirmPasswordError, isSecure: true, field: $viewModel.confirmPassword)
                 CustomButton(label: ForgotPasswordEnum.continueLabel.localizeString(), isFill: true) {
                     if viewModel.isNewPasswordComplete {
-                        //
+//                        Task {
+//                            await authVM.changePasswordAsync(login: viewModel.login, password: viewModel.password)
+//                        }
                     }
                 }
                 .padding(.vertical, 10)

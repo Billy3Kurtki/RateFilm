@@ -60,7 +60,7 @@ struct AsyncIconRowView: View {
                 }
             }
             if favoriteSelection != .none {
-                MovieStatusView()
+                movieStatusView()
             }
         }
         .frame(width: Consts.iconWidth, height: Consts.iconHeight)
@@ -84,7 +84,7 @@ struct AsyncIconRowView: View {
         }
     }
     
-    private func MovieStatusView() -> some View {
+    private func movieStatusView() -> some View {
         VStack {
             Spacer()
             ZStack {

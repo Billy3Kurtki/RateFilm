@@ -102,7 +102,7 @@ final class ListViewModel {
             }
             
             let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage, avgRating: avgRating, seriesCount: seriesCount, mainViewSelection: selections, isFavorite: i.isFavorite, favoriteSelection: i.favoritesSelection)
-            snippets.append(snippetVM)
+            resultSnippets.append(snippetVM)
         }
         return resultSnippets
     }

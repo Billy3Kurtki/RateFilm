@@ -10,8 +10,9 @@ import SwiftUI
 struct LoginView: View {
     @Bindable var viewModel = LoginViewModel()
     @Environment(AuthViewModel.self) private var authVM
-    @State var showPassword = false
-    @State var linkToRegisterViewIsActive = false
+    @State private var showPassword = false
+    @State private var linkToRegisterViewIsActive = false
+    @State private var showAlert = false
     
     var body: some View {
         NavigationStack {
@@ -40,6 +41,17 @@ struct LoginView: View {
         .onAppear {
             authVM.currentUser = nil
         }
+//        .onReceive($authVM.error) { error in // из-за observation больше не работает, пишет ошибку :( Хоть @State, хоть @Bindable у authVM, разницы нет
+//            if error != nil {
+//                showAlert.toggle()
+//            }
+//        }
+//        .alert(isPresented: $showAlert) {
+//            Alert(
+//                title: Text(String(localized: "Error")),
+//                message: Text(authVM.localizedError)
+//            )
+//        }
     }
     
     private func CustomDivider() -> some View {
@@ -66,7 +78,7 @@ struct LoginView: View {
             CustomButton(label: LoginViewEnum.signInButtonLabel.localizeString(), isMini: true, isFill: true) {
                 if viewModel.isSignInComplete {
                     Task {
-                        await authVM.signIn(login: viewModel.login, password: viewModel.password)
+                        await authVM.signInAsync(login: viewModel.login, password: viewModel.password)
                     }
                 }
             }
