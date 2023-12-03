@@ -21,7 +21,7 @@ struct RegisterView: View {
                 CustomButton(label: RegisterViewEnum.createProfileLabel.localizeString(), isFill: true, action: {
                     if viewModel.isSignUpComplete {
                         Task {
-                            await authVM.sighUp(nickName: viewModel.nickname, email: viewModel.email, password: viewModel.password)
+                            await authVM.sighUpAsync(nickName: viewModel.nickname, email: viewModel.email, password: viewModel.password)
                         }
                     }
                 })

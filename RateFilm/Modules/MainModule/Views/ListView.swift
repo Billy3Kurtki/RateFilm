@@ -29,9 +29,9 @@ struct SnippetCell: View {
     
     var body: some View {
         HStack {
-            AsyncIconRowView(urlString: snippet.previewImage)
+            AsyncIconRowView(urlString: snippet.previewImage, favoriteSelection: snippet.favoriteSelection)
             
-            DescriptionView(name: snippet.name, description: snippet.description, seriesCount: snippet.seriesCount, realeseDate: snippet.releaseDate, avgRating: snippet.avgRating)
+            DescriptionView(name: snippet.name, description: snippet.description, seriesCount: snippet.seriesCount, realeseDate: snippet.releaseDate, avgRating: snippet.avgRating, isFavorite: snippet.isFavorite)
             Spacer()
         }
         .padding(.horizontal)
@@ -40,22 +40,64 @@ struct SnippetCell: View {
 
 struct AsyncIconRowView: View {
     var urlString: String
+    var favoriteSelection: MovieStatus
+    
     var body: some View {
-        AsyncImage(url: URL(string: urlString)) { data in
-            if let image = data.image {
-                image
-                    .imageIconModifier(width: Consts.iconWidth, height: Consts.iconHeight)
-            } else if data.error != nil {
-                Consts.defaultImage
-                    .imageIconModifier(width: Consts.iconWidth, height: Consts.iconHeight)
-            } else {
-                ZStack {
-                    RoundedRectangle(cornerRadius: Consts.cornerRadius)
-                        .foregroundStyle(Color.customLightGray)
-                    ProgressView()
-                }.frame(width: Consts.iconWidth, height: Consts.iconHeight)
+        ZStack {
+            AsyncImage(url: URL(string: urlString)) { data in
+                if let image = data.image {
+                    image
+                        .imageIconModifier()
+                } else if data.error != nil {
+                    Consts.defaultImage
+                        .imageIconModifier()
+                } else {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: Consts.cornerRadius)
+                            .foregroundStyle(Color.customLightGray)
+                        ProgressView()
+                    }
+                }
+            }
+            if favoriteSelection != .none {
+                movieStatusView()
             }
         }
+        .frame(width: Consts.iconWidth, height: Consts.iconHeight)
+        .clipShape(RoundedRectangle(cornerRadius: Consts.cornerRadius))
+    }
+    
+    var favoriteColor: Color {
+        switch favoriteSelection {
+        case .none:
+            return .clear
+        case .looking:
+            return .green
+        case .inThePlans:
+            return .pink
+        case .viewed:
+            return .purple
+        case .postponed:
+            return .orange
+        case .abandoned:
+            return .red
+        }
+    }
+    
+    private func movieStatusView() -> some View {
+        VStack {
+            Spacer()
+            ZStack {
+                RoundedRectangle(cornerRadius: 0)
+                    .frame(height: 20)
+                    .foregroundStyle(favoriteColor)
+                    .opacity(Consts.opacity)
+                Text(favoriteSelection.localizeString())
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color.white)
+            }
+        }
+        
     }
     
     enum Consts {
@@ -63,6 +105,7 @@ struct AsyncIconRowView: View {
         static var iconHeight: CGFloat = 150
         static var defaultImage: Image = Image(uiImage: UIImage(named: "defaultImage")!)
         static var cornerRadius: CGFloat = 6
+        static var opacity: Double = 0.8
     }
 }
 
@@ -70,56 +113,96 @@ struct AsyncIconRowView: View {
 struct DescriptionView: View {
     var name, description: String
     var seriesCount, realeseDate, avgRating: String?
+    var isFavorite: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
             Spacer(minLength: 5)
-            Text(name)
-                .foregroundStyle(Color.customBlack)
-                .font(.system(size: Consts.textTitleSize))
-                .bold()
-            if let seriesCount = seriesCount {
-                Text(seriesCount)
-                    .foregroundStyle(Color.customLightGray)
-                    .padding(.vertical, 5)
-            }
-            if let avgRating = avgRating {
-                HStack {
-                    Text(avgRating)
-                        .font(.system(size: Consts.textSize))
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: Consts.iconStarWidth, height: Consts.iconStarHeight)
+            titleView()
+            HStack {
+                if let _ = seriesCount {
+                    seriesCountView()
                 }
-                .foregroundStyle(Color.customLightGray)
+                if let _ = avgRating {
+                    avgRatingView()
+                }
+                if isFavorite {
+                    favoriteImageView()
+                }
             }
-            if let realeseDate = realeseDate {
-                Text(realeseDate)
-                    .foregroundStyle(Color.customLightGray)
-                    .padding(5)
-                    .background {
-                        RoundedRectangle(cornerRadius: 8)
-                            .foregroundStyle(Color.customSuperLightGray)
-                    }
+            if let _ = realeseDate {
+                realeseDateView()
             }
             
-            Text(description)
-                .foregroundStyle(Color.customLightGray)
-                .font(.system(size: Consts.textSize))
-                .frame(maxHeight: Consts.maxTextHeight)
-                .multilineTextAlignment(.leading)
+            descriptionView()
             Spacer()
         }
         .padding()
         .frame(height: 200)
     }
     
+    private func avgRatingView() -> some View {
+        HStack(spacing: 3) {
+            Text(avgRating!) // тк выше проверил на != nil, что значение там есть, то так можно)
+                .font(.system(size: Consts.textSize))
+            Image(systemName: Consts.starImageFill)
+                .resizable()
+                .frame(width: Consts.iconStarWidth, height: Consts.iconStarHeight)
+        }
+        .foregroundStyle(Color.customLightGray)
+    }
+    
+    private func favoriteImageView() -> some View {
+        Image(systemName: Consts.bookmarkImage)
+            .resizable()
+            .frame(width: Consts.iconBookmarkWidth, height: Consts.iconBookmarkHeight)
+            .foregroundStyle(Color.yellow)
+            .padding(.horizontal, Consts.iconBookmarkHorPadding)
+    }
+    
+    private func realeseDateView() -> some View {
+        Text(realeseDate!) // сделал проверку на nil перед вызовом
+            .foregroundStyle(Color.customLightGray)
+            .padding(5)
+            .background {
+                RoundedRectangle(cornerRadius: 8)
+                    .foregroundStyle(Color.customSuperLightGray)
+            }
+    }
+    
+    private func descriptionView() -> some View {
+        Text(description)
+            .foregroundStyle(Color.customLightGray)
+            .font(.system(size: Consts.textSize))
+            .frame(maxHeight: Consts.maxTextHeight)
+            .multilineTextAlignment(.leading)
+    }
+    
+    private func titleView() -> some View {
+        Text(name)
+            .foregroundStyle(Color.customBlack)
+            .font(.system(size: Consts.textTitleSize))
+            .bold()
+    }
+    
+    private func seriesCountView() -> some View {
+        Text(seriesCount!) // проверка сделана
+            .foregroundStyle(Color.customLightGray)
+            .padding(.vertical, Consts.seriesCountVertPadding)
+    }
+    
     enum Consts {
         static var maxTextHeight: CGFloat = 80
         static var textSize: CGFloat = 18
         static var textTitleSize: CGFloat = 22
-        static var iconStarWidth: CGFloat = 18
-        static var iconStarHeight: CGFloat = 18
+        static var iconStarWidth: CGFloat = 15
+        static var iconStarHeight: CGFloat = 15
+        static var starImageFill: String = "star.fill"
+        static var bookmarkImage: String = "bookmark.fill"
+        static var iconBookmarkWidth: CGFloat = 12
+        static var iconBookmarkHeight: CGFloat = 16
+        static var iconBookmarkHorPadding: CGFloat = 4
+        static var seriesCountVertPadding: CGFloat = 5
     }
 }
 

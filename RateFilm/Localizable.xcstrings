@@ -1,5 +1,5 @@
 {
-  "sourceLanguage" : "ru",
+  "sourceLanguage" : "en",
   "strings" : {
     "Abandoned" : {
       "localizations" : {
@@ -244,6 +244,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Декабрь"
+          }
+        }
+      }
+    },
+    "DontWatching" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't watching"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Не смотрю"
           }
         }
       }

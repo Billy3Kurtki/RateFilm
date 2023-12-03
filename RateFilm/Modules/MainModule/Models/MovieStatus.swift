@@ -1,16 +1,14 @@
 //
-//  FavoritesViewSelectionsEnum.swift
+//  MovieSelectionsEnum.swift
 //  RateFilm
 //
-//  Created by Кирилл Казаков on 28.10.2023.
+//  Created by Кирилл Казаков on 28.11.2023.
 //
 
 import SwiftUI
 
-enum FavoritesViewSelections: LocalizedStringKey, CaseIterable {
-    case collection = "Collection"
-    case history = "History"
-    case favourite = "Favorite"
+enum MovieStatus: LocalizedStringKey, Codable {
+    case none = "DontWatching"
     case looking = "Looking"
     case inThePlans = "InThePlans"
     case viewed = "Viewed"

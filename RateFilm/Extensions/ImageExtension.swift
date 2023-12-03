@@ -8,14 +8,12 @@
 import SwiftUI
 
 extension Image {
-    func imageIconModifier(width: CGFloat, height: CGFloat) -> some View {
+    func imageIconModifier() -> some View {
         self
             .renderingMode(.original)
             .resizable()
-            .frame(width: width, height: height)
             .shadow(color: Color(red: 0,
                     green: 0, blue: 0, opacity: 0.3),
                     radius: 3, x: 2, y: 2)
-            .clipShape(RoundedRectangle(cornerRadius: 6))
     }
 }
