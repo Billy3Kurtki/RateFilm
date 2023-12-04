@@ -60,9 +60,9 @@ class CustomFormatter {
                     var unRealesedSeries = 0
                     for i in seasons {
                         if i.releaseDate <= now {
-                            realesedSeries += i.seriesCount
+                            realesedSeries += i.series.count
                         } else {
-                            unRealesedSeries += i.seriesCount
+                            unRealesedSeries += i.series.count
                         }
                     }
                     let stringMaxCount = unRealesedSeries > 0 ? "\(realesedSeries + unRealesedSeries)" : unknownCount
@@ -76,7 +76,7 @@ class CustomFormatter {
                 selection.append(.completed)
                 var maxCount = 0
                 for i in seasons {
-                    maxCount += i.seriesCount
+                    maxCount += i.series.count
                 }
                 if let _ = seasons.first(where: { range.contains($0.releaseDate)  }) {
                     selection.append(.lastReleased)
@@ -87,7 +87,7 @@ class CustomFormatter {
                 selection.append(.announcement)
                 var maxCount = 0
                 for i in seasons {
-                    maxCount += i.seriesCount
+                    maxCount += i.series.count
                 }
                 let stringMaxCount = maxCount > 0 ? "\(maxCount)" : unknownCount
                 return ("\(stringMaxCount) \(stringEp)", selection)

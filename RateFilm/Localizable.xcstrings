@@ -116,7 +116,11 @@
         }
       }
     },
+    "brbbr" : {
+
+    },
     "Collection" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -505,6 +509,9 @@
     },
     "Key" : {
       "extractionState" : "manual"
+    },
+    "Krokodile" : {
+
     },
     "lastReleased" : {
       "extractionState" : "manual",

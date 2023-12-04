@@ -13,7 +13,7 @@ struct Serial: Codable {
     var releaseDate: Int?
     var description: String
     var duration: Int
-    var previewImage: String
+    var previewImage: ImageModel
     var avgRating: Float
     var seasons: [Season]
     var ageRating: Int
@@ -22,14 +22,3 @@ struct Serial: Codable {
     var isFavorite: Bool
     var favoritesSelection: MovieStatus
 }
-
-struct Season: Codable {
-    var id: String
-    var releaseDate: Int
-    var description: String
-    var seriesCount: Int
-    var images: [ImageModel]?
-    var avgRating: Float = 0.0
-    var actors: [ActorModel]?
-}
-

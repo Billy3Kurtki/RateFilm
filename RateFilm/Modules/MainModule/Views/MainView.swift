@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedCategory: MainViewSelections = MainViewSelections.lastReleased
-    @State private var vm = ListViewModel()
+    @State private var vm = MainViewModel()
     @State private var searchText = ""
     @FocusState var focus: FocusElement?
     @Environment(AuthViewModel.self) private var authVM
@@ -30,7 +30,7 @@ struct MainView: View {
                 HorizontalScrollView(selectedCategory: $selectedCategory)
                 TabView(selection: $selectedCategory) {
                     ForEach(MainViewSelections.allCases, id: \.self) { selection in
-                        ListView(snippets: vm.getFilteredList(filterBy: selection))
+                        ListView(snippets: vm.getFilteredList(by: selection))
                             .tag(selection)
                     }
                 }

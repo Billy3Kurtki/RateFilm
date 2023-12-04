@@ -13,13 +13,12 @@ struct Film: Codable {
     var releaseDate: Int?
     var description: String
     var duration: Int
-    var previewImage: String
+    var previewImage: ImageModel
     var images: [ImageModel]?
     var avgRating: Float
     var ageRating: Int
-    var moveTypes: [Genre]
-    var author: String
-    var actors: [ActorModel]?
+    var genre: [Genre]
+    var people: [Person]
     var isFavorite: Bool
     var favoritesSelection: MovieStatus
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListView: View {
-    var snippets: [SnippetViewModel]
+    var snippets: [SnippetMainViewModel]
     
     var body: some View {
         NavigationStack {
@@ -25,7 +25,7 @@ struct ListView: View {
 }
 
 struct SnippetCell: View {
-    var snippet: SnippetViewModel
+    var snippet: SnippetMainViewModel
     
     var body: some View {
         HStack {
