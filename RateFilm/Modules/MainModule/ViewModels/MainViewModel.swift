@@ -11,7 +11,7 @@ import Observation
 @Observable
 final class MainViewModel {
     var snippets: [SnippetMainViewModel] = []
-    var searchResults: [SnippetMainViewModel] = []
+    var searchResults: [SnippetViewModel] = []
     
     let networkService = NetworkService()
     var error: NetworkError?
@@ -20,26 +20,26 @@ final class MainViewModel {
         
     }
     
-    func getFilteredList(by: MainViewSelections) -> [SnippetMainViewModel] {
+    func getFilteredList(by: MainViewSelections) -> [SnippetViewModel] {
         switch by {
         case .mySelection:
-            return snippets.filter { $0.mainViewSelection.contains(.mySelection) }
+            return snippets.filter { $0.mainViewSelection.contains(.mySelection) }.map { $0.snippet }
         case .lastReleased:
-            return snippets.filter { $0.mainViewSelection.contains(.lastReleased) }
+            return snippets.filter { $0.mainViewSelection.contains(.lastReleased) }.map { $0.snippet }
         case .ongoings:
-            return snippets.filter { $0.mainViewSelection.contains(.ongoings) }
+            return snippets.filter { $0.mainViewSelection.contains(.ongoings) }.map { $0.snippet }
         case .announcement:
-            return snippets.filter { $0.mainViewSelection.contains(.announcement) }
+            return snippets.filter { $0.mainViewSelection.contains(.announcement) }.map { $0.snippet }
         case .completed:
-            return snippets.filter { $0.mainViewSelection.contains(.completed) }
+            return snippets.filter { $0.mainViewSelection.contains(.completed) }.map { $0.snippet }
         case .serials:
-            return snippets.filter { $0.mainViewSelection.contains(.serials) }
+            return snippets.map { $0.snippet }.filter { $0.movieType == .serial }
         case .films:
-            return snippets.filter { $0.mainViewSelection.contains(.films) }
+            return snippets.map { $0.snippet }.filter { $0.movieType == .film }
         }
     }
     
-    func convertFilmsToSnippetVMs(_ films: [Film]) -> [SnippetMainViewModel] {
+    func convertFilmsToSnippetMainVMs(_ films: [Film]) -> [SnippetMainViewModel] {
         // MARK: Перегон фильмов
         var resultSnippets: [SnippetMainViewModel] = []
         
@@ -50,7 +50,7 @@ final class MainViewModel {
         for i in films {
             var avgRating: String?
             var realeseDate: String?
-            var selections: [MainViewSelections] = [.films]
+            var selections: [MainViewSelections] = []
             //допилить
             if let date = i.releaseDate {
                 realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
@@ -67,13 +67,14 @@ final class MainViewModel {
                 selections.append(.announcement)
             }
             
-            let snippetVM = SnippetMainViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, mainViewSelection: selections, isFavorite: i.isFavorite, favoriteSelection: i.favoritesSelection)
-            resultSnippets.append(snippetVM)
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: i.favoritesSelection)
+            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, mainViewSelection: selections)
+            resultSnippets.append(snippetMainVM)
         }
         return resultSnippets
     }
     
-    func convertSerialsToSnippetVMs(_ serials: [Serial]) -> [SnippetMainViewModel] {
+    func convertSerialsToSnippetMainVMs(_ serials: [Serial]) -> [SnippetMainViewModel] {
         // MARK: Перегон сериалов
         var resultSnippets: [SnippetMainViewModel] = []
         
@@ -101,15 +102,16 @@ final class MainViewModel {
                 selections.append(.announcement)
             }
             
-            let snippetVM = SnippetMainViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, mainViewSelection: selections, isFavorite: i.isFavorite, favoriteSelection: i.favoritesSelection)
-            resultSnippets.append(snippetVM)
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: i.favoritesSelection)
+            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, mainViewSelection: selections)
+            resultSnippets.append(snippetMainVM)
         }
         return resultSnippets
     }
     
     func fetchMockData() {
-        let convertedFilms = convertFilmsToSnippetVMs(MainViewModel.films)
-        let convertedSerials = convertSerialsToSnippetVMs(MainViewModel.serials)
+        let convertedFilms = convertFilmsToSnippetMainVMs(MainViewModel.films)
+        let convertedSerials = convertSerialsToSnippetMainVMs(MainViewModel.serials)
         let movies = convertedFilms + convertedSerials
         snippets = movies
     }
@@ -119,8 +121,8 @@ final class MainViewModel {
         let result = await networkService.fetchAsync(urlString: ServerString.movies.rawValue, token: user.token, NetworkMovies.self)
         switch result {
         case .success(let success):
-            let convertedFilms = convertFilmsToSnippetVMs(success.films)
-            let convertedSerials = convertSerialsToSnippetVMs(success.serials)
+            let convertedFilms = convertFilmsToSnippetMainVMs(success.films)
+            let convertedSerials = convertSerialsToSnippetMainVMs(success.serials)
             let movies = convertedFilms + convertedSerials
             snippets = movies
         case .failure(let failure):
@@ -143,11 +145,11 @@ extension MainViewModel {
     ]
     
     static let serials: [Serial] = [
-        Serial(id: "1", name: "Крокодил Гена выходит на охоту", releaseDate: 1810241212121, description: "Гена шёл-шёл, шёл-шёл, так и не пришёл.", duration: 200, previewImage: image5, avgRating: 3.0, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka", isFavorite: false, favoritesSelection: .none),
-        Serial(id: "2", name: "Мышь подкралась незаметно", releaseDate: 1699123761619, description: "Бежит, бежит, оп, упала", duration: 200, previewImage: image1, avgRating: 4.0, seasons: seasons1, ageRating: 12, moveTypes: [.action], author: "Alyshka", isFavorite: true, favoritesSelection: .looking),
-        Serial(id: "3", name: "Шарик взорвался", description: "Жалко конечно даааааа", duration: 200, previewImage: image3, avgRating: 5.0, seasons: seasons3, ageRating: 12, moveTypes: [.action], author: "Alyshka", isFavorite: false, favoritesSelection: .none),
-        Serial(id: "4", name: "Винни полетел", description: "Бывает конечно даааааа", duration: 200, previewImage: image2, avgRating: 5.0, seasons: [], ageRating: 12, moveTypes: [.action], author: "Alyshka", isFavorite: false, favoritesSelection: .abandoned),
-        Serial(id: "5", name: "Фунтик толкает машину дядюшки Мокуса", releaseDate: 1823212121, description: "Тянет-потянет, вытащить так и не смог", duration: 200, previewImage: image1, avgRating: 5.0, seasons: seasons2, ageRating: 12, moveTypes: [.action], author: "Alyshka", isFavorite: true, favoritesSelection: .none)
+        Serial(id: "1", name: "Крокодил Гена выходит на охоту", releaseDate: 1810241212121, description: "Гена шёл-шёл, шёл-шёл, так и не пришёл.", duration: 200, previewImage: image5, avgRating: 3.0, seasons: [], ageRating: 12, moveTypes: [.action], people: [person2], isFavorite: false, favoritesSelection: .none),
+        Serial(id: "2", name: "Мышь подкралась незаметно", releaseDate: 1699123761619, description: "Бежит, бежит, оп, упала", duration: 200, previewImage: image1, avgRating: 4.0, seasons: seasons1, ageRating: 12, moveTypes: [.action], people: [person1, person3], isFavorite: true, favoritesSelection: .looking),
+        Serial(id: "3", name: "Шарик взорвался", description: "Жалко конечно даааааа", duration: 200, previewImage: image3, avgRating: 5.0, seasons: seasons3, ageRating: 12, moveTypes: [.action], people: [person3, person2], isFavorite: false, favoritesSelection: .none),
+        Serial(id: "4", name: "Винни полетел", description: "Бывает конечно даааааа", duration: 200, previewImage: image2, avgRating: 5.0, seasons: [], ageRating: 12, moveTypes: [.action], people: [person1], isFavorite: false, favoritesSelection: .abandoned),
+        Serial(id: "5", name: "Фунтик толкает машину дядюшки Мокуса", releaseDate: 1823212121, description: "Тянет-потянет, вытащить так и не смог", duration: 200, previewImage: image1, avgRating: 5.0, seasons: seasons2, ageRating: 12, moveTypes: [.action], people: [person1, person2], isFavorite: true, favoritesSelection: .none)
     ]
     
     static let seasons1: [Season] = [

@@ -16,8 +16,8 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack {
-            NavBarMainView(searchText: $searchText, focus: $focus, prompt: LocalizedStrings.search.localizeString())
-            if _focus.wrappedValue == .movie {
+            CustomNavBarView(searchText: $searchText, focus: $focus, prompt: LocalizedStrings.search.localizeString())
+            if _focus.wrappedValue == .mainView {
                 if !vm.searchResults.isEmpty {
                     searchedResults()
                 } else if !searchText.isEmpty {
@@ -41,7 +41,7 @@ struct MainView: View {
             Spacer()
         }
         .onChange(of: searchText) { oldSearchTerm, newSearchTerm in
-            vm.searchResults = vm.snippets.filter { snippet in
+            vm.searchResults = vm.snippets.map{ $0.snippet }.filter { snippet in
                 snippet.name.lowercased().contains(newSearchTerm.lowercased())
             }
         }

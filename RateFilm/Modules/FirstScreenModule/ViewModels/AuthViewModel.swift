@@ -13,8 +13,7 @@ final class AuthViewModel {
     var currentUser: User?
     var networkService = NetworkService()
     var error: NetworkError?
-    var a = ""
-    
+
     var localizedError: String {
         switch error {
         case .invalidUrl:

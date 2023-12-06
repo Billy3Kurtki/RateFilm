@@ -10,8 +10,8 @@ import Observation
 
 @Observable
 final class FavoritesViewModel {
-    var snippets: [SnippetFavoritesViewModel] = []
-    var searchResults: [SnippetFavoritesViewModel] = []
+    var snippets: [SnippetViewModel] = []
+    var searchResults: [SnippetViewModel] = []
     
     let networkService = NetworkService()
     var error: NetworkError?
@@ -20,22 +20,97 @@ final class FavoritesViewModel {
         
     }
     
-    func getFilteredList(by: FavoritesViewSelections) -> [SnippetFavoritesViewModel] {
+    func getFilteredList(by: FavoritesViewSelections) -> [SnippetViewModel] {
         switch by {
         case .history:
             return [] // пока так
         case .favourite:
             return snippets.filter { $0.isFavorite == true }
         case .looking:
-            return snippets.filter { $0.favoriteSelection == .looking }
+            return snippets.filter { $0.movieStatus == .looking }
         case .inThePlans:
-            return snippets.filter { $0.favoriteSelection == .inThePlans }
+            return snippets.filter { $0.movieStatus == .inThePlans }
         case .viewed:
-            return snippets.filter { $0.favoriteSelection == .viewed }
+            return snippets.filter { $0.movieStatus == .viewed }
         case .postponed:
-            return snippets.filter { $0.favoriteSelection == .postponed }
+            return snippets.filter { $0.movieStatus == .postponed }
         case .abandoned:
-            return snippets.filter { $0.favoriteSelection == .abandoned }
+            return snippets.filter { $0.movieStatus == .abandoned }
+        }
+    }
+    
+    func convertFilmsToSnippetVMs(_ films: [Film]) -> [SnippetViewModel] {
+        // MARK: Перегон фильмов
+        var resultSnippets: [SnippetViewModel] = []
+        
+        for i in films {
+            var avgRating: String?
+            var realeseDate: String?
+            //допилить
+            if let date = i.releaseDate {
+                realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
+                if realeseDate == nil {
+                    avgRating = CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating))
+                } else {
+                    realeseDate = String(localized: "comingSoon")
+                }
+                
+                let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: i.favoritesSelection)
+                resultSnippets.append(snippetVM)
+            }
+            
+        }
+        return resultSnippets
+    }
+    
+    func convertSerialsToSnippetVMs(_ serials: [Serial]) -> [SnippetViewModel] {
+        // MARK: Перегон сериалов
+        var resultSnippets: [SnippetViewModel] = []
+        
+        for i in serials {
+            var avgRating: String?
+            var realeseDate: String?
+            var seriesCount: String
+            var selections: [MainViewSelections] = []
+            
+            (seriesCount, selections) = CustomFormatter.formatSeriesCountToString(seasons: i.seasons)
+            if let date = i.releaseDate {
+                realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
+                if realeseDate == nil {
+                    avgRating = "• \(CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating)))"
+                } else {
+                    if !selections.contains(.announcement) { // если по сезонам было определено, что это не анонс, а по дате выхода сериала это анонс, то это неправильные данные, скип
+                        continue
+                    }
+                }
+            } else {
+                realeseDate = String(localized: "comingSoon")
+            }
+            
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: i.favoritesSelection)
+            resultSnippets.append(snippetVM)
+        }
+        return resultSnippets
+    }
+    
+    func fetchMockData() {
+        let convertedFilms = convertFilmsToSnippetVMs(MainViewModel.films)
+        let convertedSerials = convertSerialsToSnippetVMs(MainViewModel.serials)
+        let movies = convertedFilms + convertedSerials
+        snippets = movies
+    }
+    
+    @MainActor
+    func fetchDataAsync(user: User) async {
+        let result = await networkService.fetchAsync(urlString: ServerString.movies.rawValue, token: user.token, NetworkMovies.self)
+        switch result {
+        case .success(let success):
+            let convertedFilms = convertFilmsToSnippetVMs(success.films)
+            let convertedSerials = convertSerialsToSnippetVMs(success.serials)
+            let movies = convertedFilms + convertedSerials
+            snippets = movies
+        case .failure(let failure):
+            error = failure
         }
     }
 }

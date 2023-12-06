@@ -38,7 +38,7 @@ struct SearchView: View {
             }
         }
         .onChange(of: searchTerm) { oldSearchTerm, newSearchTerm in
-            vm.searchResults = vm.snippets.filter { snippet in
+            vm.searchResults = vm.snippets.map { $0.snippet }.filter { snippet in
                 snippet.name.lowercased().contains(newSearchTerm.lowercased())
             }
         }

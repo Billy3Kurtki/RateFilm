@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListView: View {
-    var snippets: [SnippetMainViewModel]
+    var snippets: [SnippetViewModel]
     
     var body: some View {
         NavigationStack {
@@ -25,11 +25,11 @@ struct ListView: View {
 }
 
 struct SnippetCell: View {
-    var snippet: SnippetMainViewModel
+    var snippet: SnippetViewModel
     
     var body: some View {
         HStack {
-            AsyncIconRowView(urlString: snippet.previewImage, favoriteSelection: snippet.favoriteSelection)
+            AsyncIconRowView(urlString: snippet.previewImage, favoriteSelection: snippet.movieStatus)
             
             DescriptionView(name: snippet.name, description: snippet.description, seriesCount: snippet.seriesCount, realeseDate: snippet.releaseDate, avgRating: snippet.avgRating, isFavorite: snippet.isFavorite)
             Spacer()

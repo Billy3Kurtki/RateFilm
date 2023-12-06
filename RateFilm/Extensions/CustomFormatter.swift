@@ -47,7 +47,7 @@ class CustomFormatter {
         let stringEp = LocalizedStrings.ep.localizeString()
         let stringAnnouncement = LocalizedStrings.announcement.localizeString()
         let unknownCount = "?"
-        var selection: [MainViewSelections] = [.serials]
+        var selection: [MainViewSelections] = []
         let startDate: Int = now - 2 * UnixConsts.unixMonth
         let endDate: Int = now
         let range = startDate...endDate

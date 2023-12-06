@@ -7,16 +7,12 @@
 
 import Foundation
 
-struct SnippetMainViewModel: Identifiable {
-    var id: String
-    var name: String
-    var releaseDate: String?
-    var description: String
-    var previewImage: String
-    var avgRating: String?
-    var seriesCount: String?
+struct SnippetMainViewModel {
+    var snippet: SnippetViewModel
     var mainViewSelection: [MainViewSelections]
-    var isFavorite: Bool
-    var favoriteSelection: MovieStatus
 }
 
+enum MovieType {
+    case film
+    case serial
+}

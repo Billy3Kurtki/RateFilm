@@ -1,13 +1,13 @@
 //
-//  SnippetFavoritesViewModel.swift
+//  MovieViewModel.swift
 //  RateFilm
 //
-//  Created by Кирилл Казаков on 03.12.2023.
+//  Created by Кирилл Казаков on 30.10.2023.
 //
 
 import Foundation
 
-struct SnippetFavoritesViewModel: Identifiable {
+struct SnippetViewModel: Identifiable {
     var id: String
     var name: String
     var releaseDate: String?
@@ -15,6 +15,8 @@ struct SnippetFavoritesViewModel: Identifiable {
     var previewImage: String
     var avgRating: String?
     var seriesCount: String?
+    var mainViewSelection: [MainViewSelections]
     var isFavorite: Bool
     var favoriteSelection: MovieStatus
 }
+
