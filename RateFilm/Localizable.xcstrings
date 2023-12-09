@@ -17,6 +17,38 @@
         }
       }
     },
+    "Action" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Action"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Экшен"
+          }
+        }
+      }
+    },
+    "Actor" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actor"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Актёр"
+          }
+        }
+      }
+    },
     "announcement" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -112,6 +144,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Авторизация"
+          }
+        }
+      }
+    },
+    "Autor" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autor"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Автор"
           }
         }
       }
@@ -337,6 +385,22 @@
         }
       }
     },
+    "Fantasy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fantasy"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фэнтези"
+          }
+        }
+      }
+    },
     "Favorite" : {
       "localizations" : {
         "en" : {
@@ -437,6 +501,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "История"
+          }
+        }
+      }
+    },
+    "Horror" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horror"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Хоррор"
           }
         }
       }

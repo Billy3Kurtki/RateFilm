@@ -12,10 +12,5 @@ struct Person: Codable {
     var name: String
     var age: Int
     var image: ImageModel
-    var professions: [Profession]
-}
-
-enum Profession: Codable {
-    case Actor
-    case Autor
+    var professions: [String]
 }

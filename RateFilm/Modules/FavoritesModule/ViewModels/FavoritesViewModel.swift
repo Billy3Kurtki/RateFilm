@@ -66,7 +66,18 @@ final class FavoritesViewModel {
                 realeseDate = String(localized: "comingSoon")
             }
             
-            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: movieStatus)
+            var arrayGenre: [Genre] = []
+            for j in i.genre {
+                if let genre = CustomFormatter.convertStringToGenre(j) {
+                    arrayGenre.append(genre)
+                }
+            }
+            
+            if arrayGenre.count == 0 { // если не сконвертился ни один жанр, то в мусорку
+                continue
+            }
+            
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: movieStatus, genre: arrayGenre)
             resultSnippets.append(snippetVM)
         }
         
@@ -96,7 +107,18 @@ final class FavoritesViewModel {
                 realeseDate = String(localized: "comingSoon")
             }
             
-            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: movieStatus)
+            var arrayGenre: [Genre] = []
+            for j in i.genre {
+                if let genre = CustomFormatter.convertStringToGenre(j) {
+                    arrayGenre.append(genre)
+                }
+            }
+            
+            if arrayGenre.count == 0 { // если не сконвертился ни один жанр, то в мусорку
+                continue
+            }
+            
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: movieStatus, genre: arrayGenre)
             resultSnippets.append(snippetVM)
         }
         

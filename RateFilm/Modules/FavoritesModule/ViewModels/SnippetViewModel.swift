@@ -21,4 +21,5 @@ struct SnippetViewModel: Identifiable {
     var country: String?
     var userRating: Int?
     var lastSeriesRealeseDate: Int?
+    var genre: [Genre]
 }

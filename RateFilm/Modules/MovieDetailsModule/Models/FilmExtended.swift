@@ -17,13 +17,13 @@ struct FilmExtended: Codable {
     var images: [ImageModel]?
     var avgRating: Float
     var ageRating: Int
-    var genre: [Genre]
+    var genre: [String]
     var people: [Person]
     var isFavorite: Bool
     var status: String?
     var country: String
     var userRating: Int?
-    var comments: Comment?
+    var comments: [Comment]?
     var ratings: [Int : Int]?
     var statusOfPeople: [String : Int]?
 }

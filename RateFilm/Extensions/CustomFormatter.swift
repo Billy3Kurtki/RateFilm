@@ -38,9 +38,7 @@ class CustomFormatter {
         
         return nil
     }
-    
-    //допилить
-    // MARK: Функция для определения категорий сериала
+     
     static func formatSeriesCountToString(countSeriesLeft: Int, countSeriesMax: Int?) -> String {
         let stringOf = LocalizedStrings.of.localizeString()
         let stringEp = LocalizedStrings.ep.localizeString()
@@ -78,6 +76,14 @@ class CustomFormatter {
         default:
             .none
         }
+    }
+    
+    static func convertStringToGenre(_ genre: String) -> Genre? {
+        Genre.allCases.first(where: { "\($0)".lowercased() == genre.lowercased() })
+    }
+    
+    static func convertStringToProfession(_ profession: String) -> Profession? {
+        Profession.allCases.first(where: { "\($0)".lowercased() == profession.lowercased() })
     }
     
     enum LocalizedStrings: LocalizedStringKey {

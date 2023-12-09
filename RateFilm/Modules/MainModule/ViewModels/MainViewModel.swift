@@ -70,7 +70,18 @@ final class MainViewModel {
                 realeseDate = String(localized: "comingSoon")
             }
             
-            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: movieStatus)
+            var arrayGenre: [Genre] = []
+            for j in i.genre {
+                if let genre = CustomFormatter.convertStringToGenre(j) {
+                    arrayGenre.append(genre)
+                }
+            }
+            
+            if arrayGenre.count == 0 { // если не сконвертился ни один жанр, то в мусорку
+                continue
+            }
+            
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: movieStatus, genre: arrayGenre)
             let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, isAnnouncement: i.isAnnouncement, isLastRealesed: isLastRealesed)
             resultSnippets.append(snippetMainVM)
         }
@@ -106,7 +117,18 @@ final class MainViewModel {
                 isLastRealese = true
             }
             
-            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: movieStatus)
+            var arrayGenre: [Genre] = []
+            for j in i.genre {
+                if let genre = CustomFormatter.convertStringToGenre(j) {
+                    arrayGenre.append(genre)
+                }
+            }
+            
+            if arrayGenre.count == 0 { // если не сконвертился ни один жанр, то в мусорку
+                continue
+            }
+            
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: movieStatus, genre: arrayGenre)
             let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, isAnnouncement: i.isAnnouncement, isOngoing: i.isOngoing, isLastRealesed: isLastRealese)
             resultSnippets.append(snippetMainVM)
         }
@@ -138,23 +160,23 @@ final class MainViewModel {
 
 extension MainViewModel {
     static let films: [Film] = [
-        Film(id: "1", name: "biba1", releaseDate: 1698144372325, description: "bobaboba bobabobaboba bobabobabobab obabobabobaboba bobabobabobabobabo babobabobabobab obabobabobabobabobabo babobabobabobab obabobabobabobabobabobabobabobabobaboba", previewImage: image5, avgRating: 5.0, ageRating: 15, genre: [Genre.action], isAnnouncement: false, isFavorite: false, status: "Watching", country: "США"),
-        Film(id: "2", name: "biba2", releaseDate: 920241212121, description: "bobaboba bobabobaboba bobabobabobab obabobabobaboba bobabobabobabobabo babobabobabobab obabobabobabobabobabo babobabobabobab obabobabobabobabobabobabobabobabobaboba", previewImage: image5, avgRating: 4.0, ageRating: 15, genre: [Genre.action], isAnnouncement: false, isFavorite: true, status: .none),
-        Film(id: "3", name: "biba3", description: "boba3", previewImage: image3, avgRating: 2.0, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: true, status: "InPlans", country: "Россия", userRating: 2),
-        Film(id: "4", name: "biba4", releaseDate: 1700315320619, description: "boba4", previewImage: image5, avgRating: 4.2,ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: false, userRating: 1),
-        Film(id: "5", name: "biba5", releaseDate: 1820241212121, description: "boba", previewImage: image2, avgRating: 2.5, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: false, status: "Postponed"),
-        Film(id: "6", name: "biba6", description: "boba2", previewImage: image1, avgRating: 3.3, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: true, status: "Abandoned", country: "Россия"),
-        Film(id: "7", name: "biba7", releaseDate: 1699122213, description: "boba3", previewImage: image2, avgRating: 2.6, ageRating: 15, genre: [Genre.action], isAnnouncement: false, isFavorite: false),
-        Film(id: "8", name: "biba8", releaseDate: 1702123700619, description: "boba4", previewImage: image1, avgRating: 5.0, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: false, status: "Watched"),
-        Film(id: "9", name: "biba9", releaseDate: 1703123001619, description: "boba5", previewImage: image2, avgRating: 5.0, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: true, country: "Россия", userRating: 5)
+        Film(id: "1", name: "biba1", releaseDate: 1698144372325, description: "bobaboba bobabobaboba bobabobabobab obabobabobaboba bobabobabobabobabo babobabobabobab obabobabobabobabobabo babobabobabobab obabobabobabobabobabobabobabobabobaboba", previewImage: image5, avgRating: 5.0, ageRating: 15, genre: ["Action"], isAnnouncement: false, isFavorite: false, status: "Watching", country: "США"),
+        Film(id: "2", name: "biba2", releaseDate: 920241212121, description: "bobaboba bobabobaboba bobabobabobab obabobabobaboba bobabobabobabobabo babobabobabobab obabobabobabobabobabo babobabobabobab obabobabobabobabobabobabobabobabobaboba", previewImage: image5, avgRating: 4.0, ageRating: 15, genre: ["Action"], isAnnouncement: false, isFavorite: true, status: .none),
+        Film(id: "3", name: "biba3", description: "boba3", previewImage: image3, avgRating: 2.0, ageRating: 15, genre: ["Action"], isAnnouncement: true, isFavorite: true, status: "InPlans", country: "Россия", userRating: 2),
+        Film(id: "4", name: "biba4", releaseDate: 1700315320619, description: "boba4", previewImage: image5, avgRating: 4.2,ageRating: 15, genre: ["Fantasy"], isAnnouncement: true, isFavorite: false, userRating: 1),
+        Film(id: "5", name: "biba5", releaseDate: 1820241212121, description: "boba", previewImage: image2, avgRating: 2.5, ageRating: 15, genre: ["fantasy"], isAnnouncement: true, isFavorite: false, status: "Postponed"),
+        Film(id: "6", name: "biba6", description: "boba2", previewImage: image1, avgRating: 3.3, ageRating: 15, genre: ["Fantasy"], isAnnouncement: true, isFavorite: true, status: "Abandoned", country: "Россия"),
+        Film(id: "7", name: "biba7", releaseDate: 1699122213, description: "boba3", previewImage: image2, avgRating: 2.6, ageRating: 15, genre: ["Action"], isAnnouncement: false, isFavorite: false),
+        Film(id: "8", name: "biba8", releaseDate: 1702123700619, description: "boba4", previewImage: image1, avgRating: 5.0, ageRating: 15, genre: ["Action", "fantasy"], isAnnouncement: true, isFavorite: false, status: "Watched"),
+        Film(id: "9", name: "biba9", releaseDate: 1703123001619, description: "boba5", previewImage: image2, avgRating: 5.0, ageRating: 15, genre: ["Action", "Fantasy"], isAnnouncement: true, isFavorite: true, country: "Россия", userRating: 5)
     ]
     
     static let serials: [Serial] = [
-        Serial(id: "11", name: "Крокодил Гена выходит на охоту", releaseDate: 1810241212121, description: "Гена шёл-шёл, шёл-шёл, так и не пришёл.", previewImage: image5, avgRating: 3.0, ageRating: 12, moveTypes: [.action], isFavorite: false, status: "Watched", isAnnouncement: true, isOngoing: false, countSeriesLeft: 0, countSeriesMax: 18, country: "Россия"),
-        Serial(id: "222", name: "Мышь подкралась незаметно", releaseDate: 1699123761619, description: "Бежит, бежит, оп, упала", previewImage: image1, avgRating: 4.0, ageRating: 12, moveTypes: [.action], isFavorite: true, status: "Watching", isAnnouncement: false, isOngoing: true, countSeriesLeft: 1, countSeriesMax: 8, country: "Великобритания"),
-        Serial(id: "3321", name: "Шарик взорвался", description: "Жалко конечно даааааа", previewImage: image3, avgRating: 5.0, ageRating: 12, moveTypes: [.action], isFavorite: false, isAnnouncement: true, isOngoing: false, countSeriesLeft: 0, countSeriesMax: 8, country: "США"),
-        Serial(id: "43123", name: "Винни полетел", description: "Бывает конечно даааааа", previewImage: image2, avgRating: 5.0, ageRating: 12, moveTypes: [.action], isFavorite: false, status: "Abandoned", isAnnouncement: true, isOngoing: false, countSeriesLeft: 0, countSeriesMax: 8, country: "Россия", userRating: 2),
-        Serial(id: "54124245", name: "Фунтик толкает машину дядюшки Мокуса", releaseDate: 1823212121, description: "Тянет-потянет, вытащить так и не смог", previewImage: image1, avgRating: 5.0, ageRating: 12, moveTypes: [.action], isFavorite: true, isAnnouncement: false, isOngoing: false, countSeriesLeft: 3, country: "Япония", userRating: 3)
+        Serial(id: "11", name: "Крокодил Гена выходит на охоту", releaseDate: 1810241212121, description: "Гена шёл-шёл, шёл-шёл, так и не пришёл.", previewImage: image5, avgRating: 3.0, ageRating: 12, genre: ["Action"], isFavorite: false, status: "Watched", isAnnouncement: true, isOngoing: false, countSeriesLeft: 0, countSeriesMax: 18, country: "Россия"),
+        Serial(id: "222", name: "Мышь подкралась незаметно", releaseDate: 1699123761619, description: "Бежит, бежит, оп, упала", previewImage: image1, avgRating: 4.0, ageRating: 12, genre: ["fantasy"], isFavorite: true, status: "Watching", isAnnouncement: false, isOngoing: true, countSeriesLeft: 1, countSeriesMax: 8, country: "Великобритания"),
+        Serial(id: "3321", name: "Шарик взорвался", description: "Жалко конечно даааааа", previewImage: image3, avgRating: 5.0, ageRating: 12, genre: ["action"], isFavorite: false, isAnnouncement: true, isOngoing: false, countSeriesLeft: 0, countSeriesMax: 8, country: "США"),
+        Serial(id: "43123", name: "Винни полетел", description: "Бывает конечно даааааа", previewImage: image2, avgRating: 5.0, ageRating: 12, genre: ["Action"], isFavorite: false, status: "Abandoned", isAnnouncement: true, isOngoing: false, countSeriesLeft: 0, countSeriesMax: 8, country: "Россия", userRating: 2),
+        Serial(id: "54124245", name: "Фунтик толкает машину дядюшки Мокуса", releaseDate: 1823212121, description: "Тянет-потянет, вытащить так и не смог", previewImage: image1, avgRating: 5.0, ageRating: 12, genre: ["Fantasy"], isFavorite: true, isAnnouncement: false, isOngoing: false, countSeriesLeft: 3, country: "Япония", userRating: 3)
     ]
     
     static let seasons1: [Season] = [
@@ -184,7 +206,7 @@ extension MainViewModel {
     static let image4: ImageModel = ImageModel(id: "32411234", url: "https://img.freepik.com/premium-photo/dcim-101media-dji-0067-jpg_665346-20571.jpg")
     static let image5: ImageModel = ImageModel(id: "32411234", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/JPEG_example_down.jpg/350px-JPEG_example_down.jpg")
     
-    static let person1: Person = Person(id: "1231234afaf", name: "Керамзит Джонсон", age: 50, image: image5, professions: [.Actor])
-    static let person2: Person = Person(id: "12312412", name: "Сильвестр с талоном", age: 50, image: image5, professions: [.Actor, .Autor])
-    static let person3: Person = Person(id: "12312412", name: "Джордж Мартин", age: 50, image: image5, professions: [.Autor])
+    static let person1: Person = Person(id: "1231234afaf", name: "Керамзит Джонсон", age: 50, image: image5, professions: ["Autor"])
+    static let person2: Person = Person(id: "12312412", name: "Сильвестр с талоном", age: 50, image: image5, professions: ["Actor", "Autor"])
+    static let person3: Person = Person(id: "12312412", name: "Джордж Мартин", age: 50, image: image5, professions: ["Actor"])
 }

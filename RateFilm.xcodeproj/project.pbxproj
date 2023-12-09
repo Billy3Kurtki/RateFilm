@@ -21,6 +21,8 @@
 		08161EEA2B24AAB400641A7B /* SerialExtended.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08161EE92B24AAB400641A7B /* SerialExtended.swift */; };
 		08161EEC2B24AD8C00641A7B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08161EEB2B24AD8C00641A7B /* Comment.swift */; };
 		08161EEE2B24B8A400641A7B /* UserMini.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08161EED2B24B8A400641A7B /* UserMini.swift */; };
+		08161EF02B251B6A00641A7B /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08161EEF2B251B6A00641A7B /* Genre.swift */; };
+		08161EF22B251E8400641A7B /* Profession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08161EF12B251E8400641A7B /* Profession.swift */; };
 		081B318E2B16499100CAB851 /* MovieStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B318D2B16499100CAB851 /* MovieStatus.swift */; };
 		081B31902B177A8000CAB851 /* NetworkMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B318F2B177A8000CAB851 /* NetworkMovies.swift */; };
 		0847FD492AD0169F00DEC3C1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847FD482AD0169F00DEC3C1 /* RegisterView.swift */; };
@@ -79,6 +81,8 @@
 		08161EE92B24AAB400641A7B /* SerialExtended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialExtended.swift; sourceTree = "<group>"; };
 		08161EEB2B24AD8C00641A7B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		08161EED2B24B8A400641A7B /* UserMini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMini.swift; sourceTree = "<group>"; };
+		08161EEF2B251B6A00641A7B /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		08161EF12B251E8400641A7B /* Profession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profession.swift; sourceTree = "<group>"; };
 		081B318D2B16499100CAB851 /* MovieStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStatus.swift; sourceTree = "<group>"; };
 		081B318F2B177A8000CAB851 /* NetworkMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMovies.swift; sourceTree = "<group>"; };
 		0847FD482AD0169F00DEC3C1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				08F001D22AEC7C79002C1B99 /* MainViewSelectionsEnum.swift */,
 				081B318D2B16499100CAB851 /* MovieStatus.swift */,
 				081B318F2B177A8000CAB851 /* NetworkMovies.swift */,
+				08161EEF2B251B6A00641A7B /* Genre.swift */,
+				08161EF12B251E8400641A7B /* Profession.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -617,6 +623,7 @@
 				08F001C72AE9604F002C1B99 /* ImageExtension.swift in Sources */,
 				081B31902B177A8000CAB851 /* NetworkMovies.swift in Sources */,
 				08161EE22B1F9ACD00641A7B /* MovieCard.swift in Sources */,
+				08161EF22B251E8400641A7B /* Profession.swift in Sources */,
 				085AE5A32AD4146E0069EFF2 /* Register.swift in Sources */,
 				085AE5AF2AD5EE810069EFF2 /* ContentView.swift in Sources */,
 				081B318E2B16499100CAB851 /* MovieStatus.swift in Sources */,
@@ -649,6 +656,7 @@
 				0847FD502AD0B89F00DEC3C1 /* NetworkService.swift in Sources */,
 				085AFDC02B1CC432009C59B3 /* FavoritesViewModel.swift in Sources */,
 				0847FD492AD0169F00DEC3C1 /* RegisterView.swift in Sources */,
+				08161EF02B251B6A00641A7B /* Genre.swift in Sources */,
 				087573382ACAF6A9009A466A /* RateFilmApp.swift in Sources */,
 				08F001C52AE9601C002C1B99 /* ColorSchemeExtension.swift in Sources */,
 				08161EE42B1F9AEB00641A7B /* MovieDetailsViewModel.swift in Sources */,

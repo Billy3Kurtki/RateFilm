@@ -15,7 +15,7 @@ struct Serial: Codable {
     var previewImage: ImageModel
     var avgRating: Float
     var ageRating: Int
-    var moveTypes: [Genre]
+    var genre: [String]
     var isFavorite: Bool
     var status: String?
     var isAnnouncement: Bool

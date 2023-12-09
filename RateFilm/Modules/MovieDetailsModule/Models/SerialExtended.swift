@@ -16,7 +16,7 @@ struct SerialExtended: Codable {
     var avgRating: Float
     var seasons: [Season]
     var ageRating: Int
-    var moveTypes: [Genre]
+    var genre: [String]
     var people: [Person]
     var isFavorite: Bool
     var status: String?
@@ -27,7 +27,7 @@ struct SerialExtended: Codable {
     var lastSeriesRealeseDate: Int?
     var country: String?
     var userRating: Int?
-    var comments: Comment?
+    var comments: [Comment]?
     var ratings: [Int : Int]?
     var statusOfPeople: [String : Int]?
 }

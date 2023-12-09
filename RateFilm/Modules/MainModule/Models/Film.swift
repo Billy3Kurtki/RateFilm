@@ -15,15 +15,10 @@ struct Film: Codable {
     var previewImage: ImageModel
     var avgRating: Float
     var ageRating: Int
-    var genre: [Genre]
+    var genre: [String]
     var isAnnouncement: Bool
     var isFavorite: Bool
     var status: String?
     var country: String?
     var userRating: Int?
-}
-
-enum Genre: String, Codable {
-    case action = "Экшен"
-    case fantasy = "Фэнтези"
 }
