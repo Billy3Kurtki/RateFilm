@@ -9,7 +9,9 @@ import Foundation
 
 struct SnippetMainViewModel {
     var snippet: SnippetViewModel
-    var mainViewSelection: [MainViewSelections]
+    var isAnnouncement: Bool
+    var isOngoing: Bool?
+    var isLastRealesed: Bool
 }
 
 enum MovieType {

@@ -1,29 +1,29 @@
 //
-//  Film.swift
+//  FilmExtended.swift
 //  RateFilm
 //
-//  Created by Кирилл Казаков on 05.10.2023.
+//  Created by Кирилл Казаков on 09.12.2023.
 //
 
 import Foundation
 
-struct Film: Codable {
+struct FilmExtended: Codable {
     var id: String
     var name: String
     var releaseDate: Int?
     var description: String
+    var duration: Int
     var previewImage: ImageModel
+    var images: [ImageModel]?
     var avgRating: Float
     var ageRating: Int
     var genre: [Genre]
-    var isAnnouncement: Bool
+    var people: [Person]
     var isFavorite: Bool
     var status: String?
-    var country: String?
+    var country: String
     var userRating: Int?
-}
-
-enum Genre: String, Codable {
-    case action = "Экшен"
-    case fantasy = "Фэнтези"
+    var comments: Comment?
+    var ratings: [Int : Int]?
+    var statusOfPeople: [String : Int]?
 }

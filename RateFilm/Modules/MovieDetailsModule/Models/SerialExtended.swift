@@ -1,21 +1,23 @@
 //
-//  Serial.swift
+//  SerialExtended.swift
 //  RateFilm
 //
-//  Created by Кирилл Казаков on 06.10.2023.
+//  Created by Кирилл Казаков on 09.12.2023.
 //
 
 import Foundation
 
-struct Serial: Codable {
+struct SerialExtended: Codable {
     var id: String
     var name: String
     var releaseDate: Int?
     var description: String
     var previewImage: ImageModel
     var avgRating: Float
+    var seasons: [Season]
     var ageRating: Int
     var moveTypes: [Genre]
+    var people: [Person]
     var isFavorite: Bool
     var status: String?
     var isAnnouncement: Bool
@@ -25,4 +27,7 @@ struct Serial: Codable {
     var lastSeriesRealeseDate: Int?
     var country: String?
     var userRating: Int?
+    var comments: Comment?
+    var ratings: [Int : Int]?
+    var statusOfPeople: [String : Int]?
 }

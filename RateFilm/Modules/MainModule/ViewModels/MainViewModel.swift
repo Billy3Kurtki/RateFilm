@@ -22,20 +22,20 @@ final class MainViewModel {
     
     func getFilteredList(by: MainViewSelections) -> [SnippetViewModel] {
         switch by {
-        case .mySelection:
-            return snippets.filter { $0.mainViewSelection.contains(.mySelection) }.map { $0.snippet }
+//        case .mySelection:
+//            snippets.filter { $0.mainViewSelection.contains(.mySelection) }.map { $0.snippet }
         case .lastReleased:
-            return snippets.filter { $0.mainViewSelection.contains(.lastReleased) }.map { $0.snippet }
+            snippets.filter { $0.isLastRealesed == true }.map { $0.snippet }
         case .ongoings:
-            return snippets.filter { $0.mainViewSelection.contains(.ongoings) }.map { $0.snippet }
+            snippets.filter { $0.isOngoing == true }.map { $0.snippet }
         case .announcement:
-            return snippets.filter { $0.mainViewSelection.contains(.announcement) }.map { $0.snippet }
+            snippets.filter { $0.isAnnouncement == true }.map { $0.snippet }
         case .completed:
-            return snippets.filter { $0.mainViewSelection.contains(.completed) }.map { $0.snippet }
+            snippets.filter { $0.isAnnouncement == false && $0.isOngoing == false }.map { $0.snippet }
         case .serials:
-            return snippets.map { $0.snippet }.filter { $0.movieType == .serial }
+            snippets.map { $0.snippet }.filter { $0.movieType == .serial }
         case .films:
-            return snippets.map { $0.snippet }.filter { $0.movieType == .film }
+            snippets.map { $0.snippet }.filter { $0.movieType == .film }
         }
     }
     
@@ -44,33 +44,37 @@ final class MainViewModel {
         var resultSnippets: [SnippetMainViewModel] = []
         
         let now = Date.now.unixTimestamp
-        let startDate: Int = now - 2 * UnixConsts.unixMonth
+        let startDate: Int = now - UnixConsts.unixMonth
         let endDate: Int = now
         let range = startDate...endDate
+        var isLastRealesed = false
+        
         for i in films {
             var avgRating: String?
             var realeseDate: String?
-            var selections: [MainViewSelections] = []
-            //допилить
+            var movieStatus = MovieStatus.none
+            
+            if let status = i.status {
+                movieStatus = CustomFormatter.convertStringToMovieStatus(status)
+            }
+            
             if let date = i.releaseDate {
                 realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
                 if realeseDate == nil {
                     avgRating = CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating))
                     if range.contains(date) {
-                        selections.append(.lastReleased)
+                        isLastRealesed = true
                     }
-                } else {
-                    selections.append(.announcement)
                 }
             } else {
                 realeseDate = String(localized: "comingSoon")
-                selections.append(.announcement)
             }
             
-            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: i.favoritesSelection)
-            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, mainViewSelection: selections)
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: movieStatus)
+            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, isAnnouncement: i.isAnnouncement, isLastRealesed: isLastRealesed)
             resultSnippets.append(snippetMainVM)
         }
+        
         return resultSnippets
     }
     
@@ -81,31 +85,32 @@ final class MainViewModel {
         for i in serials {
             var avgRating: String?
             var realeseDate: String?
-            var seriesCount: String
-            var selections: [MainViewSelections] = []
+            var seriesCount: String = CustomFormatter.formatSeriesCountToString(countSeriesLeft: i.countSeriesLeft, countSeriesMax: i.countSeriesMax)
+            var movieStatus = MovieStatus.none
+            var isLastRealese = false
             
-            (seriesCount, selections) = CustomFormatter.formatSeriesCountToString(seasons: i.seasons)
+            if let status = i.status {
+                movieStatus = CustomFormatter.convertStringToMovieStatus(status)
+            }
+            
             if let date = i.releaseDate {
                 realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
                 if realeseDate == nil {
                     avgRating = "• \(CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating)))"
-                } else {
-                    if !selections.contains(.announcement) { // если по сезонам было определено, что это не анонс, а по дате выхода сериала это анонс, то это неправильные данные, скип
-                        continue
-                    }
-                    if selections.contains(.completed) {
-                        selections.removeAll(where: { $0 == .completed })
-                    }
                 }
             } else {
                 realeseDate = String(localized: "comingSoon")
-                selections.append(.announcement)
             }
             
-            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: i.favoritesSelection)
-            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, mainViewSelection: selections)
+            if let _ = i.lastSeriesRealeseDate {
+                isLastRealese = true
+            }
+            
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: movieStatus)
+            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, isAnnouncement: i.isAnnouncement, isOngoing: i.isOngoing, isLastRealesed: isLastRealese)
             resultSnippets.append(snippetMainVM)
         }
+        
         return resultSnippets
     }
     
@@ -133,23 +138,23 @@ final class MainViewModel {
 
 extension MainViewModel {
     static let films: [Film] = [
-        Film(id: "1", name: "biba1", releaseDate: 1699544372325, description: "bobaboba bobabobaboba bobabobabobab obabobabobaboba bobabobabobabobabo babobabobabobab obabobabobabobabobabo babobabobabobab obabobabobabobabobabobabobabobabobaboba", duration: 200, previewImage: image5, avgRating: 5.0, ageRating: 15, genre: [Genre.action], people: [person1], isFavorite: false, favoritesSelection: .looking),
-        Film(id: "2", name: "biba2", releaseDate: 920241212121, description: "bobaboba bobabobaboba bobabobabobab obabobabobaboba bobabobabobabobabo babobabobabobab obabobabobabobabobabo babobabobabobab obabobabobabobabobabobabobabobabobaboba", duration: 200, previewImage: image5, avgRating: 4.0, ageRating: 15, genre: [Genre.action], people: [person3, person1, person2], isFavorite: true, favoritesSelection: .none),
-        Film(id: "3", name: "biba3", description: "boba3", duration: 200, previewImage: image3, avgRating: 2.0, ageRating: 15, genre: [Genre.action], people: [person1], isFavorite: true, favoritesSelection: .abandoned),
-        Film(id: "4", name: "biba4", releaseDate: 1700315320619, description: "boba4", duration: 200, previewImage: image5, avgRating: 4.2,ageRating: 15, genre: [Genre.action], people: [person3, person2], isFavorite: false, favoritesSelection: .none),
-        Film(id: "5", name: "biba5", releaseDate: 1820241212121, description: "boba", duration: 200, previewImage: image2, avgRating: 2.5, ageRating: 15, genre: [Genre.action], people: [person3], isFavorite: false, favoritesSelection: .postponed),
-        Film(id: "6", name: "biba6", description: "boba2", duration: 200, previewImage: image1, avgRating: 3.3, ageRating: 15, genre: [Genre.action], people: [person3, person1, person2], isFavorite: true, favoritesSelection: .inThePlans),
-        Film(id: "7", name: "biba7", releaseDate: 1699122213, description: "boba3", duration: 200, previewImage: image2, avgRating: 2.6, ageRating: 15, genre: [Genre.action], people: [person2], isFavorite: false, favoritesSelection: .looking),
-        Film(id: "8", name: "biba8", releaseDate: 1699123700619, description: "boba4", duration: 200, previewImage: image1, avgRating: 5.0, ageRating: 15, genre: [Genre.action], people: [person1], isFavorite: false, favoritesSelection: .viewed),
-        Film(id: "9", name: "biba9", releaseDate: 1699123001619, description: "boba5", duration: 200, previewImage: image2, avgRating: 5.0, ageRating: 15, genre: [Genre.action], people: [person3, person1], isFavorite: true, favoritesSelection: .none)
+        Film(id: "1", name: "biba1", releaseDate: 1698144372325, description: "bobaboba bobabobaboba bobabobabobab obabobabobaboba bobabobabobabobabo babobabobabobab obabobabobabobabobabo babobabobabobab obabobabobabobabobabobabobabobabobaboba", previewImage: image5, avgRating: 5.0, ageRating: 15, genre: [Genre.action], isAnnouncement: false, isFavorite: false, status: "Watching", country: "США"),
+        Film(id: "2", name: "biba2", releaseDate: 920241212121, description: "bobaboba bobabobaboba bobabobabobab obabobabobaboba bobabobabobabobabo babobabobabobab obabobabobabobabobabo babobabobabobab obabobabobabobabobabobabobabobabobaboba", previewImage: image5, avgRating: 4.0, ageRating: 15, genre: [Genre.action], isAnnouncement: false, isFavorite: true, status: .none),
+        Film(id: "3", name: "biba3", description: "boba3", previewImage: image3, avgRating: 2.0, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: true, status: "InPlans", country: "Россия", userRating: 2),
+        Film(id: "4", name: "biba4", releaseDate: 1700315320619, description: "boba4", previewImage: image5, avgRating: 4.2,ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: false, userRating: 1),
+        Film(id: "5", name: "biba5", releaseDate: 1820241212121, description: "boba", previewImage: image2, avgRating: 2.5, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: false, status: "Postponed"),
+        Film(id: "6", name: "biba6", description: "boba2", previewImage: image1, avgRating: 3.3, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: true, status: "Abandoned", country: "Россия"),
+        Film(id: "7", name: "biba7", releaseDate: 1699122213, description: "boba3", previewImage: image2, avgRating: 2.6, ageRating: 15, genre: [Genre.action], isAnnouncement: false, isFavorite: false),
+        Film(id: "8", name: "biba8", releaseDate: 1702123700619, description: "boba4", previewImage: image1, avgRating: 5.0, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: false, status: "Watched"),
+        Film(id: "9", name: "biba9", releaseDate: 1703123001619, description: "boba5", previewImage: image2, avgRating: 5.0, ageRating: 15, genre: [Genre.action], isAnnouncement: true, isFavorite: true, country: "Россия", userRating: 5)
     ]
     
     static let serials: [Serial] = [
-        Serial(id: "1", name: "Крокодил Гена выходит на охоту", releaseDate: 1810241212121, description: "Гена шёл-шёл, шёл-шёл, так и не пришёл.", duration: 200, previewImage: image5, avgRating: 3.0, seasons: [], ageRating: 12, moveTypes: [.action], people: [person2], isFavorite: false, favoritesSelection: .none),
-        Serial(id: "2", name: "Мышь подкралась незаметно", releaseDate: 1699123761619, description: "Бежит, бежит, оп, упала", duration: 200, previewImage: image1, avgRating: 4.0, seasons: seasons1, ageRating: 12, moveTypes: [.action], people: [person1, person3], isFavorite: true, favoritesSelection: .looking),
-        Serial(id: "3", name: "Шарик взорвался", description: "Жалко конечно даааааа", duration: 200, previewImage: image3, avgRating: 5.0, seasons: seasons3, ageRating: 12, moveTypes: [.action], people: [person3, person2], isFavorite: false, favoritesSelection: .none),
-        Serial(id: "4", name: "Винни полетел", description: "Бывает конечно даааааа", duration: 200, previewImage: image2, avgRating: 5.0, seasons: [], ageRating: 12, moveTypes: [.action], people: [person1], isFavorite: false, favoritesSelection: .abandoned),
-        Serial(id: "5", name: "Фунтик толкает машину дядюшки Мокуса", releaseDate: 1823212121, description: "Тянет-потянет, вытащить так и не смог", duration: 200, previewImage: image1, avgRating: 5.0, seasons: seasons2, ageRating: 12, moveTypes: [.action], people: [person1, person2], isFavorite: true, favoritesSelection: .none)
+        Serial(id: "11", name: "Крокодил Гена выходит на охоту", releaseDate: 1810241212121, description: "Гена шёл-шёл, шёл-шёл, так и не пришёл.", previewImage: image5, avgRating: 3.0, ageRating: 12, moveTypes: [.action], isFavorite: false, status: "Watched", isAnnouncement: true, isOngoing: false, countSeriesLeft: 0, countSeriesMax: 18, country: "Россия"),
+        Serial(id: "222", name: "Мышь подкралась незаметно", releaseDate: 1699123761619, description: "Бежит, бежит, оп, упала", previewImage: image1, avgRating: 4.0, ageRating: 12, moveTypes: [.action], isFavorite: true, status: "Watching", isAnnouncement: false, isOngoing: true, countSeriesLeft: 1, countSeriesMax: 8, country: "Великобритания"),
+        Serial(id: "3321", name: "Шарик взорвался", description: "Жалко конечно даааааа", previewImage: image3, avgRating: 5.0, ageRating: 12, moveTypes: [.action], isFavorite: false, isAnnouncement: true, isOngoing: false, countSeriesLeft: 0, countSeriesMax: 8, country: "США"),
+        Serial(id: "43123", name: "Винни полетел", description: "Бывает конечно даааааа", previewImage: image2, avgRating: 5.0, ageRating: 12, moveTypes: [.action], isFavorite: false, status: "Abandoned", isAnnouncement: true, isOngoing: false, countSeriesLeft: 0, countSeriesMax: 8, country: "Россия", userRating: 2),
+        Serial(id: "54124245", name: "Фунтик толкает машину дядюшки Мокуса", releaseDate: 1823212121, description: "Тянет-потянет, вытащить так и не смог", previewImage: image1, avgRating: 5.0, ageRating: 12, moveTypes: [.action], isFavorite: true, isAnnouncement: false, isOngoing: false, countSeriesLeft: 3, country: "Япония", userRating: 3)
     ]
     
     static let seasons1: [Season] = [

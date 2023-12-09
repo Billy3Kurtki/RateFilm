@@ -22,8 +22,8 @@ final class FavoritesViewModel {
     
     func getFilteredList(by: FavoritesViewSelections) -> [SnippetViewModel] {
         switch by {
-        case .history:
-            return [] // пока так
+//        case .history:
+//            return [] // пока так
         case .favourite:
             return snippets.filter { $0.isFavorite == true }
         case .looking:
@@ -43,23 +43,33 @@ final class FavoritesViewModel {
         // MARK: Перегон фильмов
         var resultSnippets: [SnippetViewModel] = []
         
+        let now = Date.now.unixTimestamp
+        let startDate: Int = now - UnixConsts.unixMonth
+        let endDate: Int = now
+        let range = startDate...endDate
+        
         for i in films {
             var avgRating: String?
             var realeseDate: String?
-            //допилить
+            var movieStatus = MovieStatus.none
+            
+            if let status = i.status {
+                movieStatus = CustomFormatter.convertStringToMovieStatus(status)
+            }
+            
             if let date = i.releaseDate {
                 realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
                 if realeseDate == nil {
                     avgRating = CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating))
-                } else {
-                    realeseDate = String(localized: "comingSoon")
                 }
-                
-                let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: i.favoritesSelection)
-                resultSnippets.append(snippetVM)
+            } else {
+                realeseDate = String(localized: "comingSoon")
             }
             
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: movieStatus)
+            resultSnippets.append(snippetVM)
         }
+        
         return resultSnippets
     }
     
@@ -70,26 +80,26 @@ final class FavoritesViewModel {
         for i in serials {
             var avgRating: String?
             var realeseDate: String?
-            var seriesCount: String
-            var selections: [MainViewSelections] = []
+            var seriesCount: String = CustomFormatter.formatSeriesCountToString(countSeriesLeft: i.countSeriesLeft, countSeriesMax: i.countSeriesMax)
+            var movieStatus = MovieStatus.none
             
-            (seriesCount, selections) = CustomFormatter.formatSeriesCountToString(seasons: i.seasons)
+            if let status = i.status {
+                movieStatus = CustomFormatter.convertStringToMovieStatus(status)
+            }
+            
             if let date = i.releaseDate {
                 realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
                 if realeseDate == nil {
                     avgRating = "• \(CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating)))"
-                } else {
-                    if !selections.contains(.announcement) { // если по сезонам было определено, что это не анонс, а по дате выхода сериала это анонс, то это неправильные данные, скип
-                        continue
-                    }
                 }
             } else {
                 realeseDate = String(localized: "comingSoon")
             }
             
-            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: i.favoritesSelection)
+            let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: movieStatus)
             resultSnippets.append(snippetVM)
         }
+        
         return resultSnippets
     }
     

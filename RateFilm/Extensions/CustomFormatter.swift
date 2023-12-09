@@ -41,60 +41,43 @@ class CustomFormatter {
     
     //допилить
     // MARK: Функция для определения категорий сериала
-    static func formatSeriesCountToString(seasons: [Season]) -> (String, [MainViewSelections]) {
-        let now = Date.now.unixTimestamp
+    static func formatSeriesCountToString(countSeriesLeft: Int, countSeriesMax: Int?) -> String {
         let stringOf = LocalizedStrings.of.localizeString()
         let stringEp = LocalizedStrings.ep.localizeString()
         let stringAnnouncement = LocalizedStrings.announcement.localizeString()
         let unknownCount = "?"
-        var selection: [MainViewSelections] = []
-        let startDate: Int = now - 2 * UnixConsts.unixMonth
-        let endDate: Int = now
-        let range = startDate...endDate
         
-        if seasons.count > 0 {
-            if let _ = seasons.first(where: { $0.releaseDate < now }) {
-                if let _ = seasons.first(where: { $0.releaseDate > now }) {
-                    selection.append(.ongoings)
-                    var realesedSeries = 0
-                    var unRealesedSeries = 0
-                    for i in seasons {
-                        if i.releaseDate <= now {
-                            realesedSeries += i.series.count
-                        } else {
-                            unRealesedSeries += i.series.count
-                        }
-                    }
-                    let stringMaxCount = unRealesedSeries > 0 ? "\(realesedSeries + unRealesedSeries)" : unknownCount
-                    
-                    if let _ = seasons.first(where: { range.contains($0.releaseDate) }) { // если что-то вышло за последние 2 месяца
-                        selection.append(.lastReleased)
-                    }
-                    return ("\(realesedSeries) \(stringOf) \(stringMaxCount) \(stringEp)", selection)
+        if let countSeriesMax = countSeriesMax {
+            if countSeriesLeft > 0 {
+                if countSeriesMax == countSeriesLeft {
+                    return "\(countSeriesLeft) \(stringEp)"
                 }
-                
-                selection.append(.completed)
-                var maxCount = 0
-                for i in seasons {
-                    maxCount += i.series.count
-                }
-                if let _ = seasons.first(where: { range.contains($0.releaseDate)  }) {
-                    selection.append(.lastReleased)
-                }
-                return ("\(maxCount) \(stringEp)", selection)
-                
-            } else if let _ = seasons.first(where: { $0.releaseDate > now }) {
-                selection.append(.announcement)
-                var maxCount = 0
-                for i in seasons {
-                    maxCount += i.series.count
-                }
-                let stringMaxCount = maxCount > 0 ? "\(maxCount)" : unknownCount
-                return ("\(stringMaxCount) \(stringEp)", selection)
+                return "\(countSeriesLeft) \(stringOf) \(countSeriesMax) \(stringEp)"
             }
+            return "\(stringAnnouncement) \(unknownCount) \(stringEp)"
+        } else {
+            if countSeriesLeft > 0 {
+                return "\(countSeriesLeft) \(stringEp)"
+            }
+            return "\(stringAnnouncement) \(unknownCount) \(stringEp)"
         }
-        selection.append(.announcement)
-        return ("\(stringAnnouncement) \(unknownCount) \(stringEp)", selection)
+    }
+    
+    static func convertStringToMovieStatus(_ status: String) -> MovieStatus {
+        switch status {
+        case "Watching":
+            .looking
+        case "InPlans":
+            .inThePlans
+        case "Watched":
+            .viewed
+        case "Postponed":
+            .postponed
+        case "Abandoned":
+            .abandoned
+        default:
+            .none
+        }
     }
     
     enum LocalizedStrings: LocalizedStringKey {

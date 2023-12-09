@@ -425,6 +425,7 @@
 
     },
     "History" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

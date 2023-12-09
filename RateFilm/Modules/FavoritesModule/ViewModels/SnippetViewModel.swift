@@ -18,4 +18,7 @@ struct SnippetViewModel: Identifiable {
     var movieType: MovieType
     var isFavorite: Bool
     var movieStatus: MovieStatus
+    var country: String?
+    var userRating: Int?
+    var lastSeriesRealeseDate: Int?
 }
