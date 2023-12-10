@@ -29,7 +29,7 @@ struct SnippetCell: View {
     
     var body: some View {
         HStack {
-            AsyncIconRowView(urlString: snippet.previewImage, favoriteSelection: snippet.favoriteSelection)
+            AsyncIconRowView(urlString: snippet.previewImage, favoriteSelection: snippet.movieStatus)
             
             DescriptionView(name: snippet.name, description: snippet.description, seriesCount: snippet.seriesCount, realeseDate: snippet.releaseDate, avgRating: snippet.avgRating, isFavorite: snippet.isFavorite)
             Spacer()

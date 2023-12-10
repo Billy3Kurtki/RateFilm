@@ -101,4 +101,6 @@ enum ServerString: String {
     case register = "https://покаНепонятноКуда/account/register"
     case changePassword = "https://покаНепонятноКуда/account/changePassword"
     case movies = "https://покаНепонятноКуда/movies"
+    case film = "https://покаНепонятноКуда/film"
+    case serial = "https://покаНепонятноКуда/serial"
 }

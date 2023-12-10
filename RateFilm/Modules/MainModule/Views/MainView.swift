@@ -9,15 +9,15 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedCategory: MainViewSelections = MainViewSelections.lastReleased
-    @State private var vm = ListViewModel()
+    @State private var vm = MainViewModel()
     @State private var searchText = ""
     @FocusState var focus: FocusElement?
     @Environment(AuthViewModel.self) private var authVM
     
     var body: some View {
         NavigationStack {
-            NavBarMainView(searchText: $searchText, focus: $focus, prompt: LocalizedStrings.search.localizeString())
-            if _focus.wrappedValue == .movie {
+            CustomNavBarView(searchText: $searchText, focus: $focus, prompt: LocalizedStrings.search.localizeString())
+            if _focus.wrappedValue == .mainView {
                 if !vm.searchResults.isEmpty {
                     searchedResults()
                 } else if !searchText.isEmpty {
@@ -30,7 +30,7 @@ struct MainView: View {
                 HorizontalScrollView(selectedCategory: $selectedCategory)
                 TabView(selection: $selectedCategory) {
                     ForEach(MainViewSelections.allCases, id: \.self) { selection in
-                        ListView(snippets: vm.getFilteredList(filterBy: selection))
+                        ListView(snippets: vm.getFilteredList(by: selection))
                             .tag(selection)
                     }
                 }
@@ -41,7 +41,7 @@ struct MainView: View {
             Spacer()
         }
         .onChange(of: searchText) { oldSearchTerm, newSearchTerm in
-            vm.searchResults = vm.snippets.filter { snippet in
+            vm.searchResults = vm.snippets.map{ $0.snippet }.filter { snippet in
                 snippet.name.lowercased().contains(newSearchTerm.lowercased())
             }
         }

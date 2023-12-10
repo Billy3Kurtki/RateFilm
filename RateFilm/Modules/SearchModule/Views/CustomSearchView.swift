@@ -21,7 +21,7 @@ struct CustomSearchView: View {
                 TextField(prompt, text: $searchText)
                     .padding(.horizontal)
                     .foregroundStyle(Color.customBlack)
-                    .focused(focus, equals: .movie)
+                    .focused(focus, equals: .mainView)
             }
             .frame(width: Consts.width, height: Consts.height)
             .foregroundStyle(Color.customWhite)
@@ -45,11 +45,11 @@ struct CustomSearchView: View {
 }
 
 enum FocusElement: Hashable {
-    case movie
-    case favoriteMovie
+    case mainView
+    case favoriteView
 }
 
-struct NavBarMainView: View {
+struct CustomNavBarView: View {
     @Binding var searchText: String
     var focus: FocusState<FocusElement?>.Binding
     var prompt: String

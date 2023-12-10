@@ -8,8 +8,8 @@
 import SwiftUI
 
 enum FavoritesViewSelections: LocalizedStringKey, CaseIterable {
-    case collection = "Collection"
-    case history = "History"
+//    case collection = "Collection"
+//    case history = "History"
     case favourite = "Favorite"
     case looking = "Looking"
     case inThePlans = "InThePlans"

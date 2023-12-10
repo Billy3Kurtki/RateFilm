@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct MovieDetailsView: View {
+    @State private var showingOptions = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            showingOptions.toggle()
+        } label: {
+            Text("brbbr")
+        }
+        .sheet(isPresented: $showingOptions) {
+            Text("Krokodile")
+        }
     }
 }
 

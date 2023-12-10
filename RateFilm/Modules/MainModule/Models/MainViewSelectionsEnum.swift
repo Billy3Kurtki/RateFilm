@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum MainViewSelections: LocalizedStringKey, CaseIterable {
-    case mySelection = "mySelection"
+//    case mySelection = "mySelection"
     case lastReleased = "lastReleased"
     case ongoings = "ongoings"
     case announcement = "announcement"

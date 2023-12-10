@@ -1,23 +1,28 @@
 //
-//  Serial.swift
+//  MovieCard.swift
 //  RateFilm
 //
-//  Created by Кирилл Казаков on 06.10.2023.
+//  Created by Кирилл Казаков on 05.12.2023.
 //
 
 import Foundation
 
-struct Serial: Codable {
+struct MovieCard {
     var id: String
     var name: String
-    var releaseDate: Int?
     var description: String
+    var duration: Int?
     var previewImage: ImageModel
+    var images: [ImageModel]?
     var avgRating: Float
     var ageRating: Int
-    var genre: [String]
+    var genre: [Genre]
+    var people: [Person]
     var isFavorite: Bool
-    var status: String?
+    var movieType: MovieType
+    var seasons: [Season]?
+    
+    var status: MovieStatus
     var isAnnouncement: Bool
     var isOngoing: Bool
     var countSeriesLeft: Int
@@ -25,4 +30,7 @@ struct Serial: Codable {
     var lastSeriesRealeseDate: Int?
     var country: String?
     var userRating: Int?
+    var comments: Comment?
+    var ratings: [Int : Int]?
+    var statusOfPeople: [String : Int]?
 }
