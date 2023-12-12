@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum MovieStatus: LocalizedStringKey, Codable {
+enum MovieStatus: LocalizedStringKey, Codable, CaseIterable {
     case none = "DontWatching"
     case looking = "Looking"
     case inThePlans = "InThePlans"

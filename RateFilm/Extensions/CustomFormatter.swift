@@ -62,20 +62,11 @@ class CustomFormatter {
     }
     
     static func convertStringToMovieStatus(_ status: String) -> MovieStatus {
-        switch status {
-        case "Watching":
-            .looking
-        case "InPlans":
-            .inThePlans
-        case "Watched":
-            .viewed
-        case "Postponed":
-            .postponed
-        case "Abandoned":
-            .abandoned
-        default:
-            .none
+        guard let movieStatus = MovieStatus.allCases.first(where: { "\($0)".lowercased() == status.lowercased() })
+        else {
+            return .none
         }
+        return movieStatus
     }
     
     static func convertStringToGenre(_ genre: String) -> Genre? {

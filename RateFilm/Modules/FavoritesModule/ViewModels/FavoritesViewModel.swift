@@ -91,7 +91,7 @@ final class FavoritesViewModel {
         for i in serials {
             var avgRating: String?
             var realeseDate: String?
-            var seriesCount: String = CustomFormatter.formatSeriesCountToString(countSeriesLeft: i.countSeriesLeft, countSeriesMax: i.countSeriesMax)
+            let seriesCount: String = CustomFormatter.formatSeriesCountToString(countSeriesLeft: i.countSeriesLeft, countSeriesMax: i.countSeriesMax)
             var movieStatus = MovieStatus.none
             
             if let status = i.status {
