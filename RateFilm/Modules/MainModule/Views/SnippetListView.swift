@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ListView: View {
+struct SnippetListView: View {
     var snippets: [SnippetViewModel]
     
     var body: some View {

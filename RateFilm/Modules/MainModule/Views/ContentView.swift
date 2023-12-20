@@ -18,11 +18,11 @@ struct ContentView: View {
                     Text(TabBarSelections.main.stringValue())
                     Image(systemName: Images.house.rawValue)
                 }
-            SearchView()
-                .tabItem {
-                    Text(TabBarSelections.search.stringValue())
-                    Image(systemName: Images.lupo.rawValue)
-                }
+//            SearchView()
+//                .tabItem {
+//                    Text(TabBarSelections.search.stringValue())
+//                    Image(systemName: Images.lupo.rawValue)
+//                }
             FavoritesView()
                 .tabItem {
                     Text(TabBarSelections.favorites.stringValue())

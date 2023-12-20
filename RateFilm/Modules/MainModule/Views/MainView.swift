@@ -13,6 +13,7 @@ struct MainView: View {
     @State private var searchText = ""
     @FocusState var focus: FocusElement?
     @Environment(AuthViewModel.self) private var authVM
+    @State private var didFirstRequest = false
     
     var body: some View {
         NavigationStack {
@@ -29,9 +30,15 @@ struct MainView: View {
             else {
                 HorizontalScrollView(selectedCategory: $selectedCategory)
                 TabView(selection: $selectedCategory) {
-                    ForEach(MainViewSelections.allCases, id: \.self) { selection in
-                        ListView(snippets: vm.getFilteredList(by: selection))
-                            .tag(selection)
+                    if let _ = vm.error {
+                        ErrorView {
+                            refreshData()
+                        }
+                    } else {
+                        ForEach(MainViewSelections.allCases, id: \.self) { selection in
+                            SnippetListView(snippets: vm.getFilteredList(by: selection))
+                                .tag(selection)
+                        }
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
@@ -46,12 +53,19 @@ struct MainView: View {
             }
         }
         .onAppear {
-//            if let user = authVM.currentUser { // по идее здесь можно было сделать и ...(user: authVM.currentUser!), тк на этот экран можно перейти только если currentUser != nil
-//                Task {
-//                    await vm.fetchDataAsync(user: user)
-//                }
-//            }
+            if !didFirstRequest {
+                refreshData()
+                didFirstRequest = true
+            }
             vm.fetchMockData()
+        }
+    }
+    
+    private func refreshData() {
+        if let user = authVM.currentUser {
+            Task {
+                await vm.fetchDataAsync(user: user)
+            }
         }
     }
     
@@ -62,7 +76,7 @@ struct MainView: View {
                 .foregroundStyle(Color.customBlack)
                 .padding(.top, Consts.vertPadding)
                 .padding(.horizontal, Consts.horPadding)
-            ListView(snippets: vm.searchResults)
+            SnippetListView(snippets: vm.searchResults)
         }
     }
     

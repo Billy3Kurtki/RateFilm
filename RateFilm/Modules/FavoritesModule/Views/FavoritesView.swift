@@ -13,12 +13,13 @@ struct FavoritesView: View {
     @FocusState var focus: FocusElement?
     @Environment(AuthViewModel.self) private var authVM
     @State private var vm = FavoritesViewModel()
+    @State private var didSendRequest = false
     
     var body: some View {
         NavigationStack {
             if authVM.currentUser?.userType != .unauthUser {
                 CustomNavBarView(searchText: $searchText, focus: $focus, prompt: adaptivePrompt)
-                if _focus.wrappedValue == .favoriteView {
+                if _focus.wrappedValue == .mainView { // потом поменяю на то, чтобы работало не только с .mainView
                     if !vm.searchResults.isEmpty {
                         searchedResults()
                     } else if !searchText.isEmpty {
@@ -30,9 +31,15 @@ struct FavoritesView: View {
                 else {
                     FavoritesHorizontalScrollView(selectedCategory: $selectedCategory)
                     TabView(selection: $selectedCategory) {
-                        ForEach(FavoritesViewSelections.allCases, id: \.self) { selection in
-                            ListView(snippets: vm.getFilteredList(by: selection))
-                                .tag(selection)
+                        if let _ = vm.error {
+                            ErrorView {
+                                refreshData()
+                            }
+                        } else {
+                            ForEach(FavoritesViewSelections.allCases, id: \.self) { selection in
+                                SnippetListView(snippets: vm.getFilteredList(by: selection))
+                                    .tag(selection)
+                            }
                         }
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
@@ -50,12 +57,19 @@ struct FavoritesView: View {
             }
         }
         .onAppear {
-            //            if let user = authVM.currentUser { // по идее здесь можно было сделать и ...(user: authVM.currentUser!), тк на этот экран можно перейти только если currentUser != nil
-            //                Task {
-            //                    await vm.fetchDataAsync(user: user)
-            //                }
-            //            }
-            vm.fetchMockData()
+            if !didSendRequest {
+                refreshData()
+                didSendRequest = true
+            }
+            //vm.fetchMockData()
+        }
+    }
+    
+    private func refreshData() {
+        if let user = authVM.currentUser {
+            Task {
+                await vm.fetchDataAsync(user: user)
+            }
         }
     }
     
@@ -66,7 +80,7 @@ struct FavoritesView: View {
                 .foregroundStyle(Color.customBlack)
                 .padding(.top, Consts.vertPadding)
                 .padding(.horizontal, Consts.horPadding)
-            ListView(snippets: vm.searchResults)
+            SnippetListView(snippets: vm.searchResults)
         }
     }
     

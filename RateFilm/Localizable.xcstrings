@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@: " : {
+
+    },
+    "%lld" : {
+
+    },
     "Abandoned" : {
       "localizations" : {
         "en" : {
@@ -316,6 +322,22 @@
         }
       }
     },
+    "EditLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактировать"
+          }
+        }
+      }
+    },
     "EmailInvalidLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -468,6 +490,22 @@
         }
       }
     },
+    "FindUsersLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find users"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск пользователей"
+          }
+        }
+      }
+    },
     "forgotPasswordLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -485,8 +523,21 @@
         }
       }
     },
-    "Hello, World!" : {
-
+    "gotLoadErrorLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was an error loading"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Произошла ошибка при загрузке"
+          }
+        }
+      }
     },
     "History" : {
       "extractionState" : "stale",
@@ -882,6 +933,22 @@
         }
       }
     },
+    "OopsWhatsWrongLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oh, something's wrong..."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ой, что-то не так..."
+          }
+        }
+      }
+    },
     "orLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1032,6 +1099,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Повторите пароль"
+          }
+        }
+      }
+    },
+    "retryLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повторить"
           }
         }
       }
@@ -1198,6 +1281,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пропустить"
+          }
+        }
+      }
+    },
+    "StatisticLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistic"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Статистика"
           }
         }
       }

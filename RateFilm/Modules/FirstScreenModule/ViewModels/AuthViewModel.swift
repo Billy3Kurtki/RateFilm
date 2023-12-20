@@ -44,55 +44,61 @@ final class AuthViewModel {
     @MainActor
     func signInAsync(login: String, password: String) async {
         // сервер ещё в разработке
-//        let loginModel = Login(userLogin: login, password: password)
-//        
-//        let result = await networkService.postAsync(urlString: ServerString.login.rawValue,
-//                                                        body: loginModel,
-//                                                        method: .post)
-//        switch result {
-//        case .success(let data):
-//            guard let data = data else {
-//                self.error = NetworkError.dataError
-//                return
-//            }
-//            do {
-//                self.currentUser = try JSONDecoder().decode(User.self, from: data)
-//                self.error = nil
-//            } catch {
-//                self.error = NetworkError.parseError
-//            }
-//        case .failure(let error):
-//            self.error = error
-//        }
+        let loginModel = Login(userLogin: login, password: password)
+        
+        let result = await networkService.postAsync(urlString: ServerString.login.rawValue,
+                                                        body: loginModel,
+                                                        method: .post)
+        switch result {
+        case .success(let data):
+            guard let data = data else {
+                self.error = NetworkError.dataError
+                return
+            }
+            do {
+                let networkUser = try JSONDecoder().decode(NetworkUser.self, from: data)
+                self.currentUser = CustomFormatter.convertNetworkUserToUser(networkUser)
+                self.error = nil
+            } catch {
+                self.error = NetworkError.parseError
+            }
+        case .failure(let error):
+            self.error = error
+        }
 
-        currentUser = User(id: "1", userName: "user", email: "test@email.com", userType: .authUser)
+        //currentUser = User(id: "1", userName: "user_clown", email: "test@email.com", userType: .authUser)
     }
     
     @MainActor
     func sighUpAsync(nickName: String, email: String, password: String) async {
         // сервер ещё в разработке
-//        let registerModel = Register(nickName: nickName, email: email, password: password)
-//        
-//        let result = await networkService.postAsync(urlString: ServerString.login.rawValue,
-//                                                    body: registerModel,
-//                                                    method: .post)
-//        switch result {
-//        case .success(let data):
-//            guard let data = data else {
-//                self.error = NetworkError.dataError
-//                return
-//            }
-//            do {
-//                self.currentUser = try JSONDecoder().decode(User.self, from: data)
-//                self.error = nil
-//            } catch {
-//                self.error = NetworkError.parseError
-//            }
-//        case .failure(let error):
-//            self.error = error
-//        }
+        let registerModel = Register(userName: nickName, email: email, password: password)
+        
+        let result = await networkService.postAsync(urlString: ServerString.register.rawValue,
+                                                    body: registerModel,
+                                                    method: .post)
+        switch result {
+        case .success(let data):
+            guard let data = data else {
+                self.error = NetworkError.dataError
+                print("\(String(describing: self.error))")
+                return
+            }
+            do {
+                let networkUser = try JSONDecoder().decode(NetworkUser.self, from: data)
+                self.currentUser = CustomFormatter.convertNetworkUserToUser(networkUser)
+                print("\(String(describing: self.error))")
+                self.error = nil
+            } catch {
+                self.error = NetworkError.parseError
+                print("\(String(describing: self.error))")
+            }
+        case .failure(let error):
+            self.error = error
+            print("\(String(describing: self.error))")
+        }
 
-        currentUser = User(id: "2", userName: nickName, email: email, userType: .authUser)
+        //currentUser = User(id: "2", userName: nickName, userType: .authUser, token: "")
     }
     
     func changePasswordAsync(login: String, password: String) async {
@@ -105,16 +111,21 @@ final class AuthViewModel {
         case .success(let data):
             guard let data = data else {
                 self.error = NetworkError.dataError
+                print("\(String(describing: self.error))")
                 return
             }
             do {
-                self.currentUser = try JSONDecoder().decode(User.self, from: data)
+                let networkUser = try JSONDecoder().decode(NetworkUser.self, from: data)
+                self.currentUser = CustomFormatter.convertNetworkUserToUser(networkUser)
+                print("\(String(describing: self.error))")
                 self.error = nil
             } catch {
                 self.error = NetworkError.parseError
+                print("\(String(describing: self.error))")
             }
         case .failure(let error):
             self.error = error
+            print("\(String(describing: self.error))")
         }
     }
     

@@ -7,26 +7,33 @@
 
 import Foundation
 
-struct User: Identifiable, Codable {
+struct NetworkUser: Codable {
     var id: String
-    var name: String?
     var userName: String
-    var email: String
-    var phone: String?
-    var age: Int?
+    var userType: String
+    var token: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case userName = "username"
+        case userType = "role"
+        case token = "token"
+    }
+}
+
+struct User: Identifiable {
+    var id: String
+    var userName: String
     var userType: UserTypes
-    var token: String?
+    var token: String
 }
 
 // MARK: Inittializer for unauthorized user
 extension User {
     init() {
         self.id = ""
-        self.name = ""
         self.userName = ""
-        self.email = ""
-        self.age = 0
         self.userType = .unauthUser
-        self.token = nil
+        self.token = ""
     }
 }

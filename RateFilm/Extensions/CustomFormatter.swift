@@ -77,6 +77,25 @@ class CustomFormatter {
         Profession.allCases.first(where: { "\($0)".lowercased() == profession.lowercased() })
     }
     
+    static func formatUserName(_ name: String) -> String? {
+        let formatter = PersonNameComponentsFormatter()
+        if let components = formatter.personNameComponents(from: name) {
+            formatter.style = .abbreviated
+            let newString = formatter.string(from: components).reversed()
+            return String(newString)
+        }
+        return nil
+    }
+    
+    static func convertNetworkUserToUser(_ user: NetworkUser) -> User {
+        switch user.userType {
+        case "Admin":
+            return User(id: user.id, userName: user.userName, userType: .admin, token: user.token)
+        default:
+            return User(id: user.id, userName: user.userName, userType: .authUser, token: user.token)
+        }
+    }
+    
     enum LocalizedStrings: LocalizedStringKey {
         case of = "of"
         case ep = "ep"

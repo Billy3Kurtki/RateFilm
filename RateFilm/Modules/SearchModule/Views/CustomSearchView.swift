@@ -47,6 +47,7 @@ struct CustomSearchView: View {
 enum FocusElement: Hashable {
     case mainView
     case favoriteView
+    case profileView
 }
 
 struct CustomNavBarView: View {

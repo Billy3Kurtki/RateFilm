@@ -8,37 +8,54 @@
 import Foundation
 
 protocol NetworkLayer {
-    func fetchAsync<T: Decodable>(urlString: String, token: String?, _ type: T.Type) async -> Result<T, NetworkError>
+    func fetchAsync<T: Decodable>(urlString: String, token: String?, body: [String : String]?, _ type: T.Type) async -> Result<T, NetworkError>
     func postAsync<T: Encodable>(urlString: String, body: T, method: HTTPMethod, token: String?) async -> Result<Data?, NetworkError>
 }
 
 final class NetworkService: NetworkLayer {
     private lazy var session = URLSession.shared
     
-    func fetchAsync<T: Decodable>(urlString: String, token: String? = nil, _ type: T.Type = T.self) async -> Result<T, NetworkError> {
+    func fetchAsync<T: Decodable>(urlString: String, token: String? = nil, body: [String : String]? = nil, _ type: T.Type = T.self) async -> Result<T, NetworkError> {
         guard let url = URL(string: urlString) else {
             return .failure(NetworkError.invalidUrl)
         }
+        
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            return .failure(NetworkError.invalidUrl)
+        }
+        
+        components.queryItems = body?.map { (key, value) in
+            URLQueryItem(name: key, value: value)
+        }
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        
+        guard let url = components.url else {
+            return .failure(NetworkError.invalidUrl)
+        }
+        
         
         var urlRequest = URLRequest(url: url)
         if let token = token {
             urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
+        
         do {
             let (data, response) = try await session.data(for: urlRequest, delegate: nil)
             guard let _ = response as? HTTPURLResponse else {
+                print(NetworkError.unexpectedResponse)
                 return .failure(NetworkError.unexpectedResponse)
             }
             
             do {
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let responseData = try decoder.decode(T.self, from: data)
                 return .success(responseData)
             } catch {
+                print(NetworkError.parseError)
                 return .failure(NetworkError.parseError)
             }
         } catch {
+            print(NetworkError.requestError)
             return .failure(NetworkError.requestError)
         }
     }
@@ -97,10 +114,12 @@ enum HTTPMethod: String {
 
 enum ServerString: String {
     case baseUrlString = "https://покаНепонятноКуда"
-    case login = "https://покаНепонятноКуда/account/login"
-    case register = "https://покаНепонятноКуда/account/register"
+    case login = "https://0f65-31-28-198-216.ngrok-free.app/Account/Login"
+    case register = "https://0f65-31-28-198-216.ngrok-free.app/Account/Register"
     case changePassword = "https://покаНепонятноКуда/account/changePassword"
-    case movies = "https://покаНепонятноКуда/movies"
+    case movies = "https://0f65-31-28-198-216.ngrok-free.app/Movie"
     case film = "https://покаНепонятноКуда/film"
     case serial = "https://покаНепонятноКуда/serial"
+    case user = "https://0f65-31-28-198-216.ngrok-free.app/User"
+    case users = "https://0f65-31-28-198-216.ngrok-free.app/User/FindUsers"
 }

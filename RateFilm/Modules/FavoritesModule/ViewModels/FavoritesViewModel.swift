@@ -51,16 +51,17 @@ final class FavoritesViewModel {
         for i in films {
             var avgRating: String?
             var realeseDate: String?
-            var movieStatus = MovieStatus.none
+            var movieStatus: MovieStatus
             
-            if let status = i.status {
-                movieStatus = CustomFormatter.convertStringToMovieStatus(status)
-            }
+            movieStatus = CustomFormatter.convertStringToMovieStatus(i.status)
             
             if let date = i.releaseDate {
                 realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
                 if realeseDate == nil {
-                    avgRating = CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating))
+                    if let rating = i.avgRating {
+                        avgRating = CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: rating))
+                    }
+                    
                 }
             } else {
                 realeseDate = String(localized: "comingSoon")
@@ -92,16 +93,17 @@ final class FavoritesViewModel {
             var avgRating: String?
             var realeseDate: String?
             let seriesCount: String = CustomFormatter.formatSeriesCountToString(countSeriesLeft: i.countSeriesLeft, countSeriesMax: i.countSeriesMax)
-            var movieStatus = MovieStatus.none
+            var movieStatus: MovieStatus
             
-            if let status = i.status {
-                movieStatus = CustomFormatter.convertStringToMovieStatus(status)
-            }
+            movieStatus = CustomFormatter.convertStringToMovieStatus(i.status)
             
             if let date = i.releaseDate {
                 realeseDate = CustomFormatter.formatDateToCustomString(unix: date)
                 if realeseDate == nil {
-                    avgRating = "• \(CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: i.avgRating)))"
+                    if let rating = i.avgRating {
+                        avgRating = "• \(CustomFormatter.formatFloat(float: CustomFormatter.formatAvgRating(float: rating)))"
+                    }
+                    
                 }
             } else {
                 realeseDate = String(localized: "comingSoon")
@@ -143,6 +145,7 @@ final class FavoritesViewModel {
             snippets = movies
         case .failure(let failure):
             error = failure
+            print(String(describing: error))
         }
     }
 }
