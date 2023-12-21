@@ -20,6 +20,6 @@ struct SnippetViewModel: Identifiable {
     var movieStatus: MovieStatus
     var country: String?
     var userRating: Int?
-    var lastSeriesRealeseDate: Int?
+    var lastSeriesReleaseDate: Int?
     var genre: [Genre]
 }

@@ -4,6 +4,9 @@
     "%@: " : {
 
     },
+    "%@." : {
+
+    },
     "%lld" : {
 
     },
@@ -51,6 +54,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Актёр"
+          }
+        }
+      }
+    },
+    "AgoLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ago"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "назад"
           }
         }
       }
@@ -170,9 +189,6 @@
         }
       }
     },
-    "brbbr" : {
-
-    },
     "Collection" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -203,6 +219,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "cкоро"
+          }
+        }
+      }
+    },
+    "CommentsLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comments"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Комментарии"
           }
         }
       }
@@ -289,6 +321,22 @@
         }
       }
     },
+    "DayShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "d"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "д"
+          }
+        }
+      }
+    },
     "december" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -302,6 +350,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Декабрь"
+          }
+        }
+      }
+    },
+    "descriptionLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Описание"
           }
         }
       }
@@ -473,6 +537,22 @@
         }
       }
     },
+    "Film" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Film"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фильм"
+          }
+        }
+      }
+    },
     "films" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -523,6 +603,22 @@
         }
       }
     },
+    "FramesLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frames"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кадры"
+          }
+        }
+      }
+    },
     "gotLoadErrorLabel" : {
       "localizations" : {
         "en" : {
@@ -568,6 +664,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Хоррор"
+          }
+        }
+      }
+    },
+    "HourShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "h"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ч"
+          }
+        }
+      }
+    },
+    "InPeopleListLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On people's list"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В списках у людей"
           }
         }
       }
@@ -641,9 +769,6 @@
     },
     "Key" : {
       "extractionState" : "manual"
-    },
-    "Krokodile" : {
-
     },
     "lastReleased" : {
       "extractionState" : "manual",
@@ -778,6 +903,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Май"
+          }
+        }
+      }
+    },
+    "MinuteShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "min"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "мин"
+          }
+        }
+      }
+    },
+    "MonthShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "month"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "мес"
+          }
+        }
+      }
+    },
+    "MoreDetailsLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More details"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подробнее"
           }
         }
       }
@@ -1086,6 +1259,22 @@
         }
       }
     },
+    "RatingLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ratings"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рейтинги"
+          }
+        }
+      }
+    },
     "RepeatPasswordLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1200,6 +1389,22 @@
         }
       }
     },
+    "SecondShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sec"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "сек"
+          }
+        }
+      }
+    },
     "september" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1217,6 +1422,22 @@
         }
       }
     },
+    "Serial" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serial"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сериал"
+          }
+        }
+      }
+    },
     "serials" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1230,6 +1451,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сериалы"
+          }
+        }
+      }
+    },
+    "ShowAllLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show all"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Показать все"
           }
         }
       }
@@ -1313,6 +1550,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Просмотрено"
+          }
+        }
+      }
+    },
+    "VotesShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "vot"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "оц"
+          }
+        }
+      }
+    },
+    "WeekShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "week"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "нед"
+          }
+        }
+      }
+    },
+    "YearShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "year"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "г"
           }
         }
       }

@@ -9,12 +9,13 @@ import SwiftUI
 
 struct SnippetListView: View {
     var snippets: [SnippetViewModel]
+    var user: User
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 ForEach(snippets) { snippet in
-                    NavigationLink(destination: MovieDetailsView()) {
+                    NavigationLink(destination: MovieDetailsView(vm: MovieDetailsViewModel(movieId: snippet.id, movieType: snippet.movieType, user: user))) {
                         SnippetCell(snippet: snippet)
                     }
                 }

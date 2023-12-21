@@ -10,4 +10,8 @@ import SwiftUI
 enum Profession: LocalizedStringKey, CaseIterable {
     case actor = "Actor"
     case autor = "Autor"
+    
+    func localizeString() -> String {
+        return NSLocalizedString(self.rawValue.stringKey ?? "", comment: "")
+    }
 }

@@ -11,7 +11,6 @@ struct Comment: Codable {
     var id: String
     var user: UserMini
     var text: String
-    var createDate: Int
-    var isEdit: Bool
+    var date: Int
     var countLike: Int
 }

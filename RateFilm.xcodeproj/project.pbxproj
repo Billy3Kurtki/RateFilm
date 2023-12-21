@@ -61,6 +61,10 @@
 		087573492ACD6A27009A466A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087573482ACD6A27009A466A /* User.swift */; };
 		0875734B2ACF582A009A466A /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875734A2ACF582A009A466A /* Film.swift */; };
 		0875734D2ACF5E1D009A466A /* Serial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875734C2ACF5E1D009A466A /* Serial.swift */; };
+		08A286C42B338927009244AF /* PersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A286C32B338927009244AF /* PersonViewModel.swift */; };
+		08A286C62B34792F009244AF /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A286C52B34792F009244AF /* CommentViewModel.swift */; };
+		08A286C82B34BB3A009244AF /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A286C72B34BB3A009244AF /* CommentsView.swift */; };
+		08A286CA2B34E9F2009244AF /* CommentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A286C92B34E9F2009244AF /* CommentListView.swift */; };
 		08F001C12AE86E58002C1B99 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001C02AE86E58002C1B99 /* SettingsView.swift */; };
 		08F001C32AE95FE6002C1B99 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001C22AE95FE6002C1B99 /* ColorExtension.swift */; };
 		08F001C52AE9601C002C1B99 /* ColorSchemeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F001C42AE9601C002C1B99 /* ColorSchemeExtension.swift */; };
@@ -130,6 +134,10 @@
 		087573482ACD6A27009A466A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0875734A2ACF582A009A466A /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		0875734C2ACF5E1D009A466A /* Serial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serial.swift; sourceTree = "<group>"; };
+		08A286C32B338927009244AF /* PersonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersonViewModel.swift; path = RateFilm/Modules/MovieDetailsModule/Models/PersonViewModel.swift; sourceTree = SOURCE_ROOT; };
+		08A286C52B34792F009244AF /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommentViewModel.swift; path = RateFilm/Modules/MovieDetailsModule/Models/CommentViewModel.swift; sourceTree = SOURCE_ROOT; };
+		08A286C72B34BB3A009244AF /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		08A286C92B34E9F2009244AF /* CommentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListView.swift; sourceTree = "<group>"; };
 		08F001C02AE86E58002C1B99 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		08F001C22AE95FE6002C1B99 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		08F001C42AE9601C002C1B99 /* ColorSchemeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeExtension.swift; sourceTree = "<group>"; };
@@ -358,6 +366,8 @@
 			children = (
 				08161EE12B1F9ACD00641A7B /* MovieCard.swift */,
 				08161EE32B1F9AEB00641A7B /* MovieDetailsViewModel.swift */,
+				08A286C32B338927009244AF /* PersonViewModel.swift */,
+				08A286C52B34792F009244AF /* CommentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -365,7 +375,9 @@
 		085AE5AB2AD5E9E80069EFF2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				08A286C72B34BB3A009244AF /* CommentsView.swift */,
 				085AE5B02AD5F4500069EFF2 /* MovieDetailsView.swift */,
+				08A286C92B34E9F2009244AF /* CommentListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -658,6 +670,7 @@
 				08161EEA2B24AAB400641A7B /* SerialExtended.swift in Sources */,
 				08F001D32AEC7C79002C1B99 /* MainViewSelectionsEnum.swift in Sources */,
 				085AE5962AD40A820069EFF2 /* ImageModel.swift in Sources */,
+				08A286C62B34792F009244AF /* CommentViewModel.swift in Sources */,
 				085BAFDD2AF6BB7F00EBF98D /* CustomFormatter.swift in Sources */,
 				080A8BAE2B057F3F008626AE /* ForgotPasswordViewModel.swift in Sources */,
 				08161EE62B20A79500641A7B /* SnippetViewModel.swift in Sources */,
@@ -687,9 +700,11 @@
 				08161EE82B24A8CB00641A7B /* FilmExtended.swift in Sources */,
 				0847FD502AD0B89F00DEC3C1 /* NetworkService.swift in Sources */,
 				085AFDC02B1CC432009C59B3 /* FavoritesViewModel.swift in Sources */,
+				08A286CA2B34E9F2009244AF /* CommentListView.swift in Sources */,
 				0847FD492AD0169F00DEC3C1 /* RegisterView.swift in Sources */,
 				08161EF02B251B6A00641A7B /* Genre.swift in Sources */,
 				087573382ACAF6A9009A466A /* RateFilmApp.swift in Sources */,
+				08A286C42B338927009244AF /* PersonViewModel.swift in Sources */,
 				08F001C52AE9601C002C1B99 /* ColorSchemeExtension.swift in Sources */,
 				08161EE42B1F9AEB00641A7B /* MovieDetailsViewModel.swift in Sources */,
 				08F001CD2AEA66F0002C1B99 /* LoginViewModel.swift in Sources */,
@@ -702,6 +717,7 @@
 				08F001D12AEC7C2E002C1B99 /* FavoritesViewSelectionsEnum.swift in Sources */,
 				080A8BA82B03CBFA008626AE /* FirstScreenView.swift in Sources */,
 				085AE5C22AD6C9120069EFF2 /* FavoritesView.swift in Sources */,
+				08A286C82B34BB3A009244AF /* CommentsView.swift in Sources */,
 				085AFDC82B1E1D78009C59B3 /* Series.swift in Sources */,
 				08F001C32AE95FE6002C1B99 /* ColorExtension.swift in Sources */,
 			);

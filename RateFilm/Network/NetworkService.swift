@@ -114,12 +114,12 @@ enum HTTPMethod: String {
 
 enum ServerString: String {
     case baseUrlString = "https://покаНепонятноКуда"
-    case login = "https://0f65-31-28-198-216.ngrok-free.app/Account/Login"
-    case register = "https://0f65-31-28-198-216.ngrok-free.app/Account/Register"
-    case changePassword = "https://покаНепонятноКуда/account/changePassword"
-    case movies = "https://0f65-31-28-198-216.ngrok-free.app/Movie"
-    case film = "https://покаНепонятноКуда/film"
-    case serial = "https://покаНепонятноКуда/serial"
-    case user = "https://0f65-31-28-198-216.ngrok-free.app/User"
-    case users = "https://0f65-31-28-198-216.ngrok-free.app/User/FindUsers"
+    case login = "https://aa8e-31-28-221-167.ngrok-free.app/Account/Login"
+    case register = "https://aa8e-31-28-221-167.ngrok-free.app/Account/Register"
+    case changePassword = "https://aa8e-31-28-221-167.ngrok-free.app/changePassword"
+    case movies = "https://aa8e-31-28-221-167.ngrok-free.app/Movie"
+    case film = "https://aa8e-31-28-221-167.ngrok-free.app/Films"
+    case serial = "https://aa8e-31-28-221-167.ngrok-free.app/Serials"
+    case user = "https://aa8e-31-28-221-167.ngrok-free.app/User"
+    case users = "https://aa8e-31-28-221-167.ngrok-free.app/User/FindUsers"
 }

@@ -25,7 +25,7 @@ final class MainViewModel {
 //        case .mySelection:
 //            snippets.filter { $0.mainViewSelection.contains(.mySelection) }.map { $0.snippet }
         case .lastReleased:
-            snippets.filter { $0.isLastRealesed == true }.map { $0.snippet }
+            snippets.filter { $0.isLastReleased == true }.map { $0.snippet }
         case .ongoings:
             snippets.filter { $0.isOngoing == true }.map { $0.snippet }
         case .announcement:
@@ -83,7 +83,7 @@ final class MainViewModel {
             }
             
             let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, movieType: .film, isFavorite: i.isFavorite, movieStatus: movieStatus, genre: arrayGenre)
-            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, isAnnouncement: i.isAnnouncement, isLastRealesed: isLastRealesed)
+            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, isAnnouncement: i.isAnnouncement, isLastReleased: isLastRealesed)
             resultSnippets.append(snippetMainVM)
         }
         
@@ -130,7 +130,7 @@ final class MainViewModel {
             }
             
             let snippetVM = SnippetViewModel(id: i.id, name: i.name, releaseDate: realeseDate, description: i.description, previewImage: i.previewImage.url, avgRating: avgRating, seriesCount: seriesCount, movieType: .serial, isFavorite: i.isFavorite, movieStatus: movieStatus, genre: arrayGenre)
-            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, isAnnouncement: i.isAnnouncement, isOngoing: i.isOngoing, isLastRealesed: isLastRealese)
+            let snippetMainVM = SnippetMainViewModel(snippet: snippetVM, isAnnouncement: i.isAnnouncement, isOngoing: i.isOngoing, isLastReleased: isLastRealese)
             resultSnippets.append(snippetMainVM)
         }
         
@@ -181,24 +181,24 @@ extension MainViewModel {
     ]
     
     static let seasons1: [Season] = [
-        Season(id: "1", releaseDate: 1699123761620, description: "", avgRating: 0.0, series: series1),
-        Season(id: "2", releaseDate: 1699123762619, description: "", avgRating: 0.0, series: []),
-        Season(id: "3", releaseDate: 1671023761619, description: "", avgRating: 0.0, series: series1)
+        Season(id: "1", releaseDate: 1699123761620, description: "", images: [MainViewModel.image1, MainViewModel.image2], avgRating: 0.0, series: series1),
+        Season(id: "2", releaseDate: 1699123762619, description: "", images: [MainViewModel.image1, MainViewModel.image2], avgRating: 0.0, series: []),
+        Season(id: "3", releaseDate: 1671023761619, description: "", images: [MainViewModel.image1, MainViewModel.image2], avgRating: 0.0, series: series1)
     ]
     
     static let seasons2: [Season] = [
-        Season(id: "1", releaseDate: 1823212121, description: "", avgRating: 0.1, series: [])
+        Season(id: "1", releaseDate: 1823212121, description: "", images: [MainViewModel.image1, MainViewModel.image2], avgRating: 0.1, series: [])
     ]
     
     static let seasons3: [Season] = [
-        Season(id: "2", releaseDate: 1699123761619, description: "", avgRating: 0.0, series: []),
-        Season(id: "4", releaseDate: 1699121514, description: "", avgRating: 0.0, series: series1)
+        Season(id: "2", releaseDate: 1699123761619, description: "", images: [MainViewModel.image1, MainViewModel.image2], avgRating: 0.0, series: []),
+        Season(id: "4", releaseDate: 1699121514, description: "", images: [MainViewModel.image1, MainViewModel.image2], avgRating: 0.0, series: series1)
     ]
     
     static let series1: [Series] = [
-        Series(id: "41234", name: "Выход крокодильчика на свободу", duration: 25, realeseDate: 1810251212121, previewImage: image1, avgRating: 0.2),
-        Series(id: "312412", name: "Гена переходит дорогу", duration: 25, realeseDate: 1810251212121, previewImage: image2, avgRating: 0.3),
-        Series(id: "12321", name: "Гена выносит дорогу", duration: 25, realeseDate: 1810251212121, previewImage: image3, avgRating: 0.3)
+        Series(id: "41234", name: "Выход крокодильчика на свободу", duration: 25, releaseDate: 1810251212121, previewImage: image1, avgRating: 0.2),
+        Series(id: "312412", name: "Гена переходит дорогу", duration: 25, releaseDate: 1810251212121, previewImage: image2, avgRating: 0.3),
+        Series(id: "12321", name: "Гена выносит дорогу", duration: 25, releaseDate: 1810251212121, previewImage: image3, avgRating: 0.3)
     ]
     
     static let image1: ImageModel = ImageModel(id: "324134", url: "https://i.pinimg.com/236x/1b/9b/34/1b9b3430f3e89b95c22937d7c353737e.jpg")

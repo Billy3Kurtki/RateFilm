@@ -37,7 +37,7 @@ struct FavoritesView: View {
                             }
                         } else {
                             ForEach(FavoritesViewSelections.allCases, id: \.self) { selection in
-                                SnippetListView(snippets: vm.getFilteredList(by: selection))
+                                SnippetListView(snippets: vm.getFilteredList(by: selection), user: authVM.currentUser!)
                                     .tag(selection)
                             }
                         }
@@ -80,7 +80,7 @@ struct FavoritesView: View {
                 .foregroundStyle(Color.customBlack)
                 .padding(.top, Consts.vertPadding)
                 .padding(.horizontal, Consts.horPadding)
-            SnippetListView(snippets: vm.searchResults)
+            SnippetListView(snippets: vm.searchResults, user: authVM.currentUser!)
         }
     }
     

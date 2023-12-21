@@ -11,7 +11,7 @@ struct Series: Codable {
     var id: String
     var name: String
     var duration: Int
-    var realeseDate: Int?
+    var releaseDate: Int?
     var previewImage: ImageModel
-    var avgRating: Float
+    var avgRating: Float?
 }
