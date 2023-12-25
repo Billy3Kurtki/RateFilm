@@ -19,6 +19,7 @@ struct SerialExtended: Codable {
     var genre: [String]
     var people: [Person]
     var isFavorite: Bool
+    var countFavorite: Int
     var status: String?
     var isAnnouncement: Bool
     var isOngoing: Bool

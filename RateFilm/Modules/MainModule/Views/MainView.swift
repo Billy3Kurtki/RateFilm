@@ -13,7 +13,6 @@ struct MainView: View {
     @State private var searchText = ""
     @FocusState var focus: FocusElement?
     @Environment(AuthViewModel.self) private var authVM
-    @State private var didFirstRequest = false
     
     var body: some View {
         NavigationStack {
@@ -35,9 +34,11 @@ struct MainView: View {
                             refreshData()
                         }
                     } else {
-                        ForEach(MainViewSelections.allCases, id: \.self) { selection in
-                            SnippetListView(snippets: vm.getFilteredList(by: selection), user: authVM.currentUser!)
-                                .tag(selection)
+                        if let user = authVM.currentUser {
+                            ForEach(MainViewSelections.allCases, id: \.self) { selection in
+                                SnippetListView(snippets: vm.getFilteredList(by: selection), user: user)
+                                    .tag(selection)
+                            }
                         }
                     }
                 }
@@ -53,11 +54,7 @@ struct MainView: View {
             }
         }
         .onAppear {
-            if !didFirstRequest {
-                refreshData()
-                didFirstRequest = true
-            }
-            //vm.fetchMockData()
+            refreshData()
         }
     }
     

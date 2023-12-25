@@ -27,7 +27,9 @@ struct ProfileView: View {
                             .padding(Consts.padding)
                     }
                 } else {
-                    ProfileCardView(vm: ProfileCardViewModel(username: authVM.currentUser!.userName)) // потому что я в условии выше проверил его на != 0
+                    if let user = authVM.currentUser {
+                        ProfileCardView(vm: ProfileCardViewModel(username: user.userName)) // потому что я в условии выше проверил его на != 0
+                    }
                 }
                 
                 Spacer()

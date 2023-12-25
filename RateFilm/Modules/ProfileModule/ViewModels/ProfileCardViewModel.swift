@@ -50,7 +50,7 @@ final class ProfileCardViewModel {
     @MainActor
     func fetchUserAsync() async {
         let body = ["username": username]
-        let result = await networkService.fetchAsync(urlString: ServerString.user.rawValue, body: body, UserExtended.self)
+        let result = await networkService.fetchAsync(urlString: ServerString.user, body: body, UserExtended.self)
         switch result {
         case .success(let success):
             self.user = UserViewModel(user: success)

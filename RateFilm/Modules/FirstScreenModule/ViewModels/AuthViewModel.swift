@@ -13,29 +13,7 @@ final class AuthViewModel {
     var currentUser: User?
     var networkService = NetworkService()
     var error: NetworkError?
-
-    var localizedError: String {
-        switch error {
-        case .invalidUrl:
-            "" // пока так
-        case .networkError:
-            ""
-        case .dataError:
-            ""
-        case .parseError:
-            ""
-        case .unexpectedResponse:
-            ""
-        case .failedResponse(let HTTPURLResponse):
-            ""
-        case .requestError:
-            ""
-        case .serverError:
-            ""
-        case nil:
-            ""
-        }
-    }
+    var state: LoadStates = .didLoad
     
     init(currentUser: User? = nil) {
         self.currentUser = currentUser
@@ -43,10 +21,10 @@ final class AuthViewModel {
     
     @MainActor
     func signInAsync(login: String, password: String) async {
-        // сервер ещё в разработке
+        state = .loading
         let loginModel = Login(userLogin: login, password: password)
         
-        let result = await networkService.postAsync(urlString: ServerString.login.rawValue,
+        let result = await networkService.postAsync(urlString: ServerString.login,
                                                         body: loginModel,
                                                         method: .post)
         switch result {
@@ -65,16 +43,15 @@ final class AuthViewModel {
         case .failure(let error):
             self.error = error
         }
-
-        //currentUser = User(id: "1", userName: "user_clown", email: "test@email.com", userType: .authUser)
+        state = .didLoad
     }
     
     @MainActor
     func sighUpAsync(nickName: String, email: String, password: String) async {
-        // сервер ещё в разработке
+        state = .loading
         let registerModel = Register(userName: nickName, email: email, password: password)
         
-        let result = await networkService.postAsync(urlString: ServerString.register.rawValue,
+        let result = await networkService.postAsync(urlString: ServerString.register,
                                                     body: registerModel,
                                                     method: .post)
         switch result {
@@ -97,14 +74,13 @@ final class AuthViewModel {
             self.error = error
             print("\(String(describing: self.error))")
         }
-
-        //currentUser = User(id: "2", userName: nickName, userType: .authUser, token: "")
+        state = .didLoad
     }
     
     func changePasswordAsync(login: String, password: String) async {
         let loginModel = Login(userLogin: login, password: password)
         
-        let result = await networkService.postAsync(urlString: ServerString.changePassword.rawValue,
+        let result = await networkService.postAsync(urlString: ServerString.changePassword,
                                                         body: loginModel,
                                                         method: .put)
         switch result {

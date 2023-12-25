@@ -13,4 +13,5 @@ struct Comment: Codable {
     var text: String
     var date: Int
     var countLike: Int
+    var isLiked: Bool
 }

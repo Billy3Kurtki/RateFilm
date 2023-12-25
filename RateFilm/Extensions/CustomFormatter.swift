@@ -103,6 +103,50 @@ class CustomFormatter {
         Profession.allCases.first(where: { "\($0)".lowercased() == profession.lowercased() })
     }
     
+    static func convertRatingToEnumValue(_ rating: Int?) -> Ratings? {
+        Ratings.allCases.first(where: { $0.rawValue == rating })
+    }
+    
+    static func getPeopleProfessionsDict(_ people: [Person]) -> String {
+        var result: [Profession:String] = [:]
+        var arrayPeople: [PersonViewModel] = []
+        for i in people {
+            let person = CustomFormatter.convertPersonToPersonVM(i)
+            if let person = person {
+                arrayPeople.append(person)
+            }
+        }
+        
+        var uniqueProfessions: [Profession] = []
+        
+        for i in arrayPeople {
+            i.professions.forEach { profession in
+                if !uniqueProfessions.contains(profession) {
+                    uniqueProfessions.append(profession)
+                }
+            }
+        }
+        
+        for i in uniqueProfessions {
+            arrayPeople.forEach { person in
+                if let exists = person.professions.first(where: { $0 == i }) {
+                    if let existsProfession = result[exists] {
+                        result[exists]! += ", \(person.name)"
+                    } else {
+                        result[exists] = person.name
+                    }
+                }
+            }
+        }
+        
+        var resultString = ""
+        for i in result {
+            resultString.append("\(i.key.localizeString()): \(i.value) \n")
+        }
+        
+        return resultString
+    }
+    
     static func formatUserName(_ name: String) -> String? {
         let formatter = PersonNameComponentsFormatter()
         if let components = formatter.personNameComponents(from: name) {
@@ -254,4 +298,13 @@ enum UnixConsts {
     static var unixHour = 3600000
     static var unixMinute = 60000
     static var unixSecond = 1000
+}
+
+enum Ratings: Int, CaseIterable {
+    case zero = 0
+    case one = 1
+    case two = 2
+    case three = 3
+    case four = 4
+    case five = 5
 }

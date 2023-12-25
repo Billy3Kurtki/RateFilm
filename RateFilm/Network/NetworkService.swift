@@ -112,14 +112,24 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
-enum ServerString: String {
-    case baseUrlString = "https://покаНепонятноКуда"
-    case login = "https://aa8e-31-28-221-167.ngrok-free.app/Account/Login"
-    case register = "https://aa8e-31-28-221-167.ngrok-free.app/Account/Register"
-    case changePassword = "https://aa8e-31-28-221-167.ngrok-free.app/changePassword"
-    case movies = "https://aa8e-31-28-221-167.ngrok-free.app/Movie"
-    case film = "https://aa8e-31-28-221-167.ngrok-free.app/Films"
-    case serial = "https://aa8e-31-28-221-167.ngrok-free.app/Serials"
-    case user = "https://aa8e-31-28-221-167.ngrok-free.app/User"
-    case users = "https://aa8e-31-28-221-167.ngrok-free.app/User/FindUsers"
+enum ServerString {
+    static var baseUrlString = "https://062b-31-28-221-167.ngrok-free.app"
+    static var login = "\(baseUrlString)/Account/Login"
+    static var register = "\(baseUrlString)/Account/Register"
+    static var changePassword = "\(baseUrlString)/changePassword"
+    static var movies = "\(baseUrlString)/Movie"
+    static var film = "\(baseUrlString)/Films"
+    static var filmSetFavorite = "\(baseUrlString)/Films/SetFavorite"
+    static var serial = "\(baseUrlString)/Serials"
+    static var serialSetFavorite = "\(baseUrlString)/Serials/SetFavorite"
+    static var user = "\(baseUrlString)/User"
+    static var users = "\(baseUrlString)/User/FindUsers"
+    static var filmComments = "\(baseUrlString)/Comment/CommentInFilm"
+    static var serialComments = "\(baseUrlString)/Comment/CommentInSerial"
+    static var comment = "\(baseUrlString)/Comment"
+}
+
+enum LoadStates {
+    case loading
+    case didLoad
 }

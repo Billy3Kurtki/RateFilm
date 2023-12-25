@@ -13,7 +13,6 @@ struct FavoritesView: View {
     @FocusState var focus: FocusElement?
     @Environment(AuthViewModel.self) private var authVM
     @State private var vm = FavoritesViewModel()
-    @State private var didSendRequest = false
     
     var body: some View {
         NavigationStack {
@@ -36,9 +35,11 @@ struct FavoritesView: View {
                                 refreshData()
                             }
                         } else {
-                            ForEach(FavoritesViewSelections.allCases, id: \.self) { selection in
-                                SnippetListView(snippets: vm.getFilteredList(by: selection), user: authVM.currentUser!)
-                                    .tag(selection)
+                            if let user = authVM.currentUser {
+                                ForEach(FavoritesViewSelections.allCases, id: \.self) { selection in
+                                    SnippetListView(snippets: vm.getFilteredList(by: selection), user: user)
+                                        .tag(selection)
+                                }
                             }
                         }
                     }
@@ -57,10 +58,7 @@ struct FavoritesView: View {
             }
         }
         .onAppear {
-            if !didSendRequest {
-                refreshData()
-                didSendRequest = true
-            }
+            refreshData()
             //vm.fetchMockData()
         }
     }

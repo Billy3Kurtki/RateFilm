@@ -9,12 +9,14 @@ import SwiftUI
 
 struct MovieDetailsView: View {
     @State var vm: MovieDetailsViewModel
-    @AppStorage("systemThemeVal") private var systemTheme: String = SchemeType.allCases.first!.rawValue
     
     @State private var statusSelection: MovieStatus = .none
     @State private var isFavorite = false
+    @State private var userMovieRating: Ratings = .zero
     @State private var linkToCommentsView = false
+    @State private var linkToLoginView = false
     @State private var showFullDescription = false
+    @State private var showingConfirmation = false
     
     var body: some View {
         NavigationStack {
@@ -23,25 +25,40 @@ struct MovieDetailsView: View {
                     refreshData()
                 }
             } else {
-                movieDetailsView()
+                if let _ = vm.card {
+                    movieDetailsView()
+                }
+            }
+        }
+        .overlay {
+            if vm.state == .loading {
+                ProgressView()
             }
         }
         .onAppear {
             refreshData()
 //            vm.fetchMockMovie(vm.movieType)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // потом надо будет добавить какой-нибудь loadingState вместо этого
+        }
+        .onChange(of: vm.state) { newState in
+            if newState == .didLoad {
                 if let card = vm.card {
                     statusSelection = card.status
                     isFavorite = card.isFavorite
+                    userMovieRating = card.userRating
                 }
             }
         }
         .onChange(of: statusSelection) { oldValue, newValue in
             vm.card?.status = newValue
+            updateMovie()
         }
         .onChange(of: isFavorite) { oldValue, newValue in
             vm.card?.isFavorite = newValue
+            updateIsFavorite()
+        }
+        .onChange(of: userMovieRating) { oldValue, newValue in
+            vm.card?.userRating = newValue
+            updateMovie()
         }
     }
     
@@ -52,10 +69,22 @@ struct MovieDetailsView: View {
     
     private func refreshData() {
         Task {
-            await vm.fetchMovie(user: vm.user)
+            await vm.fetchMovie()
         }
         if let status = vm.card?.status {
             statusSelection = status
+        }
+    }
+    
+    private func updateMovie() {
+        Task {
+            await vm.updateStatusAndIsFavorite()
+        }
+    }
+    
+    private func updateIsFavorite() {
+        Task {
+            await vm.updateIsFavorite()
         }
     }
     
@@ -157,25 +186,30 @@ struct MovieDetailsView: View {
     
     private func statusPickerView() -> some View {
         VStack {
-            Menu {
-                Picker(selection: $statusSelection) {
-                    ForEach(MovieStatus.allCases, id: \.self) { status in
-                        Text(status.localizeString())
-                    }
-                } label: {
-                    
+            Button {
+                if vm.user.userType == .unauthUser {
+                    showingConfirmation.toggle()
                 }
-                
             } label: {
-                Text(statusSelection.localizeString())
-                Image(systemName: Consts.toggleImage)
-            }
-            .foregroundStyle(favoriteColor)
-            .padding(9)
-            .background {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(lineWidth: 1.0)
-                    .foregroundStyle(favoriteColor)
+                Menu {
+                    Picker(selection: $statusSelection) {
+                        ForEach(MovieStatus.allCases, id: \.self) { status in
+                            Text(status.localizeString())
+                        }
+                    } label: {}
+                    
+                } label: {
+                    Text(statusSelection.localizeString())
+                    Image(systemName: Consts.toggleImage)
+                }
+                .foregroundStyle(favoriteColor)
+                .padding(9)
+                .background {
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 1.0)
+                        .foregroundStyle(favoriteColor)
+                }
+                .disabled(vm.user.userType == .unauthUser)
             }
         }
         .padding(.horizontal, 5)
@@ -200,19 +234,35 @@ struct MovieDetailsView: View {
     
     private func favoriteButtonView() -> some View {
         VStack {
-            Button {
-                isFavorite.toggle()
-            } label: {
-                Image(systemName: isFavorite ? Consts.bookmarkFillImage : Consts.bookmarkImage)
-                    .resizable()
-                    .frame(width: Consts.iconBookmarkWidth, height: Consts.iconBookmarkHeight)
-                    .foregroundStyle(isFavorite ? Color.yellow : Color.customGray)
-                    .padding(Consts.iconBookmarkPadding)
-                    .background {
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(lineWidth: 1.0)
-                            .foregroundStyle(isFavorite ? Color.yellow : Color.customLightGray)
+            if let card = vm.card {
+                NavigationLink(destination: LoginView(), isActive: $linkToLoginView) {
+                    Button {
+                        vm.user.userType == .unauthUser ? showingConfirmation = true : isFavorite.toggle()
+                    } label: {
+                        HStack {
+                            Text("\(card.countFavorite)")
+                            Image(systemName: isFavorite ? Consts.bookmarkFillImage : Consts.bookmarkImage)
+                                .resizable()
+                                .frame(width: Consts.iconBookmarkWidth, height: Consts.iconBookmarkHeight)
+                        }
+                        .padding(Consts.iconBookmarkPadding)
+                        .background {
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(lineWidth: 1.0)
+                                //.foregroundStyle(vm.card!.isFavorite ? Color.yellow : Color.customLightGray)
+                        }
+                        .foregroundStyle(vm.card!.isFavorite ? Color.yellow : Color.customGray) // выше проверил что card != nil
                     }
+                    .confirmationDialog("LoginLabel", isPresented: $showingConfirmation) {
+                        Button {
+                            linkToLoginView.toggle()
+                        } label: {
+                            Text(LocalizedStrings.authorization.localizeString())
+                        }
+                    } message: {
+                        Text(LocalizedStrings.needToLogin.localizeString())
+                    }
+                }
             }
         }
         .padding(.horizontal, 5)
@@ -220,7 +270,7 @@ struct MovieDetailsView: View {
     
     private func toCommentButtonView() -> some View {
         VStack {
-            NavigationLink(destination: CommentsView(movieId: vm.movieId, movieType: vm.movieType), isActive: $linkToCommentsView) {
+            NavigationLink(destination: CommentsView(vm: CommentsViewModel(movieId:  vm.movieId, movieType: vm.movieType, user: vm.user)), isActive: $linkToCommentsView) {
                 Button {
                     linkToCommentsView.toggle()
                 } label: {
@@ -266,6 +316,16 @@ struct MovieDetailsView: View {
                     Text(movie.movieTypeString)
                     Spacer()
                 }
+                HStack {
+                    VStack {
+                        Image(systemName: Consts.iconPersons)
+                            .frame(width: Consts.iconCommentWidth, height: Consts.iconCommentHeight)
+                            .foregroundStyle(Color.customLightGray)
+                        Spacer()
+                    }
+                    Text(movie.people)
+                    Spacer()
+                }
             }
         }
         .padding(.horizontal, 70)
@@ -277,7 +337,8 @@ struct MovieDetailsView: View {
             if let movie = movie {
                 HStack {
                     Text(LocalizedStrings.description.localizeString())
-                        .font(.system(size: 18))
+                        .font(.system(size: 18).bold())
+                        .foregroundStyle(Color.customLightGray)
                     Spacer()
                 }
                 .padding(.bottom, 10)
@@ -292,7 +353,7 @@ struct MovieDetailsView: View {
                     showFullDescription = true
                 } label: {
                     Text(LocalizedStrings.moreDetails.localizeString())
-                        .foregroundStyle(Color.customLightRed)
+                        .foregroundStyle(Color.customLightGray)
                 }
                 .padding(.top, 1)
                 .opacity(showFullDescription ? 0 : 1)
@@ -322,6 +383,31 @@ struct MovieDetailsView: View {
                             Text("\(LocalizedStrings.votes.localizeString()).")
                         }
                         .foregroundStyle(Color.customLightGray)
+                        Button {
+                            if vm.user.userType == .unauthUser {
+                                showingConfirmation.toggle()
+                            }
+                        } label: {
+                            Menu {
+                                Picker(selection: $userMovieRating) {
+                                    ForEach(Ratings.allCases, id: \.self) { rating in
+                                        Text("\(rating.rawValue)")
+                                    }
+                                } label: {}
+                            } label: {
+                                Text("\(userMovieRating.rawValue)")
+                                Image(systemName: Consts.toggleImage)
+                            }
+                            .foregroundStyle(Color.customGray)
+                            .padding(5)
+                            .background {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(lineWidth: 1.0)
+                                    .foregroundStyle(Color.customLightGray)
+                            }
+                            .disabled(vm.user.userType == .unauthUser)
+                        }
+                        
                     }
                     .padding(25)
                     VStack {
@@ -433,7 +519,7 @@ struct MovieDetailsView: View {
                             .font(.system(size: 20).bold())
                             .foregroundStyle(Color.customLightGray)
                         Spacer()
-                        NavigationLink(destination: CommentsView(movieId: vm.movieId, movieType: vm.movieType)) {
+                        NavigationLink(destination: CommentsView(vm: CommentsViewModel(movieId: vm.movieId, movieType: vm.movieType, user: vm.user))) {
                             Button {
                                 linkToCommentsView.toggle()
                             } label: {
@@ -469,15 +555,6 @@ struct MovieDetailsView: View {
         }
     }
     
-    enum Ratings: Int, CaseIterable {
-        case one = 1
-        case two = 2
-        case three = 3
-        case four = 4
-        case five = 5
-    }
-    
-    
     enum Consts {
         static var imageWidth: CGFloat = 250
         static var imageHeight: CGFloat = 350
@@ -502,8 +579,8 @@ struct MovieDetailsView: View {
         static var movieTypeImage: String = "list.clipboard"
         static var statisticBackLineWidth: CGFloat = 150
         static var statisticBackLineHeidth: CGFloat = 10
-//        static var statisticLineWidth: CGFloat = 150
         static var statisticBackLineHeight: CGFloat = 10
+        static var iconPersons: String = "person.2.fill"
     }
     
     enum LocalizedStrings: LocalizedStringKey {
@@ -515,6 +592,8 @@ struct MovieDetailsView: View {
         case frames = "FramesLabel"
         case comments = "CommentsLabel"
         case showAll = "ShowAllLabel"
+        case authorization = "authorizationLabel"
+        case needToLogin = "NeedToLoginLabel"
         
         func localizeString() -> String {
             return NSLocalizedString(self.rawValue.stringKey ?? "", comment: "")
@@ -523,7 +602,7 @@ struct MovieDetailsView: View {
 }
 
 #Preview {
-    MovieDetailsView(vm: MovieDetailsViewModel(movieId: "1", movieType: .serial, user: User(id: "1", userName: "", userType: .authUser, token: "")))
+    MovieDetailsView(vm: MovieDetailsViewModel(movieId: "1", movieType: .serial, user: User(id: "1", userName: "", userType: .unauthUser, token: "")))
 }
 
 struct ImageItemView: View {

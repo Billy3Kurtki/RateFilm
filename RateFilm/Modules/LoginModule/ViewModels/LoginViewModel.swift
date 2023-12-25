@@ -36,8 +36,8 @@ final class LoginViewModel: ObservableObject {
     }
     
     var isSignInComplete: Bool {
-        var loginValidation = loginValid()
-        var passwordValidation = passwordValid()
+        let loginValidation = loginValid()
+        let passwordValidation = passwordValid()
         if !loginValidation ||
            !passwordValidation {
             return false

@@ -40,7 +40,7 @@ final class ProfileViewModel {
     @MainActor
     func getUsersByUsernameAsync(username: String) async {
         let body = ["\(username)": username.lowercased()]
-        let result = await networkService.fetchAsync(urlString: ServerString.users.rawValue, body: body, [UserMini].self)
+        let result = await networkService.fetchAsync(urlString: ServerString.users, body: body, [UserMini].self)
         switch result {
         case .success(let success):
             self.searchResults = []

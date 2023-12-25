@@ -136,7 +136,7 @@ final class FavoritesViewModel {
     
     @MainActor
     func fetchDataAsync(user: User) async {
-        let result = await networkService.fetchAsync(urlString: ServerString.movies.rawValue, token: user.token, NetworkMovies.self)
+        let result = await networkService.fetchAsync(urlString: ServerString.movies, token: user.token, NetworkMovies.self)
         switch result {
         case .success(let success):
             let convertedFilms = convertFilmsToSnippetVMs(success.films)

@@ -10,8 +10,8 @@ import SwiftUI
 extension Image {
     func imageIconModifier() -> some View {
         self
-            .renderingMode(.original)
             .resizable()
+            .aspectRatio(contentMode: .fill)
             .shadow(color: Color(red: 0,
                     green: 0, blue: 0, opacity: 0.3),
                     radius: 3, x: 2, y: 2)

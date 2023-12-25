@@ -20,6 +20,7 @@ struct FilmExtended: Codable {
     var genre: [String]
     var people: [Person]
     var isFavorite: Bool
+    var countFavorite: Int
     var isAnnouncement: Bool
     var status: String?
     var country: String?

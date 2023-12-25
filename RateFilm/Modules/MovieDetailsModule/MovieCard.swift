@@ -20,6 +20,7 @@ struct MovieCard {
     var genre: [Genre]
     var peopleDescription: String?
     var isFavorite: Bool
+    var countFavorite: Int
     var movieType: MovieType
     var movieTypeString: String
     var seasons: [Season]?
@@ -29,8 +30,9 @@ struct MovieCard {
     var seriesCount: String?
     var lastSeriesReleaseDate: Int?
     var country: String?
-    var userRating: Int?
-    var comments: [CommentViewModel]?
+    var userRating: Ratings
+    var comments: [CommentVM]?
+    var people: String
     var ratings: [Int : Int]?
     var countRatings: Int
     var statusOfPeople: [MovieStatus : Int]
