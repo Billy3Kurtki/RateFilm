@@ -39,7 +39,7 @@ struct MovieDetailsView: View {
             refreshData()
 //            vm.fetchMockMovie(vm.movieType)
         }
-        .onChange(of: vm.state) { newState in
+        .onChange(of: vm.state) { oldState, newState in
             if newState == .didLoad {
                 if let card = vm.card {
                     statusSelection = card.status
@@ -445,10 +445,7 @@ struct MovieDetailsView: View {
                                             Spacer()
                                         }
                                     }
-                                    
                                 }
-                                
-                                
                             }
                         }
                         Spacer()

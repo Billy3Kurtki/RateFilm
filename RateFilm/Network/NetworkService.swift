@@ -113,7 +113,7 @@ enum HTTPMethod: String {
 }
 
 enum ServerString {
-    static var baseUrlString = "https://062b-31-28-221-167.ngrok-free.app"
+    static var baseUrlString = "https://b77d-31-28-221-167.ngrok-free.app"
     static var login = "\(baseUrlString)/Account/Login"
     static var register = "\(baseUrlString)/Account/Register"
     static var changePassword = "\(baseUrlString)/changePassword"

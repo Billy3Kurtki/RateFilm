@@ -14,9 +14,9 @@ struct CommentsView: View {
     var body: some View {
         NavigationStack {
             if let _ = vm.error {
-                ErrorView(action: {
+                ErrorView {
                     refreshData()
-                })
+                }
             } else {
                 ZStack {
                     ScrollView {
@@ -26,22 +26,7 @@ struct CommentsView: View {
                         Spacer()
                         ZStack {
                             EntryField(prompt: LocalizedStrings.enterComment.localizeString(), errorValidText: "", field: $commentText)
-                            HStack {
-                                Spacer()
-                                Button {
-                                    Task {
-                                        let request = await vm.addComment(text: commentText)
-                                        if request {
-                                            commentText = ""
-                                        }
-                                    }
-                                } label: {
-                                    Image(systemName: "paperplane")
-                                        .frame(width: 20, height: 20)
-                                        .foregroundStyle(Color.customBlack)
-                                }
-                            }
-                            .padding(.horizontal, 25)
+                            sendCommentButton()
                         }
                     }
                 }
@@ -60,6 +45,32 @@ struct CommentsView: View {
         }
     }
     
+    private func sendCommentButton() -> some View {
+        HStack {
+            Spacer()
+            Button {
+                Task {
+                    let request = await vm.addComment(text: commentText)
+                    if request {
+                        commentText = ""
+                    }
+                }
+            } label: {
+                Image(systemName: Consts.sendButtonImage)
+                    .frame(width: Consts.sendButtonWidth, height: Consts.sendButtonHeight)
+                    .foregroundStyle(Color.customBlack)
+            }
+        }
+        .padding(.horizontal, Consts.sendButtonPadding)
+    }
+    
+    enum Consts {
+        static var sendButtonImage = "paperplane"
+        static var sendButtonWidth: CGFloat = 20
+        static var sendButtonHeight: CGFloat = 20
+        static var sendButtonPadding: CGFloat = 25
+    }
+    
     enum LocalizedStrings: LocalizedStringKey {
         case comments = "CommentsLabel"
         case enterComment = "EnterCommentLabel"
@@ -72,12 +83,4 @@ struct CommentsView: View {
 
 #Preview {
     CommentsView(vm: CommentsViewModel(movieId: "1", movieType: .film, user: User(id: "1", userName: "adada", userType: .authUser, token: "")))
-}
-
-struct ViewOffsetKey: PreferenceKey {
-    typealias Value = CGFloat
-    static var defaultValue = CGFloat.zero
-    static func reduce(value: inout Value, nextValue: () -> Value) {
-        value += nextValue()
-    }
 }

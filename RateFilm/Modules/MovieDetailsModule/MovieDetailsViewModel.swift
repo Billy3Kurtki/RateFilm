@@ -18,26 +18,6 @@ final class MovieDetailsViewModel {
     var card: MovieCard?
     var error: NetworkError?
     var networkService = NetworkService()
-//    var localizedError: String {
-//        switch error {
-//        case .invalidUrl:
-//            <#code#>
-//        case .networkError:
-//            <#code#>
-//        case .dataError:
-//            <#code#>
-//        case .parseError:
-//            <#code#>
-//        case .unexpectedResponse:
-//            <#code#>
-//        case .failedResponse(let hTTPURLResponse):
-//            <#code#>
-//        case .requestError:
-//            <#code#>
-//        case .serverError:
-//            <#code#>
-//        }
-//    }
     
     init(movieId: String, movieType: MovieType, user: User) {
         self.movieId = movieId
