@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct UserMini: Codable {
+struct UserMini: Identifiable, Codable {
     var id: String
     var username: String
-    var image: ImageModel
+    var image: ImageModel?
 }

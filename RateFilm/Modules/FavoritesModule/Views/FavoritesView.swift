@@ -18,7 +18,7 @@ struct FavoritesView: View {
         NavigationStack {
             if authVM.currentUser?.userType != .unauthUser {
                 CustomNavBarView(searchText: $searchText, focus: $focus, prompt: adaptivePrompt)
-                if _focus.wrappedValue == .favoriteView {
+                if _focus.wrappedValue == .mainView { // потом поменяю на то, чтобы работало не только с .mainView
                     if !vm.searchResults.isEmpty {
                         searchedResults()
                     } else if !searchText.isEmpty {
@@ -30,9 +30,17 @@ struct FavoritesView: View {
                 else {
                     FavoritesHorizontalScrollView(selectedCategory: $selectedCategory)
                     TabView(selection: $selectedCategory) {
-                        ForEach(FavoritesViewSelections.allCases, id: \.self) { selection in
-                            ListView(snippets: vm.getFilteredList(by: selection))
-                                .tag(selection)
+                        if let _ = vm.error {
+                            ErrorView {
+                                refreshData()
+                            }
+                        } else {
+                            if let user = authVM.currentUser {
+                                ForEach(FavoritesViewSelections.allCases, id: \.self) { selection in
+                                    SnippetListView(snippets: vm.getFilteredList(by: selection), user: user)
+                                        .tag(selection)
+                                }
+                            }
                         }
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
@@ -50,12 +58,16 @@ struct FavoritesView: View {
             }
         }
         .onAppear {
-            //            if let user = authVM.currentUser { // по идее здесь можно было сделать и ...(user: authVM.currentUser!), тк на этот экран можно перейти только если currentUser != nil
-            //                Task {
-            //                    await vm.fetchDataAsync(user: user)
-            //                }
-            //            }
-            vm.fetchMockData()
+            refreshData()
+            //vm.fetchMockData()
+        }
+    }
+    
+    private func refreshData() {
+        if let user = authVM.currentUser {
+            Task {
+                await vm.fetchDataAsync(user: user)
+            }
         }
     }
     
@@ -66,7 +78,7 @@ struct FavoritesView: View {
                 .foregroundStyle(Color.customBlack)
                 .padding(.top, Consts.vertPadding)
                 .padding(.horizontal, Consts.horPadding)
-            ListView(snippets: vm.searchResults)
+            SnippetListView(snippets: vm.searchResults, user: authVM.currentUser!)
         }
     }
     
@@ -95,44 +107,4 @@ struct FavoritesView: View {
 
 #Preview {
     FavoritesView()
-}
-
-struct FavoritesHorizontalScrollView: View {
-    @Binding var selectedCategory: FavoritesViewSelections
-    var body: some View {
-        ScrollViewReader { scrollProxy in
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    Spacer(minLength: 20)
-                    ForEach(FavoritesViewSelections.allCases, id: \.self) { selection in
-                        Button {
-                            self.selectedCategory = selection
-                        } label: {
-                            Text(selection.localizeString())
-                                .padding()
-                                .foregroundStyle(self.selectedCategory == selection ? Color.accentColor : Color.customBlack)
-                                .font(.system(size: 19))
-                                .background(
-                                    Capsule()
-                                        .foregroundStyle(self.selectedCategory == selection ? Color.accentColor : Color.clear)
-                                        .frame(height: 3)
-                                        .offset(y: 22)
-                                )
-                        }
-                    }
-                }
-                .padding(.horizontal)
-            }
-            .onAppear {
-                withAnimation(.easeInOut(duration: 20)) {
-                    scrollProxy.scrollTo(selectedCategory, anchor: .center)
-                }
-            }
-            .onChange(of: selectedCategory) { _, newValue in
-                withAnimation(.easeInOut(duration: 20)) {
-                    scrollProxy.scrollTo(newValue, anchor: .center)
-                }
-            }
-        }
-    }
 }

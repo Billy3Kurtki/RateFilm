@@ -1,20 +1,20 @@
 //
-//  HorizontalScrollView.swift
+//  FavoriteScrollView.swift
 //  RateFilm
 //
-//  Created by Кирилл Казаков on 10.10.2023.
+//  Created by Кирилл Казаков on 10.12.2023.
 //
 
 import SwiftUI
 
-struct HorizontalScrollView: View {
-    @Binding var selectedCategory: MainViewSelections
+struct FavoritesHorizontalScrollView: View {
+    @Binding var selectedCategory: FavoritesViewSelections
     var body: some View {
         ScrollViewReader { scrollProxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     Spacer(minLength: 20)
-                    ForEach(MainViewSelections.allCases, id: \.self) { selection in
+                    ForEach(FavoritesViewSelections.allCases, id: \.self) { selection in
                         Button {
                             self.selectedCategory = selection
                         } label: {
@@ -46,8 +46,3 @@ struct HorizontalScrollView: View {
         }
     }
 }
-
-#Preview {
-    HorizontalScrollView(selectedCategory: .constant(MainViewSelections.lastReleased))
-}
-

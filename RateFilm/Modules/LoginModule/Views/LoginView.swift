@@ -26,49 +26,43 @@ struct LoginView: View {
                 EntryField(prompt: LoginViewEnum.loginPromptLabel.localizeString(), errorValidText: viewModel.loginError, field: $viewModel.login)
                 EntryField(prompt: LoginViewEnum.passwordPromptLabel.localizeString(), errorValidText: viewModel.passwordError, isSecure: true, field: $viewModel.password)
                 
-                AuthorizationBlockButtons()
-                CustomDivider()
+                authorizationBlockButtons()
+                customDivider()
                 NavigationLink(destination: RegisterView(), isActive: $linkToRegisterViewIsActive) {
                     CustomButton(label: LoginViewEnum.signUpButtonLabel.localizeString()) {
                         linkToRegisterViewIsActive.toggle()
                     }
                 }
                 
-                SkipAuthorizationButton()
+                skipAuthorizationButton()
                 Spacer(minLength: Consts.spacerPadding)
+            }
+            .overlay {
+                if authVM.state == .loading {
+                    ProgressView()
+                }
             }
         }
         .onAppear {
             authVM.currentUser = nil
         }
-//        .onReceive($authVM.error) { error in // из-за observation больше не работает, пишет ошибку :( Хоть @State, хоть @Bindable у authVM, разницы нет
-//            if error != nil {
-//                showAlert.toggle()
-//            }
-//        }
-//        .alert(isPresented: $showAlert) {
-//            Alert(
-//                title: Text(String(localized: "Error")),
-//                message: Text(authVM.localizedError)
-//            )
-//        }
     }
     
-    private func CustomDivider() -> some View {
+    private func customDivider() -> some View {
         HStack {
             Capsule()
                 .frame(height: Consts.capsuleHeight)
-            .padding(.horizontal)
+                .padding(.horizontal)
             Text(LoginViewEnum.orLabel.localizeString())
                 .foregroundStyle(Color.customLightGray)
             Capsule()
                 .frame(height: Consts.capsuleHeight)
-            .padding(.horizontal)
+                .padding(.horizontal)
         }
         .padding(.vertical)
     }
     
-    private func AuthorizationBlockButtons() -> some View {
+    private func authorizationBlockButtons() -> some View {
         HStack {
             NavigationLink(destination: ForgotPasswordView()) {
                 Text(LoginViewEnum.forgotPasswordLabel.localizeString())
@@ -86,7 +80,7 @@ struct LoginView: View {
         .padding(.leading, 20)
     }
     
-    private func SkipAuthorizationButton() -> some View {
+    private func skipAuthorizationButton() -> some View {
         VStack(alignment: .center) {
             Button {
                 authVM.skipAuth()

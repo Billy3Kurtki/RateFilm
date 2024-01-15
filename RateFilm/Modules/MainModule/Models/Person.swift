@@ -10,7 +10,7 @@ import Foundation
 struct Person: Codable {
     var id: String
     var name: String
-    var age: Int
-    var image: ImageModel
+    var age: Int?
+    var image: ImageModel?
     var professions: [String]
 }

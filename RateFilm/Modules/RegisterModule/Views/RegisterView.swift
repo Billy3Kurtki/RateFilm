@@ -30,6 +30,11 @@ struct RegisterView: View {
             .padding(.vertical)
             .navigationTitle(Consts.navTitle)
         }
+        .overlay {
+            if authVM.state == .loading {
+                ProgressView()
+            }
+        }
     }
     
     enum Consts {

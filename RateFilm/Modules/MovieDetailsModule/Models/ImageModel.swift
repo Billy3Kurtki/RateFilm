@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ImageModel: Codable {
+struct ImageModel: Codable, Identifiable {
     var id: String
     var url: String
 }

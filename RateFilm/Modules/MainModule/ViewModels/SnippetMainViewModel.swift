@@ -11,7 +11,7 @@ struct SnippetMainViewModel {
     var snippet: SnippetViewModel
     var isAnnouncement: Bool
     var isOngoing: Bool?
-    var isLastRealesed: Bool
+    var isLastReleased: Bool
 }
 
 enum MovieType {

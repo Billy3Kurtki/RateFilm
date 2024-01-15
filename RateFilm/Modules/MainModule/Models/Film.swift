@@ -10,15 +10,15 @@ import Foundation
 struct Film: Codable {
     var id: String
     var name: String
-    var releaseDate: Int?
     var description: String
-    var previewImage: ImageModel
-    var avgRating: Float
-    var ageRating: Int
+    var releaseDate: Int?
     var genre: [String]
+    var previewImage: ImageModel
+    var avgRating: Float?
+    var ageRating: Int
     var isAnnouncement: Bool
     var isFavorite: Bool
-    var status: String?
+    var status: String
     var country: String?
     var userRating: Int?
 }

@@ -29,9 +29,17 @@ struct MainView: View {
             else {
                 HorizontalScrollView(selectedCategory: $selectedCategory)
                 TabView(selection: $selectedCategory) {
-                    ForEach(MainViewSelections.allCases, id: \.self) { selection in
-                        ListView(snippets: vm.getFilteredList(by: selection))
-                            .tag(selection)
+                    if let _ = vm.error {
+                        ErrorView {
+                            refreshData()
+                        }
+                    } else {
+                        if let user = authVM.currentUser {
+                            ForEach(MainViewSelections.allCases, id: \.self) { selection in
+                                SnippetListView(snippets: vm.getFilteredList(by: selection), user: user)
+                                    .tag(selection)
+                            }
+                        }
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
@@ -46,12 +54,15 @@ struct MainView: View {
             }
         }
         .onAppear {
-//            if let user = authVM.currentUser { // по идее здесь можно было сделать и ...(user: authVM.currentUser!), тк на этот экран можно перейти только если currentUser != nil
-//                Task {
-//                    await vm.fetchDataAsync(user: user)
-//                }
-//            }
-            vm.fetchMockData()
+            refreshData()
+        }
+    }
+    
+    private func refreshData() {
+        if let user = authVM.currentUser {
+            Task {
+                await vm.fetchDataAsync(user: user)
+            }
         }
     }
     
@@ -62,7 +73,7 @@ struct MainView: View {
                 .foregroundStyle(Color.customBlack)
                 .padding(.top, Consts.vertPadding)
                 .padding(.horizontal, Consts.horPadding)
-            ListView(snippets: vm.searchResults)
+            SnippetListView(snippets: vm.searchResults, user: authVM.currentUser!)
         }
     }
     

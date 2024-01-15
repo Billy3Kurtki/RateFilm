@@ -1,6 +1,15 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@: " : {
+
+    },
+    "%@." : {
+
+    },
+    "%lld" : {
+
+    },
     "Abandoned" : {
       "localizations" : {
         "en" : {
@@ -45,6 +54,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Актёр"
+          }
+        }
+      }
+    },
+    "Adventure" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adventure"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Приключения"
+          }
+        }
+      }
+    },
+    "AgoLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ago"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "назад"
+          }
+        }
+      }
+    },
+    "Animated" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animated"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мультфильм"
+          }
+        }
+      }
+    },
+    "Anime" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anime"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Анимэ"
           }
         }
       }
@@ -164,9 +237,6 @@
         }
       }
     },
-    "brbbr" : {
-
-    },
     "Collection" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -180,6 +250,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Коллеция"
+          }
+        }
+      }
+    },
+    "Comedy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comedy"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Комедия"
           }
         }
       }
@@ -201,6 +287,22 @@
         }
       }
     },
+    "CommentsLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comments"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Комментарии"
+          }
+        }
+      }
+    },
     "completed" : {
       "localizations" : {
         "en" : {
@@ -213,6 +315,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Завершённые"
+          }
+        }
+      }
+    },
+    "Composer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Composer"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Композитор"
           }
         }
       }
@@ -283,6 +401,38 @@
         }
       }
     },
+    "Crime" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crime"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Криминал"
+          }
+        }
+      }
+    },
+    "DayShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "d"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "д"
+          }
+        }
+      }
+    },
     "december" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -300,6 +450,38 @@
         }
       }
     },
+    "descriptionLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Описание"
+          }
+        }
+      }
+    },
+    "Director" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Director"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режисёр"
+          }
+        }
+      }
+    },
     "DontWatching" : {
       "localizations" : {
         "en" : {
@@ -312,6 +494,54 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Не смотрю"
+          }
+        }
+      }
+    },
+    "Drama" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drama"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Драма"
+          }
+        }
+      }
+    },
+    "EditLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактировать"
+          }
+        }
+      }
+    },
+    "Editor" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editor"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактор"
           }
         }
       }
@@ -346,6 +576,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Email"
+          }
+        }
+      }
+    },
+    "EnterCommentLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your comment"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш комментарий"
           }
         }
       }
@@ -451,6 +697,22 @@
         }
       }
     },
+    "Film" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Film"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фильм"
+          }
+        }
+      }
+    },
     "films" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -464,6 +726,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Фильмы"
+          }
+        }
+      }
+    },
+    "FindUsersLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find users"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск пользователей"
           }
         }
       }
@@ -485,8 +763,53 @@
         }
       }
     },
-    "Hello, World!" : {
-
+    "FramesLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frames"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кадры"
+          }
+        }
+      }
+    },
+    "gotLoadErrorLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was an error loading"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Произошла ошибка при загрузке"
+          }
+        }
+      }
+    },
+    "Historical" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historical"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Историческое"
+          }
+        }
+      }
     },
     "History" : {
       "extractionState" : "stale",
@@ -517,6 +840,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Хоррор"
+          }
+        }
+      }
+    },
+    "HourShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "h"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ч"
+          }
+        }
+      }
+    },
+    "InPeopleListLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On people's list"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В списках у людей"
           }
         }
       }
@@ -591,9 +946,6 @@
     "Key" : {
       "extractionState" : "manual"
     },
-    "Krokodile" : {
-
-    },
     "lastReleased" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -629,6 +981,9 @@
         }
       }
     },
+    "LoginLabel" : {
+
+    },
     "loginPromptLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -659,6 +1014,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Заполните поле Логин"
+          }
+        }
+      }
+    },
+    "LogoutLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logout"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выйти"
           }
         }
       }
@@ -697,6 +1068,22 @@
         }
       }
     },
+    "Manager" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manager"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Менеджер"
+          }
+        }
+      }
+    },
     "march" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -731,6 +1118,54 @@
         }
       }
     },
+    "MinuteShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "min"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "мин"
+          }
+        }
+      }
+    },
+    "MonthShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "month"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "мес"
+          }
+        }
+      }
+    },
+    "MoreDetailsLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More details"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подробнее"
+          }
+        }
+      }
+    },
     "mySelection" : {
       "comment" : "enum MainViewSelections",
       "extractionState" : "manual",
@@ -745,6 +1180,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Моя вкладка"
+          }
+        }
+      }
+    },
+    "NeedToLoginLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Need to log in"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Необходимо авторизоваться"
           }
         }
       }
@@ -779,6 +1230,25 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Никнейм"
+          }
+        }
+      }
+    },
+    "none" : {
+
+    },
+    "None" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет"
           }
         }
       }
@@ -878,6 +1348,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Онгоинги"
+          }
+        }
+      }
+    },
+    "OopsWhatsWrongLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oh, something's wrong..."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ой, что-то не так..."
           }
         }
       }
@@ -1002,6 +1488,38 @@
         }
       }
     },
+    "Producer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Producer"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продюсер"
+          }
+        }
+      }
+    },
+    "ProductionDesigner" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ProductionDesigner"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Художник-постановщик"
+          }
+        }
+      }
+    },
     "profileLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1015,6 +1533,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Профиль"
+          }
+        }
+      }
+    },
+    "RatingLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ratings"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рейтинги"
           }
         }
       }
@@ -1036,6 +1570,22 @@
         }
       }
     },
+    "retryLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повторить"
+          }
+        }
+      }
+    },
     "reviewLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1049,6 +1599,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Обзор"
+          }
+        }
+      }
+    },
+    "Romance" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Romance"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Романтика"
+          }
+        }
+      }
+    },
+    "ScreenWriter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ScreenWriter"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сценарист"
           }
         }
       }
@@ -1117,6 +1699,22 @@
         }
       }
     },
+    "SecondShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sec"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "сек"
+          }
+        }
+      }
+    },
     "september" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1134,6 +1732,22 @@
         }
       }
     },
+    "Serial" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serial"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сериал"
+          }
+        }
+      }
+    },
     "serials" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1147,6 +1761,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сериалы"
+          }
+        }
+      }
+    },
+    "ShowAllLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show all"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Показать все"
           }
         }
       }
@@ -1202,6 +1832,38 @@
         }
       }
     },
+    "StatisticLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistic"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Статистика"
+          }
+        }
+      }
+    },
+    "Thriller" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thriller"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Триллер"
+          }
+        }
+      }
+    },
     "Viewed" : {
       "localizations" : {
         "en" : {
@@ -1214,6 +1876,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Просмотрено"
+          }
+        }
+      }
+    },
+    "VotesShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "vot"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "оц"
+          }
+        }
+      }
+    },
+    "WeekShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "week"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "нед"
+          }
+        }
+      }
+    },
+    "YearShortLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "year"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "г"
           }
         }
       }

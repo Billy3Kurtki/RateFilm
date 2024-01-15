@@ -13,21 +13,22 @@ struct SerialExtended: Codable {
     var releaseDate: Int?
     var description: String
     var previewImage: ImageModel
-    var avgRating: Float
+    var avgRating: Float?
     var seasons: [Season]
     var ageRating: Int
     var genre: [String]
     var people: [Person]
     var isFavorite: Bool
+    var countFavorite: Int
     var status: String?
     var isAnnouncement: Bool
     var isOngoing: Bool
     var countSeriesLeft: Int
     var countSeriesMax: Int?
-    var lastSeriesRealeseDate: Int?
+    var lastSeriesReleaseDate: Int?
     var country: String?
     var userRating: Int?
     var comments: [Comment]?
     var ratings: [Int : Int]?
-    var statusOfPeople: [String : Int]?
+    var statusOfPeople: [String : Int]
 }

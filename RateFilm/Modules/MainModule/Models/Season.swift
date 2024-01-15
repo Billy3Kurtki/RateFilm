@@ -9,9 +9,9 @@ import Foundation
 
 struct Season: Codable {
     var id: String
-    var releaseDate: Int
+    var releaseDate: Int?
     var description: String
     var images: [ImageModel]?
-    var avgRating: Float
+    var avgRating: Float?
     var series: [Series]
 }
